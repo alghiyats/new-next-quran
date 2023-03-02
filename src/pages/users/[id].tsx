@@ -1,12 +1,10 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
-
 import { Surah } from '../../interfaces';
-import { listSurah } from '../../utils/listSurah';
 import Layout from '../../components/Layout';
 import ListDetail from '../../components/ListDetail';
 
 type Props = {
-  item?: Surah;
+  item?: { data: Surah };
   errors?: string;
 };
 
@@ -24,9 +22,9 @@ const StaticPropsDetail = ({ item, errors }: Props) => {
   return (
     <Layout
       title={`${
-        item ? item.name.transliteration.id : 'User Detail'
+        item.data ? item.data.name.transliteration.id : 'User Detail'
       } | Next.js + TypeScript Example`}>
-      {item && <ListDetail item={item} />}
+      {item.data && <ListDetail item={item.data} />}
     </Layout>
   );
 };
@@ -34,7 +32,9 @@ const StaticPropsDetail = ({ item, errors }: Props) => {
 export default StaticPropsDetail;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = listSurah.map((user) => ({
+  const res = await fetch('https://api.quran.gading.dev/surah');
+  const data = await res.json();
+  const paths = data.data.map((user) => ({
     params: { id: user.number.toString() },
   }));
 
@@ -44,7 +44,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
     const id = params?.id;
-    const item = listSurah.find((data) => data.number === Number(id));
+    const res = await fetch('https://api.quran.gading.dev/surah/' + id);
+    const item = await res.json();
     return { props: { item } };
   } catch (err: any) {
     return { props: { errors: err.message } };
