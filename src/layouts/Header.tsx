@@ -25,10 +25,10 @@ function Header() {
                 About
               </li>
             </Link>
-            <Link href={'/users'}>
+            <Link href={'/surah'}>
               <li
-                className={router.pathname === '/users' ? 'text-sky-700' : ''}>
-                Users
+                className={router.pathname === '/surah' ? 'text-sky-700' : ''}>
+                Surah
               </li>
             </Link>
           </ul>
