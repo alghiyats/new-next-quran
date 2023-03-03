@@ -8,11 +8,16 @@ type ListDetailProps = {
 
 const ListDetail = ({ item: user }: ListDetailProps) => (
   <div>
-    <h1>Detail for {user.name.transliteration.id}</h1>
-    {user.verses.map((x) => (
-      <li>{x.text.arab}</li>
-    ))}
-    <p>ID: {user.number}</p>
+    <h1 className="font-bold text-xl text-center mb-6">
+      {user.name.transliteration.id}
+    </h1>
+    <div>
+      <ul className="list-none">
+        {user.verses.map((x) => (
+          <li className="text-right">{x.text.arab}</li>
+        ))}
+      </ul>
+    </div>
   </div>
 );
 
