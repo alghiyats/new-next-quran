@@ -9,8 +9,9 @@ type ListDetailProps = {
 const ListDetail = ({ item: user }: ListDetailProps) => (
   <div>
     <h1>Detail for {user.name.transliteration.id}</h1>
-    {Array.isArray(user.verses) &&
-      user.verses.map((x: any) => <li>{x.text.arab}</li>)}
+    {user.verses.map((x) => (
+      <li>{x.text.arab}</li>
+    ))}
     <p>ID: {user.number}</p>
   </div>
 );

@@ -60,15 +60,6 @@ export interface Surah {
   tafsir: {
     id: string;
   };
-  preBismillah: null | {
-    arab: string;
-    transliteration: {
-      en: string;
-    };
-    translation: {
-      en: string;
-      id: string;
-    };
-  };
-  verses: Verse;
+  preBismillah: null;
+  verses: Verse[];
 }
