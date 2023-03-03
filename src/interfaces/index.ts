@@ -61,13 +61,14 @@ export interface Surah {
     id: string;
   };
   preBismillah: null | {
-    arab: string;
-    transliteration: {
-      en: string;
-    };
+    text: { arab: string; transliteration: { en: string } };
     translation: {
       en: string;
       id: string;
+    };
+    audio: {
+      primary: string;
+      secondary: string[];
     };
   };
   verses: Verse[];
