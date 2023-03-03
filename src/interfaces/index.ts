@@ -1,3 +1,7 @@
+interface Audio {
+  primary: string;
+  secondary: string[];
+}
 export type Surah = {
   number: number;
   sequence: number;
@@ -28,7 +32,7 @@ export type Surah = {
     };
     text: { arab: string; transliteration: { en: string } };
     translation: { en: string; id: string };
-    audio: { primary: string; secondary: string[] };
+    audio: Audio;
     tafsir: { id: { short: string; long: string } };
   }[];
 };
