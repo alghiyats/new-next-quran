@@ -1,22 +1,38 @@
-interface Audio {
-  primary: string;
-  secondary: string[];
-}
-
-export type Surah = {
+export interface Surah {
   number: number;
   sequence: number;
   numberOfVerses: number;
   name: {
     short: string;
     long: string;
-    transliteration: { en: string; id: string };
-    translation: { en: string; id: string };
+    transliteration: {
+      en: string;
+      id: string;
+    };
+    translation: {
+      en: string;
+      id: string;
+    };
   };
-  revelation: { arab: string; en: string; id: string };
-  tafsir: { id: string };
-  preBismillah?: string | null;
-  verses: {
+  revelation: {
+    arab: string;
+    en: string;
+    id: string;
+  };
+  tafsir: {
+    id: string;
+  };
+  preBismillah: null | {
+    arab: string;
+    transliteration: {
+      en: string;
+    };
+    translation: {
+      en: string;
+      id: string;
+    };
+  };
+  verses: Array<{
     number: {
       inQuran: number;
       inSurah: number;
@@ -32,9 +48,25 @@ export type Surah = {
         obligatory: boolean;
       };
     };
-    text: { arab: string; transliteration: { en: string } };
-    translation: { en: string; id: string };
-    audio: Audio;
-    tafsir: { id: { short: string; long: string } };
-  }[];
-};
+    text: {
+      arab: string;
+      transliteration: {
+        en: string;
+      };
+    };
+    translation: {
+      en: string;
+      id: string;
+    };
+    audio: {
+      primary: string;
+      secondary: string[];
+    };
+    tafsir: {
+      id: {
+        short: string;
+        long: string;
+      };
+    };
+  }>;
+}
