@@ -2,6 +2,7 @@ interface Audio {
   primary: string;
   secondary: string[];
 }
+
 export type Surah = {
   number: number;
   sequence: number;
@@ -14,6 +15,7 @@ export type Surah = {
   };
   revelation: { arab: string; en: string; id: string };
   tafsir: { id: string };
+  preBismillah?: string | null;
   verses: {
     number: {
       inQuran: number;
