@@ -28,7 +28,7 @@ export type Surah = {
     };
     text: { arab: string; transliteration: { en: string } };
     translation: { en: string; id: string };
-    audio: { primary: string };
+    audio: { primary: string; secondary: string[] };
     tafsir: { id: { short: string; long: string } };
   }[];
 };
