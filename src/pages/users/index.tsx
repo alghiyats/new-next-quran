@@ -1,11 +1,13 @@
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
+
 import { Surah } from '../../interfaces';
+import { data } from '../../utils/data';
 import Layout from '../../components/Layout';
 import List from '../../components/List';
 
 type Props = {
-  items: { data: Surah[] };
+  items: Surah[];
 };
 
 const WithStaticProps = ({ items }: Props) => (
@@ -15,7 +17,7 @@ const WithStaticProps = ({ items }: Props) => (
       Example fetching data from inside <code>getStaticProps()</code>.
     </p>
     <p>You are currently on: /users</p>
-    <List items={items.data} />
+    <List items={items} />
     <p>
       <Link href="/">Go home</Link>
     </p>
@@ -23,8 +25,7 @@ const WithStaticProps = ({ items }: Props) => (
 );
 
 export const getStaticProps: GetStaticProps = async () => {
-  const res = await fetch('https://api.quran.gading.dev/surah');
-  const items: Surah[] = await res.json();
+  const items: Surah[] = data;
   return { props: { items } };
 };
 

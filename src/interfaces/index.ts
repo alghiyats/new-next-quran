@@ -10,5 +10,5 @@ export type Surah = {
   };
   revelation: { arab: string; en: string; id: string };
   tafsir: { id: string };
-  verses: [{ text: { arab: string } }];
+  verses: { text: { arab: string } }[];
 };
