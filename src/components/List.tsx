@@ -7,7 +7,7 @@ type Props = {
 };
 
 const List = ({ items }: Props) => (
-  <div className="grid grid-cols-3 gap-6">
+  <div className="grid grid-cols-1 gap-6 md:grid-cols-3 sm:grid-cols-2">
     {items.map((item) => (
       <ListItem key={item.number} data={item} />
     ))}
