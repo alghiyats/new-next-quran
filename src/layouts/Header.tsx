@@ -7,11 +7,9 @@ function Header() {
   return (
     <div className="top-0 sticky border-b border-sky-600">
       <div className="h-14 bg-white px-6 flex justify-between items-center max-w-[1280px] mx-auto">
-        <div>
-          <Link href={'/'}>
-            <h1 className="font-bold">Next Quran</h1>
-          </Link>
-        </div>
+        <Link href={'/'}>
+          <h1 className="font-bold">Next Quran</h1>
+        </Link>
         <div>
           <ul className="flex gap-4">
             <Link href={'/'}>

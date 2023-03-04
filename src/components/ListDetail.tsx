@@ -14,7 +14,9 @@ const ListDetail = ({ item: user }: ListDetailProps) => (
     <div>
       <ul className="list-none">
         {user.verses.map((x) => (
-          <li className="text-right">{x.text.arab}</li>
+          <li className="text-right font-['Scheherazade_New,_serif']">
+            {x.text.arab}
+          </li>
         ))}
       </ul>
     </div>
