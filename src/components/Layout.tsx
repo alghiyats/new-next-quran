@@ -15,7 +15,7 @@ const Layout = ({ children, title = 'Next Quran' }: Props) => (
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <Header />
-    <div className="max-w-[1280px] mx-auto px-6 mt-6">{children}</div>
+    <div className="max-w-[1280px] mx-auto px-6 my-6">{children}</div>
   </div>
 );
 

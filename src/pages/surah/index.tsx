@@ -1,6 +1,4 @@
 import { GetStaticProps } from 'next';
-import Link from 'next/link';
-
 import { Surah } from '../../interfaces';
 import { data } from '../../utils/data';
 import Layout from '../../components/Layout';
@@ -12,7 +10,7 @@ type Props = {
 
 const WithStaticProps = ({ items }: Props) => (
   <Layout title="Surah | Next Quran">
-    <h1>Surah List</h1>
+    <h1 className="text-center text-2xl font bold mb-6">Daftar Surah</h1>
     <List items={items} />
   </Layout>
 );

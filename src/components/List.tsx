@@ -7,13 +7,11 @@ type Props = {
 };
 
 const List = ({ items }: Props) => (
-  <ul>
+  <div className="grid grid-cols-3 gap-6">
     {items.map((item) => (
-      <li key={item.number}>
-        <ListItem data={item} />
-      </li>
+      <ListItem key={item.number} data={item} />
     ))}
-  </ul>
+  </div>
 );
 
 export default List;
