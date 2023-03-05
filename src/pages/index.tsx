@@ -1,13 +1,13 @@
+import Head from 'next/head';
 import Link from 'next/link';
-import Layout from '../components/Layout';
 
 const IndexPage = () => (
-  <Layout title="Next Quran">
+  <>
+    <Head>
+      <title>Home - Next Quran</title>
+    </Head>
     <h1 className="text-sky-700 font-bold">Hello Next.js 👋</h1>
-    <p>
-      <Link href="/about">About</Link>
-    </p>
-  </Layout>
+  </>
 );
 
 export default IndexPage;

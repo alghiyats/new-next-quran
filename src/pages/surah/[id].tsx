@@ -2,8 +2,8 @@ import { GetStaticProps, GetStaticPaths } from 'next';
 
 import { Surah } from '../../interfaces';
 import { data } from '../../utils/data';
-import Layout from '../../components/Layout';
 import ListDetail from '../../components/ListDetail';
+import Head from 'next/head';
 
 type Props = {
   item?: Surah;
@@ -13,19 +13,26 @@ type Props = {
 const StaticPropsDetail = ({ item, errors }: Props) => {
   if (errors) {
     return (
-      <Layout title="Error | Next Quran">
+      <>
+        <Head>
+          <title>Error - Next Quran</title>
+        </Head>
         <p>
           <span style={{ color: 'red' }}>Error:</span> {errors}
         </p>
-      </Layout>
+      </>
     );
   }
 
   return (
-    <Layout
-      title={`${item ? item.name.transliteration.id : 'Surah'} - Next Quran`}>
-      {item && <ListDetail item={item} />}
-    </Layout>
+    <>
+      <Head>
+        <title>{`${
+          item ? item.name.transliteration.id : 'Surah'
+        } - Next Quran`}</title>
+      </Head>
+      <ListDetail item={item} />
+    </>
   );
 };
 

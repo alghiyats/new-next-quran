@@ -4,13 +4,12 @@ import Header from '../layouts/Header';
 
 type Props = {
   children?: ReactNode;
-  title?: string;
 };
 
-const Layout = ({ children, title = 'Next Quran' }: Props) => (
+const Layout = ({ children }: Props) => (
   <div>
     <Head>
-      <title>{title}</title>
+      <title>Next Quran</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
