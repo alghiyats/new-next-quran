@@ -24,12 +24,17 @@ const StaticPropsDetail = ({ item, errors }: Props) => {
     );
   }
 
+  if (!item) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <Head>
-        <title>{`${
-          item ? item.name.transliteration.id : 'Surah'
-        } - Next Quran`}</title>
+        <title>
+          Surah{' '}
+          {`${item ? item.name.transliteration.id : 'Surah'} - Next Quran`}
+        </title>
       </Head>
       <ListDetail item={item} />
     </>
