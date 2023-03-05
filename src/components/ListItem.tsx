@@ -9,7 +9,7 @@ type Props = {
 
 const ListItem = ({ data }: Props) => {
   return (
-    <div className="h-24 bg-slate-100 p-6 flex flex-col">
+    <div className="h-24 p-6 flex flex-col shadow-md rounded-md dark:shadow-slate-500">
       <Link href={`/surah/${data.name.transliteration.id.toLowerCase()}`}>
         <p className="font-semibold hover:text-sky-700">
           {data.name.transliteration.id}

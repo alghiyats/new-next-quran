@@ -16,7 +16,7 @@ const Layout = ({ children, title = 'Next Quran' }: Props) => (
       <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     </Head>
     <Header />
-    <div className="max-w-[1280px] mx-auto px-6 my-6">{children}</div>
+    <div className="max-w-[1000px] mx-auto px-6 my-6">{children}</div>
   </div>
 );
 

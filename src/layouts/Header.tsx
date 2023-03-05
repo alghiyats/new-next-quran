@@ -18,8 +18,8 @@ function Header() {
 
   return (
     <div className="bg-white sticky top-0 dark:bg-black">
-      <div className={`border-b py-3 px-6`}>
-        <div className="flex justify-between">
+      <div className={`shadow-md py-3`}>
+        <div className="flex justify-between max-w-[1000px] mx-auto px-6">
           <div className="flex items-center">
             <div className="hidden cursor-pointer select-none items-center rounded-md border p-2 mr-2 hover:bg-blue-500 hover:text-white">
               <svg
@@ -37,7 +37,7 @@ function Header() {
               </svg>
             </div>
             <Link href={'/'}>
-              <span className="font-semibold text-[#252C32]">Next Quran</span>
+              <span className="font-semibold">Next Quran</span>
             </Link>
           </div>
           <div className="ml-2 flex gap-x-2">
