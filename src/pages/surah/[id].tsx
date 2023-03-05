@@ -23,7 +23,7 @@ const StaticPropsDetail = ({ item, errors }: Props) => {
 
   return (
     <Layout
-      title={`${item ? item.name.transliteration.id : 'Surah'} | Next Quran`}>
+      title={`${item ? item.name.transliteration.id : 'Surah'} - Next Quran`}>
       {item && <ListDetail item={item} />}
     </Layout>
   );

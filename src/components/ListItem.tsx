@@ -9,15 +9,15 @@ type Props = {
 
 const ListItem = ({ data }: Props) => {
   return (
-    <div className="h-24 bg-slate-100 p-6 flex">
+    <div className="h-24 bg-slate-100 p-6 flex flex-col">
       <Link href={`/surah/${data.name.transliteration.id.toLowerCase()}`}>
         <p className="font-semibold hover:text-sky-700">
           {data.name.transliteration.id}
         </p>
-        <p>
-          {data.numberOfVerses} | {data.revelation.id}
-        </p>
       </Link>
+      <p>
+        {data.numberOfVerses} - {data.revelation.id}
+      </p>
     </div>
   );
 };

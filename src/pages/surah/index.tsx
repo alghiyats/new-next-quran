@@ -9,7 +9,7 @@ type Props = {
 };
 
 const WithStaticProps = ({ items }: Props) => (
-  <Layout title="Surah | Next Quran">
+  <Layout title="Surah - Next Quran">
     <h1 className="text-center text-2xl font bold mb-6">Daftar Surah</h1>
     <List items={items} />
   </Layout>

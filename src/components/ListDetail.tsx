@@ -11,10 +11,13 @@ const ListDetail = ({ item: user }: ListDetailProps) => (
     <h1 className="font-bold text-xl text-center mb-6">
       {user.name.transliteration.id}
     </h1>
+    <h2 className="text-center">
+      {user.preBismillah !== null ? user.preBismillah.text.arab : null}
+    </h2>
     <div>
       <ul className="list-none">
         {user.verses.map((x) => (
-          <li className="text-right font-['Scheherazade_New,_serif']">
+          <li className="text-right font-['Uthmani'] text-2xl font-semibold ">
             {x.text.arab}
           </li>
         ))}
