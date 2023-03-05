@@ -17,7 +17,7 @@ const ListDetail = ({ item: user }: ListDetailProps) => (
     <div>
       <ul className="list-none">
         {user.verses.map((x) => (
-          <li className="text-right font-['Uthmani'] text-2xl font-semibold ">
+          <li className="text-right font-['Uthmani'] text-2xl font-semibold">
             {x.text.arab}
           </li>
         ))}
