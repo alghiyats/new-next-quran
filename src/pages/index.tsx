@@ -1,20 +1,15 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import { GetStaticProps } from 'next';
-import { Surah } from '../interfaces';
-import { data } from '../utils/data';
 import Link from 'next/link';
 
-type Props = {
-  items: Surah[];
-};
-
-const IndexPage = ({ items }: Props) => {
+const IndexPage = () => {
   const [data, setData] = useState<any>();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const datas = JSON.parse(localStorage.getItem('lastRead'));
     setData(datas);
+    setLoading(false);
   }, []);
 
   const handleLocalStorageChange = (e) => {
@@ -31,8 +26,12 @@ const IndexPage = ({ items }: Props) => {
     };
   }, []);
 
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
+
   if (!data) {
-    return <p>Loading...</p>;
+    return <h1>Last read not found.</h1>;
   }
 
   return (
@@ -52,8 +51,5 @@ const IndexPage = ({ items }: Props) => {
     </>
   );
 };
-export const getStaticProps: GetStaticProps = async () => {
-  const items: Surah[] = data;
-  return { props: { items } };
-};
+
 export default IndexPage;
