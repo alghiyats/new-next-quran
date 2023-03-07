@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Layout from '../layouts/Layout';
@@ -11,20 +10,6 @@ const IndexPage = () => {
     const datas = JSON.parse(localStorage.getItem('lastRead'));
     setData(datas);
     setLoading(false);
-  }, []);
-
-  const handleLocalStorageChange = (e) => {
-    if (e.key === 'lastRead') {
-      setData(e.newValue);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('storage', handleLocalStorageChange);
-
-    return () => {
-      window.removeEventListener('storage', handleLocalStorageChange);
-    };
   }, []);
 
   if (loading) {
@@ -46,7 +31,7 @@ const IndexPage = () => {
           {data.verses.map((m) => m.number.inSurah)}
         </h1>
       </Link>
-      </Layout>
+    </Layout>
   );
 };
 

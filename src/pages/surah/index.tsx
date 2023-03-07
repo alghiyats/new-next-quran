@@ -2,7 +2,6 @@ import { GetStaticProps } from 'next';
 import { Surah } from '../../interfaces';
 import { data } from '../../utils/data';
 import List from '../../components/List';
-import Head from 'next/head';
 import Layout from '../../layouts/Layout';
 
 type Props = {
