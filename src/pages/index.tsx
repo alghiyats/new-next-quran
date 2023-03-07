@@ -3,13 +3,14 @@ import { useEffect, useState } from 'react';
 import { GetStaticProps } from 'next';
 import { Surah } from '../interfaces';
 import { data } from '../utils/data';
+import Link from 'next/link';
 
 type Props = {
   items: Surah[];
 };
 
 const IndexPage = ({ items }: Props) => {
-  const [data, setData] = useState<any>([]);
+  const [data, setData] = useState<any>();
 
   useEffect(() => {
     const datas = JSON.parse(localStorage.getItem('lastRead'));
@@ -22,8 +23,6 @@ const IndexPage = ({ items }: Props) => {
     }
   };
 
-  console.log(data);
-
   useEffect(() => {
     window.addEventListener('storage', handleLocalStorageChange);
 
@@ -32,12 +31,24 @@ const IndexPage = ({ items }: Props) => {
     };
   }, []);
 
+  if (!data) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <>
       <Head>
         <title>Home - Next Quran</title>
       </Head>
-      <h1 className="text-sky-700 font-bold">{data.info.number}</h1>
+      <Link
+        href={`/surah/${data.info.name.transliteration.id.toLowerCase()}#${data.verses.map(
+          (m) => m.number.inSurah
+        )}`}>
+        <h1 className="text-sky-700 font-bold">
+          {data.info.name.transliteration.id} ayat{' '}
+          {data.verses.map((m) => m.number.inSurah)}
+        </h1>
+      </Link>
     </>
   );
 };

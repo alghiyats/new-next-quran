@@ -17,10 +17,11 @@ const ListDetail = ({
   translation,
   ayat,
   handleLastRead,
-  data,
 }: ListDetailProps) => {
   return (
-    <div className="group flex shadow-md hover:shadow-lg border dark:border-gray-500 duration-300 rounded-md dark:shadow-gray-500 justify-between dark:bg-slate-900 flex-col gap-y-2">
+    <div
+      id={`${ayat}`}
+      className="group flex shadow-md hover:shadow-lg border dark:border-gray-500 duration-300 rounded-md dark:shadow-gray-500 justify-between dark:bg-slate-900 flex-col gap-y-2">
       <div className="px-4 py-2 gap-3 dark:bg-gray-700 bg-gray-100 flex items-center w-full justify-between">
         <div>
           <span className="text-sm">
