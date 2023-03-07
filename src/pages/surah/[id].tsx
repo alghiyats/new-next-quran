@@ -11,6 +11,14 @@ type Props = {
 };
 
 const StaticPropsDetail = ({ item, errors }: Props) => {
+  const handleLastRead = (data: any, number: number) => {
+    const filteredVerses = data?.verses?.filter(
+      (verse) => verse.number.inSurah === number
+    );
+    const newData = { info: data, verses: filteredVerses };
+    localStorage.setItem('lastRead', JSON.stringify(newData));
+  };
+
   if (errors) {
     return (
       <>
@@ -56,6 +64,8 @@ const StaticPropsDetail = ({ item, errors }: Props) => {
               arab={x.text.arab}
               translation={x.translation.id}
               ayat={x.number.inSurah}
+              handleLastRead={handleLastRead}
+              data={x}
             />
           ))}
         </div>
@@ -90,6 +100,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }
 
     const item = data.find((data) => data.number === Number(id));
+
     return { props: { item } };
   } catch (err: any) {
     return { props: { errors: err.message } };
