@@ -4,6 +4,7 @@ import { Surah } from '../../interfaces';
 import { data } from '../../utils/data';
 import ListDetail from '../../components/ListDetail';
 import Head from 'next/head';
+import Layout from '../../layouts/Layout';
 
 type Props = {
   item?: Surah;
@@ -37,13 +38,7 @@ const StaticPropsDetail = ({ item, errors }: Props) => {
   }
 
   return (
-    <>
-      <Head>
-        <title>
-          Surah{' '}
-          {`${item ? item.name.transliteration.id : 'Surah'} - Next Quran`}
-        </title>
-      </Head>
+    <Layout title={item.name.transliteration.id}>
       <div>
         <div className="py-6 flex flex-col gap-4 shadow-md  border dark:border-gray-500 duration-300 rounded-md dark:shadow-gray-500 dark:bg-slate-900 mb-12">
           <p className="font-bold text-xl text-center">
@@ -70,7 +65,7 @@ const StaticPropsDetail = ({ item, errors }: Props) => {
           ))}
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
 

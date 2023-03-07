@@ -14,7 +14,7 @@ class SpecialDocument extends Document {
           />
           <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
         </Head>
-        <body className="bg-white text-black dark:bg-black dark:text-white scroll-pt-20">
+        <body className="bg-white text-black dark:bg-black dark:text-white">
           <Main />
           <NextScript />
         </body>

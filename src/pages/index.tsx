@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Layout from '../layouts/Layout';
 
 const IndexPage = () => {
   const [data, setData] = useState<any>();
@@ -35,10 +36,7 @@ const IndexPage = () => {
   }
 
   return (
-    <>
-      <Head>
-        <title>Home - Next Quran</title>
-      </Head>
+    <Layout>
       <Link
         href={`/surah/${data.info.name.transliteration.id.toLowerCase()}#${data.verses.map(
           (m) => m.number.inSurah
@@ -48,7 +46,7 @@ const IndexPage = () => {
           {data.verses.map((m) => m.number.inSurah)}
         </h1>
       </Link>
-    </>
+      </Layout>
   );
 };
 
