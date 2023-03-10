@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import { Surah } from '../interfaces';
+import { listSurah } from '../interfaces';
 
 type ListDetailProps = {
-  item: Surah;
+  item: listSurah;
   arab: string;
   translation: string;
   ayat: number;
@@ -25,7 +25,7 @@ const ListDetail = ({
       <div className="px-4 py-2 gap-3 dark:bg-gray-700 bg-gray-100 flex items-center w-full justify-between">
         <div>
           <span className="text-sm">
-            {item.number} : {ayat}
+            {item.nomor} : {ayat}
           </span>
         </div>
         <div className="flex items-center flex-row-reverse">

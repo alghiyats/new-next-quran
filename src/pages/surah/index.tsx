@@ -1,23 +1,22 @@
 import { GetStaticProps } from 'next';
-import { Surah } from '../../interfaces';
-import { data } from '../../utils/data';
+import { listSurah } from '../../interfaces';
 import List from '../../components/List';
 import Layout from '../../layouts/Layout';
+import { getSurah } from '../../lib/getSurah';
 
 type Props = {
-  items: Surah[];
+  listSurah: any;
 };
 
-const WithStaticProps = ({ items }: Props) => (
-  <Layout title="Daftar Surah - Next Quran">
+const WithStaticProps = ({ listSurah }: Props) => (
+  <>
     <h1 className="text-center text-2xl font bold mb-6">Daftar Surah</h1>
-    <List items={items} />
-  </Layout>
+    <List items={listSurah} /></>
 );
 
 export const getStaticProps: GetStaticProps = async () => {
-  const items: Surah[] = data;
-  return { props: { items } };
+  const listSurah: listSurah[] = await getSurah()
+  return { props: { listSurah } };
 };
 
 export default WithStaticProps;

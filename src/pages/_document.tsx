@@ -4,7 +4,7 @@ import Document, { Html, Head, Main, NextScript } from 'next/document';
 class SpecialDocument extends Document {
   render() {
     return (
-      <Html>
+      <Html className='scroll-mt-36'>
         <Head>
           <title>Next Quran</title>
           <meta charSet="utf-8" />

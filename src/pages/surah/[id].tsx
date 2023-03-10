@@ -1,22 +1,21 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
-
-import { Surah } from '../../interfaces';
-import { data } from '../../utils/data';
+import { listSurah } from '../../interfaces';
 import ListDetail from '../../components/ListDetail';
 import Head from 'next/head';
-import Layout from '../../layouts/Layout';
+import { getSurah } from '../../lib/getSurah';
+import { getSurahDetail } from '../../lib/getSurahDetail';
 
 type Props = {
-  item?: Surah;
+  detail?: listSurah;
   errors?: string;
 };
 
-const StaticPropsDetail = ({ item, errors }: Props) => {
+const StaticPropsDetail = ({ detail, errors }: Props) => {
   const handleLastRead = (data: any, number: number) => {
-    const filteredVerses = data?.verses?.filter(
-      (verse) => verse.number.inSurah === number
+    const filteredVerses = data?.ayat?.filter(
+      (verse) => verse.nomorAyat === number
     );
-    const newData = { info: data, verses: filteredVerses };
+    const newData = { data, verses: filteredVerses };
     localStorage.setItem('lastRead', JSON.stringify(newData));
   };
 
@@ -33,47 +32,38 @@ const StaticPropsDetail = ({ item, errors }: Props) => {
     );
   }
 
-  if (!item) {
+  if (!detail) {
     return <div>Loading...</div>;
   }
 
   return (
-    <Layout title={item.name.transliteration.id}>
-      <div>
-        <div className="py-6 flex flex-col gap-4 shadow-md  border dark:border-gray-500 duration-300 rounded-md dark:shadow-gray-500 dark:bg-slate-900 mb-12">
-          <p className="font-bold text-xl text-center">
-            {item.name.transliteration.id}
-          </p>
-          <p className="text-center text-sm">
-            {item.numberOfVerses} Ayat - {item.revelation.id}
-          </p>
-          <p className=" font-['Uthmani'] text-3xl font-bold text-center">
-            {item.preBismillah !== null && item.preBismillah.text.arab}
-          </p>
-        </div>
-        <div className="flex gap-y-6 flex-col">
-          {item.verses.map((x) => (
-            <ListDetail
-              key={x.number.inSurah}
-              item={item}
-              arab={x.text.arab}
-              translation={x.translation.id}
-              ayat={x.number.inSurah}
-              handleLastRead={handleLastRead}
-              data={x}
-            />
-          ))}
-        </div>
+    <div>
+      <div className="py-6 flex flex-col gap-4 shadow-md  border dark:border-gray-500 duration-300 rounded-md dark:shadow-gray-500 dark:bg-slate-900 mb-12">
+        <p className='text-xl font-bold text-center'>{detail.namaLatin}</p>
       </div>
-    </Layout>
+      <div className="flex gap-y-6 flex-col">
+        {detail.ayat.map((x) => (
+          <ListDetail
+            key={x.nomorAyat}
+            item={detail}
+            arab={x.teksArab}
+            translation={x.teksIndonesia}
+            ayat={x.nomorAyat}
+            handleLastRead={handleLastRead}
+            data={x}
+          />
+        ))}
+      </div>
+    </div>
   );
 };
 
 export default StaticPropsDetail;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = data.map((item) => ({
-    params: { id: item.name.transliteration.id.toLowerCase() },
+  const data = await getSurah()
+  const paths = data?.map((item) => ({
+    params: { id: item.namaLatin.toLowerCase() },
   }));
 
   return { paths, fallback: false };
@@ -81,22 +71,22 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 function getIdFromName(path: string, data: any[]) {
   const matchingData = data.find(
-    (item) => item.name.transliteration.id.toLowerCase() === path.toLowerCase()
+    (item) => item.namaLatin.toLowerCase() === path.toLowerCase()
   );
 
-  return matchingData ? matchingData.number : null;
+  return matchingData ? matchingData.nomor : null;
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
+    const data = await getSurah()
     const id = getIdFromName(params?.id as string, data);
     if (!id) {
       return { notFound: true };
     }
+    const detail = await getSurahDetail(id)
 
-    const item = data.find((data) => data.number === Number(id));
-
-    return { props: { item } };
+    return { props: { detail } };
   } catch (err: any) {
     return { props: { errors: err.message } };
   }

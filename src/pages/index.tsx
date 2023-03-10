@@ -21,17 +21,15 @@ const IndexPage = () => {
   }
 
   return (
-    <Layout>
-      <Link
-        href={`/surah/${data.info.name.transliteration.id.toLowerCase()}#${data.verses.map(
-          (m) => m.number.inSurah
-        )}`}>
-        <h1 className="text-sky-700 font-bold">
-          {data.info.name.transliteration.id} ayat{' '}
-          {data.verses.map((m) => m.number.inSurah)}
-        </h1>
-      </Link>
-    </Layout>
+    <Link
+      href={`/surah/${data.data.namaLatin.toLowerCase()}#${data.verses.map(
+        (m) => m.nomorAyat
+      )}`}>
+      <h1 className="text-sky-700 font-bold">
+        {data.data.namaLatin} ayat{' '}
+        {data.verses.map((m) => m.nomorAyat)}
+      </h1>
+    </Link>
   );
 };
 
