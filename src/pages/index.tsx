@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Layout from '../layouts/Layout';
 
 const IndexPage = () => {
   const [data, setData] = useState<any>();

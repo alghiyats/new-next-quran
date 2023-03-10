@@ -44,7 +44,7 @@ function Header() {
             <Link href={'/'}>
               <div
                 className={`${router.pathname === '/' && 'bg-gray-100 dark:bg-gray-800'
-                  }flex cursor-pointer items-center gap-x-1 rounded-md  p-2 sm:py-2 sm:px-4 hover:bg-gray-200 hover:dark:bg-gray-700`}>
+                  } flex cursor-pointer items-center gap-x-1 rounded-md  p-2 sm:py-2 sm:px-4 hover:bg-gray-200 hover:dark:bg-gray-700`}>
                 <svg
                   className="h-5 w-5 fill-gray-500 dark:fill-white"
                   viewBox="0 0 24 24"
