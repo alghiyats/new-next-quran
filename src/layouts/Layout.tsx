@@ -1,20 +1,26 @@
-import Head from 'next/head';
-import React, { ReactNode } from 'react';
-import Header from '../layouts/Header';
+import React, { ReactNode, useState } from 'react';
+import Header from '../components/Header';
 
 type Props = {
   children?: ReactNode;
   title?: string;
 };
 
-const Layout = ({ children, title = 'Next Quran' }: Props) => (
-  <>
-    <Head>
-      <title>{title}</title>
-    </Head>
-    <Header />
-    <div className="max-w-[1000px] mx-auto px-6 my-6">{children}</div>
-  </>
-);
+const Layout = ({ children }: Props) => {
+  const [headerLoaded, setHeaderLoaded] = useState(false);
+
+  const handleHeaderLoad = () => {
+    setHeaderLoaded(true);
+  };
+
+  return (
+    <>
+      <Header onLoad={handleHeaderLoad} />
+      {headerLoaded && (
+        <div className='max-w-[1000px] mx-auto px-6 my-6'>{children}</div>
+      )}
+    </>
+  );
+};
 
 export default Layout;

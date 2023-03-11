@@ -15,7 +15,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider attribute="class" disableTransitionOnChange>
       <Layout>
-        <Component {...pageProps} /></Layout>
+        <Component {...pageProps} />
+      </Layout>
     </ThemeProvider>
   );
 }
