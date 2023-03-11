@@ -51,11 +51,10 @@ export default function Header({ onLoad }: Props) {
                 } flex cursor-pointer items-center gap-x-1 rounded-md p-2 sm:py-2 sm:px-4 hover:bg-gray-100 hover:dark:bg-gray-700`}>
               <span className='hidden sm:block text-sm font-medium'>Bookmark</span>
             </div>
-            <div className='flex cursor-pointer select-none items-center rounded-md p-2 hover:bg-gray-100 hover:dark:bg-gray-700'>
+            <div onClick={
+              theme === 'dark' ? () => setTheme('light') : () => setTheme('dark')
+            } className='flex cursor-pointer select-none items-center rounded-md p-2 hover:bg-gray-100 hover:dark:bg-gray-700'>
               <svg
-                onClick={
-                  theme === 'dark' ? () => setTheme('light') : () => setTheme('dark')
-                }
                 className='h-5 w-5 stroke-gray-500 dark:stroke-slate-200 fill-none'
                 viewBox='0 0 24 24'>
                 {theme === 'dark' ? (
