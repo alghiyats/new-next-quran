@@ -41,7 +41,7 @@ const StaticPropsDetail = ({ detail, errors }: Props) => {
       <div className="py-6 flex flex-col gap-4 shadow-md  border dark:border-gray-500 duration-300 rounded-md dark:shadow-gray-500 dark:bg-slate-900 mb-12">
         <p className='text-xl font-bold text-center'>{detail.namaLatin}</p>
         <p className='text-center text-base'>{detail.jumlahAyat} Ayat - {detail.tempatTurun}</p>
-        {detail.nomor > 1 && <p className='text-3xl text-center font-["Scheherazade_New"]'>بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>}
+        {detail.nomor > 1 && <p className='text-3xl text-center font-["Scheherazade_New"] mb-4' dir="rtl">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>}
       </div>
       <div className="flex gap-y-6 flex-col">
         {detail.ayat.map((x) => (

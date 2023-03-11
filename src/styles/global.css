@@ -3,6 +3,6 @@
 @tailwind utilities;
 
 @font-face {
-   font-family: 'Scheherazade New';
-   src: url(/ScheherazadeNew.woff);
+   font-family: 'Uthmani';
+   src: url(/Uthmani.otf);
 }

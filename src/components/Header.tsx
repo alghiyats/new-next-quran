@@ -4,80 +4,155 @@ import React, { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 
 type Props = {
-  onLoad: () => void;
+   onLoad: () => void;
 };
 
 export default function Header({ onLoad }: Props) {
+   onLoad();
+   const router = useRouter();
+   const [mounted, setMounted] = useState(false);
+   const { theme, setTheme } = useTheme();
 
-  onLoad();
-  const router = useRouter();
-  const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
+   useEffect(() => {
+      setMounted(true);
+   }, []);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+   if (!mounted) {
+      return null;
+   }
 
-  if (!mounted) {
-    return null;
-  }
-
-  return (
-    <div className='bg-white sticky top-0 dark:bg-black'>
-      <div className={`shadow-md py-3`}>
-        <div className='flex justify-between max-w-[1000px] mx-auto px-6'>
-          <div className='flex items-center'>
-            <Link href={'/'}>
-              <span className='font-semibold'>Next Quran</span>
-            </Link>
-          </div>
-          <div className='ml-2 flex gap-x-2'>
-            <Link href={'/'}>
-              <div
-                className={`${router.pathname === '/' && 'bg-gray-100 dark:bg-gray-800'
-                  } flex cursor-pointer items-center gap-x-1 rounded-md  p-2 sm:py-2 sm:px-4 hover:bg-gray-200 hover:dark:bg-gray-700`}>
-                <span className='hidden sm:block text-sm font-medium'>Home</span>
-              </div>
-            </Link>
-            <Link href={'/surah'}>
-              <div
-                className={`${router.pathname === '/surah' && 'bg-gray-100 dark:bg-gray-800'
-                  } flex cursor-pointer items-center gap-x-1 rounded-md  p-2 sm:py-2 sm:px-4 hover:bg-gray-200 hover:dark:bg-gray-700`}>
-                <span className='hidden sm:block text-sm font-medium'>Surah</span>
-              </div>
-            </Link>
-            <div
-              className={`${router.pathname === '/bookmark' && 'bg-gray-100 dark:bg-gray-800'
-                } flex cursor-pointer items-center gap-x-1 rounded-md p-2 sm:py-2 sm:px-4 hover:bg-gray-100 hover:dark:bg-gray-700`}>
-              <span className='hidden sm:block text-sm font-medium'>Bookmark</span>
+   return (
+      <div className='bg-white sticky top-0 dark:bg-black'>
+         <div className={`shadow-md py-3`}>
+            <div className='flex justify-between max-w-[1000px] mx-auto px-6'>
+               <div className='flex items-center'>
+                  <div
+                     className={`flex cursor-pointer items-center gap-x-1 rounded-md p-2  hover:bg-gray-200 hover:dark:bg-gray-700 mr-2`}>
+                     <svg
+                        className='w-5 h-5'
+                        viewBox='0 0 24 24'
+                        fill='none'
+                        xmlns='http://www.w3.org/2000/svg'>
+                        <g>
+                           <path
+                              className='stroke-gray-500 dark:stroke-slate-200'
+                              d='M4 17H8M12 17H20M4 12H20M4 7H12M16 7H20'
+                              stroke='#000000'
+                              strokeWidth='1.5'
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
+                           />
+                        </g>
+                     </svg>
+                  </div>
+                  <Link href={'/'}>
+                     <span className='font-bold'>Next Quran</span>
+                  </Link>
+               </div>
+               <div className='ml-2 flex gap-x-2'>
+                  <Link href={'/'}>
+                     <div
+                        className={`${
+                           router.pathname === '/' && 'bg-gray-100 dark:bg-gray-800'
+                        } flex cursor-pointer items-center gap-x-1 rounded-md  p-2 sm:py-2 sm:px-4 hover:bg-gray-200 hover:dark:bg-gray-700`}>
+                        <svg
+                           className='w-5 h-5'
+                           viewBox='0 0 24 24'
+                           fill='none'
+                           xmlns='http://www.w3.org/2000/svg'>
+                           <g>
+                              <path
+                                 className='stroke-gray-500 dark:stroke-slate-200'
+                                 d='M15 16C15 15.2044 14.6839 14.4413 14.1213 13.8787C13.5587 13.3161 12.7957 13 12 13C11.2044 13 10.4413 13.3161 9.87868 13.8787C9.31607 14.4413 9 15.2043 9 16V20H4L4 10L8 6.5M12 3L20 10L20 20H15'
+                                 stroke='#000000'
+                                 strokeWidth='1.5'
+                                 strokeLinecap='round'
+                                 strokeLinejoin='round'
+                              />
+                           </g>
+                        </svg>
+                        <span className='hidden sm:block text-sm font-medium'>Home</span>
+                     </div>
+                  </Link>
+                  <Link href={'/surah'}>
+                     <div
+                        className={`${
+                           router.pathname === '/surah' && 'bg-gray-100 dark:bg-gray-800'
+                        } flex cursor-pointer items-center gap-x-1 rounded-md  p-2 sm:py-2 sm:px-4 hover:bg-gray-200 hover:dark:bg-gray-700`}>
+                        <svg
+                           className='w-5 h-5'
+                           viewBox='0 0 24 24'
+                           fill='none'
+                           xmlns='http://www.w3.org/2000/svg'>
+                           <g>
+                              <path
+                                 className='stroke-gray-500 dark:stroke-slate-200'
+                                 d='M15 11H4M6 5C4.89543 5 4 5.89543 4 7V19C4 20.1046 4.89543 21 6 21H18C19.1046 21 20 20.1046 20 19V7C20 5.89543 19.1046 5 18 5H15M15 3V7M9 3V7M9 5H12'
+                                 stroke='#000000'
+                                 strokeWidth='1.5'
+                                 strokeLinecap='round'
+                              />
+                           </g>
+                        </svg>
+                        <span className='hidden sm:block text-sm font-medium'>Surah</span>
+                     </div>
+                  </Link>
+                  <div
+                     className={`${
+                        router.pathname === '/bookmark' && 'bg-gray-100 dark:bg-gray-800'
+                     } flex cursor-pointer items-center gap-x-1 rounded-md p-2 sm:py-2 sm:px-4 hover:bg-gray-100 hover:dark:bg-gray-700`}>
+                     <svg
+                        className='w-5 h-5'
+                        viewBox='0 0 24 24'
+                        fill='none'
+                        xmlns='http://www.w3.org/2000/svg'>
+                        <g>
+                           <path
+                              className='stroke-gray-500 dark:stroke-slate-200'
+                              d='M18 13V21L12 15L6 21V17M18 8V6C18 4.89543 17.1046 4 16 4H8C6.89543 4 6 4.89543 6 6V13'
+                              stroke='#000000'
+                              strokeWidth='1.5'
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
+                           />
+                        </g>
+                     </svg>
+                     <span className='hidden sm:block text-sm font-medium'>Bookmark</span>
+                  </div>
+                  <div
+                     onClick={theme === 'dark' ? () => setTheme('light') : () => setTheme('dark')}
+                     className='flex cursor-pointer select-none items-center rounded-md p-2 hover:bg-gray-100 hover:dark:bg-gray-700'>
+                     <svg
+                        className='h-5 w-5 fill-none'
+                        viewBox='0 0 24 24'>
+                        {theme !== 'dark' ? (
+                           <g>
+                              <path
+                                 className='stroke-gray-500 dark:stroke-slate-200'
+                                 d='M20 12C20 7.11149 16.0007 3.13144 11 3C16.6829 8.75775 10.952 18.6176 3 17C4.65938 19.4319 7.77111 21 11 21C13.8836 21 16.3745 19.7215 18 17.7163'
+                                 stroke='#000000'
+                                 strokeWidth='1.5'
+                                 strokeLinecap='round'
+                                 strokeLinejoin='round'
+                              />
+                           </g>
+                        ) : (
+                           <g>
+                              <path
+                                 className='stroke-gray-500 dark:stroke-slate-200'
+                                 d='M3 12H5M5.00006 19L7.00006 17M12 19V21M17 17L19 19M5 5L7 7M19 12H21M16.9999 7L18.9999 5M12 3V5M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z'
+                                 stroke='#000000'
+                                 strokeWidth='1.5'
+                                 strokeLinecap='round'
+                                 strokeLinejoin='round'
+                              />
+                           </g>
+                        )}
+                     </svg>
+                  </div>
+               </div>
             </div>
-            <div onClick={
-              theme === 'dark' ? () => setTheme('light') : () => setTheme('dark')
-            } className='flex cursor-pointer select-none items-center rounded-md p-2 hover:bg-gray-100 hover:dark:bg-gray-700'>
-              <svg
-                className='h-5 w-5 stroke-gray-500 dark:stroke-slate-200 fill-none'
-                viewBox='0 0 24 24'>
-                {theme === 'dark' ? (
-                  <g>
-                    <path d='M12 18.5C15.5899 18.5 18.5 15.5899 18.5 12C18.5 8.41015 15.5899 5.5 12 5.5C8.41015 5.5 5.5 8.41015 5.5 12C5.5 15.5899 8.41015 18.5 12 18.5Z' />
-                    <path
-                      d='M19.14 19.14L19.01 19.01M19.01 4.99L19.14 4.86L19.01 4.99ZM4.86 19.14L4.99 19.01L4.86 19.14ZM12 2.08V2V2.08ZM12 22V21.92V22ZM2.08 12H2H2.08ZM22 12H21.92H22ZM4.99 4.99L4.86 4.86L4.99 4.99Z'
-                      strokeWidth={2}
-                    />
-                  </g>
-                ) : (
-                  <g>
-                    <path
-                      d='M183.72453,170.371a10.4306,10.4306,0,0,1-.8987,3.793,11.19849,11.19849,0,0,1-5.73738,5.72881,10.43255,10.43255,0,0,1-3.77582.89138,1.99388,1.99388,0,0,0-1.52447,3.18176,10.82936,10.82936,0,1,0,15.118-15.11819A1.99364,1.99364,0,0,0,183.72453,170.371Z'
-                      transform='translate(-169.3959 -166.45548)'
-                    />
-                  </g>
-                )}
-              </svg>
-            </div>
-          </div>
-        </div>
+         </div>
       </div>
-    </div>
-  );
+   );
 }

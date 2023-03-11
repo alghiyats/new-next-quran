@@ -24,7 +24,7 @@ const ListItem = ({ data }: Props) => {
           </div>
         </div>
         <div>
-          <span className="text-right font-['Uthmani'] text-xl font-bold">
+          <span className="font-['Scheherazade_New'] text-xl font-bold" dir="rtl">
             {data.nama}
           </span>
         </div>
