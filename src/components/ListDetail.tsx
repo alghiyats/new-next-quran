@@ -9,6 +9,7 @@ type ListDetailProps = {
   ayat: number;
   handleLastRead: any;
   data: any;
+  latin: string
 };
 
 const ListDetail = ({
@@ -16,7 +17,7 @@ const ListDetail = ({
   arab,
   translation,
   ayat,
-  handleLastRead,
+  handleLastRead, latin
 }: ListDetailProps) => {
   return (
     <div
@@ -25,7 +26,7 @@ const ListDetail = ({
       <div className="px-4 py-2 gap-3 dark:bg-gray-700 bg-gray-100 flex items-center w-full justify-between">
         <div>
           <span className="text-sm">
-            {item.nomor} : {ayat}
+            {ayat}
           </span>
         </div>
         <div className="flex items-center flex-row-reverse">
@@ -78,8 +79,9 @@ const ListDetail = ({
           </span>
         </div>
       </div>
-      <div className="m-6">
-        <p className='mb-2 font-["Uthmani"] text-2xl text-right'>{arab}</p>
+      <div className="m-6 flex flex-col gap-2">
+        <p className='mb-2 font-["Scheherazade_New"] text-3xl text-right'>{arab}</p>
+        <p className="text-sm font-semibold">{latin}</p>
         <p className="text-sm">{translation}</p>
       </div>
     </div>

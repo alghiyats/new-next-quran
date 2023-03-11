@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: 'Uthmani';
-  src: url(/Uthmani.otf);
-}
+@import url('https://fonts.googleapis.com/css2?family=Scheherazade+New&display=swap');
+
+/* @font-face{
+    font-family: 'Scheherazade New';
+    src: url(/ScheherazadeNew.woff);
+} */
