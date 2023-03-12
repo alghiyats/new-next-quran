@@ -12,6 +12,7 @@ export default function Header({ onLoad }: Props) {
    const router = useRouter();
    const [mounted, setMounted] = useState(false);
    const { theme, setTheme } = useTheme();
+   const [isTop, setIsTop] = useState(true);
 
    useEffect(() => {
       setMounted(true);
@@ -21,10 +22,18 @@ export default function Header({ onLoad }: Props) {
       return null;
    }
 
+   const handleScroll = () => {
+      setIsTop(window.scrollY === 0);
+   };
+
+   if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', handleScroll);
+   }
+
    return (
       <div className='bg-white sticky top-0 dark:bg-black'>
-         <div className={`shadow-md py-3`}>
-            <div className='flex justify-between max-w-[1000px] mx-auto px-6'>
+         <div className={` ${isTop ? 'py-4 ' : 'shadow-md py-3 '}duration-300`}>
+            <div className='flex justify-between max-w-[1050px] mx-auto px-3 sm:px-0'>
                <div className='flex items-center'>
                   <div
                      className={`flex cursor-pointer items-center gap-x-1 rounded-md p-2  hover:bg-gray-200 hover:dark:bg-gray-700 mr-2`}>

@@ -10,9 +10,18 @@ type ListDetailProps = {
    handleLastRead: any;
    data: any;
    latin: string;
+   check: any;
 };
 
-const ListDetail = ({ item, arab, translation, ayat, handleLastRead, latin }: ListDetailProps) => {
+const ListDetail = ({
+   item,
+   arab,
+   translation,
+   ayat,
+   handleLastRead,
+   latin,
+   check,
+}: ListDetailProps) => {
    const gh = w => {
       let ar = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
       let nm = `${w}`;
@@ -67,7 +76,9 @@ const ListDetail = ({ item, arab, translation, ayat, handleLastRead, latin }: Li
                   </svg>
                </span>
                <span
-                  onClick={() => handleLastRead(item, ayat)}
+                  onClick={() =>
+                     check?.verses?.map(v => v.nomorAyat !== ayat && handleLastRead(item, ayat))
+                  }
                   className='w-6 h-6 flex items-center justify-center cursor-pointer'>
                   <svg
                      className='w-5 h-5'
@@ -76,7 +87,9 @@ const ListDetail = ({ item, arab, translation, ayat, handleLastRead, latin }: Li
                      xmlns='http://www.w3.org/2000/svg'>
                      <g>
                         <path
-                           className={`} stroke-gray-500 dark:stroke-slate-200`}
+                           className={`${check?.verses?.map(
+                              m => m.nomorAyat === ayat && 'stroke-sky-500 '
+                           )}stroke-gray-500 dark:stroke-slate-200`}
                            d='M19 9.80001L20 8.00002L16 4.00002L7 9.00002L15 17L17 13.4M11 13L4 20'
                            stroke='#000000'
                            strokeWidth='1.5'
