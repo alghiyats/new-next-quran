@@ -101,7 +101,9 @@ export default function Header({ onLoad }: Props) {
    return (
       <div
          className={`${
-            isTop ? '' : 'dark:border-b dark:border-[rgba(255,255,255,.15)] dark:border-solid '
+            isTop
+               ? ''
+               : 'dark:border-b dark:border-[rgba(255,255,255,.15)] dark:border-solid shadow-md dark:shadow-none '
          }bg-[#fffdfc] sticky top-0 dark:bg-darkPrimary`}>
          <div className={`duration-300 py-4`}>
             <div className='flex justify-between max-w-screen-xl mx-auto px-3'>
