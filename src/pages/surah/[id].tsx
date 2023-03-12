@@ -15,10 +15,8 @@ type Props = {
 const StaticPropsDetail = ({ detail, errors }: Props) => {
    const [isModalOpen, setIsModalOpen] = useState(false);
    const [newData, setNewData] = useState<any>(null);
-   const body = document.querySelector('body');
 
    const handleLastRead = (data: any, number: number) => {
-      body.classList.add('overflow-hidden');
       const ayat = data?.ayat?.filter(verse => verse.nomor === number);
       const { nama, arti, nama_latin, deskripsi, jumlah_ayat, audio } = data;
       const newData = { nama, arti, nama_latin, deskripsi, jumlah_ayat, audio, ayat };
@@ -39,12 +37,10 @@ const StaticPropsDetail = ({ detail, errors }: Props) => {
       localStorage.setItem('lastRead', JSON.stringify(newData));
       window.dispatchEvent(new Event('lastRead'));
       setIsModalOpen(false);
-      body.classList.remove('overflow-hidden');
    };
 
    const handleCancel = () => {
       setIsModalOpen(false);
-      body.classList.remove('overflow-hidden');
    };
 
    const [check, setCheck] = useState<any>();
