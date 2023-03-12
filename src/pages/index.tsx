@@ -31,12 +31,14 @@ const IndexPage = () => {
    }
 
    return (
-      <Link
-         href={`/surah/${data.data.namaLatin.toLowerCase()}#${data.verses.map(m => m.nomorAyat)}`}>
-         <h1 className='text-sky-700 font-bold'>
-            {data.data.namaLatin} ayat {data.verses.map(m => m.nomorAyat)}
-         </h1>
-      </Link>
+      <>
+         <h1 className='text-sky-700 font-bold text-2xl'>Terakhir dibaca</h1>
+         <Link href={`/surah/${data.nama_latin.toLowerCase()}#${data.ayat.map(m => m.nomor)}`}>
+            <h1 className='hover:text-sky-700 font-bold'>
+               {data.nama_latin} ayat {data.ayat.map(m => m.nomor)}
+            </h1>
+         </Link>
+      </>
    );
 };
 

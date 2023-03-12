@@ -32,7 +32,7 @@ class SpecialDocument extends Document {
             </Head>
             <body
                id='body'
-               className="bg-white text-black dark:bg-black dark:text-white font-['Quicksand',_sans-serif]">
+               className="bg-primary text-black dark:bg-darkPrimary dark:text-white font-['Quicksand',_sans-serif]">
                <Main />
                <NextScript />
             </body>

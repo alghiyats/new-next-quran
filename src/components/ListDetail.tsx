@@ -11,6 +11,7 @@ type ListDetailProps = {
    data: any;
    latin: string;
    check: any;
+   id: number;
 };
 
 const ListDetail = ({
@@ -21,6 +22,7 @@ const ListDetail = ({
    handleLastRead,
    latin,
    check,
+   id,
 }: ListDetailProps) => {
    const gh = w => {
       let ar = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
@@ -35,8 +37,8 @@ const ListDetail = ({
    return (
       <div
          id={`${ayat}`}
-         className='group scroll-mt-20 flex shadow-md hover:shadow-lg border dark:border-gray-500 duration-300 rounded-md dark:shadow-gray-500 justify-between dark:bg-slate-900 flex-col gap-y-2'>
-         <div className='px-4 py-2 gap-3 dark:bg-gray-700 bg-gray-100 flex items-center w-full justify-between'>
+         className='group bg-[#fffdfc] scroll-mt-20 flex shadow-[0_5px_35px_rgba(0,0,0,.07)] hover:shadow-lg border dark:border-gray-500 duration-300 rounded-md dark:shadow-gray-500 justify-between dark:bg-slate-900 flex-col gap-y-2'>
+         <div className='px-4 py-2 gap-3 dark:bg-gray-700 bg-slate-200 flex items-center w-full justify-between'>
             <div>
                <span className='text-sm'>{ayat}</span>
             </div>
@@ -77,7 +79,9 @@ const ListDetail = ({
                </span>
                <span
                   onClick={() =>
-                     check?.verses?.map(v => v.nomorAyat !== ayat && handleLastRead(item, ayat))
+                     check
+                        ? check.ayat.map(m => m.id !== id && handleLastRead(item, ayat))
+                        : handleLastRead(item, ayat)
                   }
                   className='w-6 h-6 flex items-center justify-center cursor-pointer'>
                   <svg
@@ -87,8 +91,8 @@ const ListDetail = ({
                      xmlns='http://www.w3.org/2000/svg'>
                      <g>
                         <path
-                           className={`${check?.verses?.map(
-                              m => m.nomorAyat === ayat && 'stroke-sky-500 '
+                           className={`${check?.ayat?.map(
+                              m => m.id === id && 'stroke-sky-500 '
                            )}stroke-gray-500 dark:stroke-slate-200`}
                            d='M19 9.80001L20 8.00002L16 4.00002L7 9.00002L15 17L17 13.4M11 13L4 20'
                            stroke='#000000'
@@ -108,7 +112,9 @@ const ListDetail = ({
                {arab}
                <span className='font-["Uthmani"] text-3xl md:text-4xl'>&nbsp;{gh(ayat)}</span>
             </p>
-            <p className='text-sm font-semibold mb-2'>{latin}</p>
+            <p
+               className='text-sm font-semibold mb-2'
+               dangerouslySetInnerHTML={{ __html: latin }}></p>
             <p className='text-sm'>{translation}</p>
          </div>
       </div>

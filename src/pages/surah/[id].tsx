@@ -19,14 +19,17 @@ const StaticPropsDetail = ({ detail, errors }: Props) => {
 
    const handleLastRead = (data: any, number: number) => {
       body.classList.add('overflow-hidden');
-      const filteredVerses = data?.ayat?.filter(verse => verse.nomorAyat === number);
-      const newData = { data, verses: filteredVerses };
+      const ayat = data?.ayat?.filter(verse => verse.nomor === number);
+      const { nama, arti, nama_latin, deskripsi, jumlah_ayat, audio } = data;
+      const newData = { nama, arti, nama_latin, deskripsi, jumlah_ayat, audio, ayat };
+
       const lastReadData = JSON.parse(localStorage.getItem('lastRead'));
 
       if (lastReadData) {
          setNewData(newData);
          setIsModalOpen(true);
       } else {
+         // simpan objek baru ke local storage
          localStorage.setItem('lastRead', JSON.stringify(newData));
          window.dispatchEvent(new Event('lastRead'));
       }
@@ -98,9 +101,9 @@ const StaticPropsDetail = ({ detail, errors }: Props) => {
          )}
          <div>
             <div className='py-6 flex flex-col gap-4 shadow-md  border dark:border-gray-500 duration-300 rounded-md dark:shadow-gray-500 dark:bg-slate-900 mb-12'>
-               <p className='text-xl font-bold text-center'>{detail.namaLatin}</p>
+               <p className='text-xl font-bold text-center'>{detail.nama_latin}</p>
                <p className='text-center text-base'>
-                  {detail.jumlahAyat} Ayat - {detail.tempatTurun}
+                  {detail.jumlah_ayat} Ayat - {detail.tempat_turun}
                </p>
                {detail.nomor > 1 && (
                   <p
@@ -113,15 +116,16 @@ const StaticPropsDetail = ({ detail, errors }: Props) => {
             <div className='flex gap-y-6 flex-col'>
                {detail.ayat.map(x => (
                   <ListDetail
-                     key={x.nomorAyat}
+                     key={x.nomor}
                      item={detail}
-                     arab={x.teksArab}
-                     translation={x.teksIndonesia}
-                     ayat={x.nomorAyat}
+                     arab={x.ar}
+                     translation={x.idn}
+                     ayat={x.nomor}
                      handleLastRead={handleLastRead}
                      data={x}
-                     latin={x.teksLatin}
+                     latin={x.tr}
                      check={check}
+                     id={x.id}
                   />
                ))}
             </div>
@@ -135,14 +139,14 @@ export default StaticPropsDetail;
 export const getStaticPaths: GetStaticPaths = async () => {
    const data = await getSurah();
    const paths = data?.map(item => ({
-      params: { id: item.namaLatin.toLowerCase() },
+      params: { id: item.nama_latin.toLowerCase() },
    }));
 
    return { paths, fallback: false };
 };
 
 function getIdFromName(path: string, data: any[]) {
-   const matchingData = data.find(item => item.namaLatin.toLowerCase() === path.toLowerCase());
+   const matchingData = data.find(item => item.nama_latin.toLowerCase() === path.toLowerCase());
 
    return matchingData ? matchingData.nomor : null;
 }

@@ -1,15 +1,18 @@
 export interface listSurah {
    nomor: number;
    nama: string;
-   namaLatin: string;
-   jumlahAyat: number;
-   tempatTurun: string;
+   nama_latin: string;
+   jumlah_ayat: number;
+   tempat_turun: string;
    arti: string;
    deskripsi: string;
+   audio: string;
    ayat: {
-      nomorAyat: number;
-      teksArab: string;
-      teksLatin: string;
-      teksIndonesia: string;
+      id: number;
+      surah: number;
+      nomor: number;
+      ar: string;
+      tr: string;
+      idn: string;
    }[];
 }
