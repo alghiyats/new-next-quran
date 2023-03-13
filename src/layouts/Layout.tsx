@@ -1,4 +1,5 @@
 import React, { ReactNode, useState } from 'react';
+import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 type Props = {
@@ -17,6 +18,7 @@ const Layout = ({ children }: Props) => {
       <>
          <Header onLoad={handleHeaderLoad} />
          {headerLoaded && <div className='max-w-screen-xl mx-auto px-5 my-6'>{children}</div>}
+         <Footer />
       </>
    );
 };

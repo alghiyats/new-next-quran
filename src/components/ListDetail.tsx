@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { listSurah } from '../interfaces';
+import BookmarkIcon from './BookmarkIcon';
 
 type ListDetailProps = {
    item: listSurah;
@@ -42,7 +43,7 @@ const ListDetail = ({
             <div>
                <span className='text-sm'>{ayat}</span>
             </div>
-            <div className='flex items-center flex-row-reverse'>
+            <div className='flex items-center flex-row-reverse gap-2'>
                <span className='w-6 h-6 flex items-center justify-center cursor-pointer'>
                   <svg
                      className='w-5 h-5'
@@ -103,6 +104,7 @@ const ListDetail = ({
                      </g>
                   </svg>
                </span>
+               <BookmarkIcon favId={item} />
             </div>
          </div>
          <div className='m-6'>

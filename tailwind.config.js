@@ -16,6 +16,10 @@ module.exports = {
             link: '#482dff',
             darkLink: '#41B375',
          },
+         fontFamily: {
+            arabic: '"Scheherazade New"',
+            ayatArabic: '"Uthmani"',
+         },
       },
    },
 

@@ -15,11 +15,12 @@ type Props = {
 const StaticPropsDetail = ({ detail, errors }: Props) => {
    const [isModalOpen, setIsModalOpen] = useState(false);
    const [newData, setNewData] = useState<any>(null);
+   const [check, setCheck] = useState<any>();
 
    const handleLastRead = (data: any, number: number) => {
       const ayat = data?.ayat?.filter(verse => verse.nomor === number);
-      const { nama, arti, nama_latin, deskripsi, jumlah_ayat, audio } = data;
-      const newData = { nama, arti, nama_latin, deskripsi, jumlah_ayat, audio, ayat };
+      const { nomor, nama, arti, nama_latin, deskripsi, jumlah_ayat, audio } = data;
+      const newData = { nomor, nama, arti, nama_latin, deskripsi, jumlah_ayat, audio, ayat };
 
       const lastReadData = JSON.parse(localStorage.getItem('lastRead'));
 
@@ -42,8 +43,6 @@ const StaticPropsDetail = ({ detail, errors }: Props) => {
    const handleCancel = () => {
       setIsModalOpen(false);
    };
-
-   const [check, setCheck] = useState<any>();
 
    useEffect(() => {
       const datas = JSON.parse(localStorage.getItem('lastRead'));

@@ -30,14 +30,41 @@ const IndexPage = () => {
       return <h1>Last read not found.</h1>;
    }
 
+   const gh = w => {
+      let ar = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+      let nm = `${w}`;
+      let result = '';
+      for (let c of nm) {
+         result += ar[parseInt(c)];
+      }
+      return result;
+   };
+
    return (
       <>
-         <h1 className='text-sky-700 font-bold text-2xl'>Terakhir dibaca</h1>
-         <Link href={`/surah/${data.nama_latin.toLowerCase()}#${data.ayat.map(m => m.nomor)}`}>
-            <h1 className='hover:text-sky-700 font-bold'>
-               {data.nama_latin} ayat {data.ayat.map(m => m.nomor)}
+         <h1 className='font-bold text-xl mb-4'>Terakhir dibaca</h1>
+         <div className='shadow-md bg-secondary dark:bg-darkSecondary rounded-lg p-6'>
+            <h1 className='hover:underline font-bold w-max'>
+               {data.nama_latin} / {data.nomor} : {data.ayat.map(m => m.nomor)}
             </h1>
-         </Link>
+            <p
+               className='text-3xl font-arabic my-6 leading-[60px]'
+               dir='rtl'>
+               {data.ayat.map(ar => ar.ar)}
+               <span className='font-ayatArabic text-3xl md:text-4xl'>
+                  &nbsp;{gh(data.ayat.map(m => m.nomor))}
+               </span>
+            </p>
+            <p
+               className='text-sm font-semibold mb-2'
+               dangerouslySetInnerHTML={{ __html: data.ayat.map(tr => tr.tr) }}></p>
+            <p className='text-sm'>{data.ayat.map(idn => idn.idn)}</p>
+            <Link href={`/surah/${data.nama_latin.toLowerCase()}#${data.ayat.map(m => m.nomor)}`}>
+               <h1 className='hover:text-link dark:hover:text-darkLink font-semibold mt-4'>
+                  Lanjut membaca
+               </h1>
+            </Link>
+         </div>
       </>
    );
 };
