@@ -104,7 +104,7 @@ const ListDetail = ({
                      </g>
                   </svg>
                </span>
-               <BookmarkIcon favId={item} />
+               <BookmarkIcon favId={id} />
             </div>
          </div>
          <div className='m-6'>
