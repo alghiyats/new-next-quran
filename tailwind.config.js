@@ -11,8 +11,10 @@ module.exports = {
          colors: {
             primary: '#fdfcff',
             secondary: '#fffdfc',
+            lightBg: 'rgba(0,0,0,.03)',
             darkPrimary: '#1e1e1e',
             darkSecondary: '#2d2d30',
+            darkBg: 'rgba(0,0,0,.15)',
             link: '#482dff',
             darkLink: '#41B375',
          },

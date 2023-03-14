@@ -99,41 +99,22 @@ export default function Header() {
             isTop
                ? ''
                : 'dark:border-b dark:border-[rgba(255,255,255,.15)] dark:border-solid shadow-md dark:shadow-none '
-         }bg-[#fffdfc] fixed top-0 dark:bg-darkPrimary w-full`}>
+         }bg-[#fffdfc] fixed top-0 dark:bg-darkPrimary w-full px-3`}>
          <div className={`duration-300 py-4`}>
             <div className='flex justify-between max-w-screen-xl mx-auto px-3'>
                <div className='flex items-center'>
-                  <div
-                     className={`flex cursor-pointer items-center gap-x-1 rounded-md p-2  hover:bg-gray-200 hover:dark:bg-gray-700 mr-2`}>
-                     <svg
-                        className='w-5 h-5'
-                        viewBox='0 0 24 24'
-                        fill='none'
-                        xmlns='http://www.w3.org/2000/svg'>
-                        <g>
-                           <path
-                              className='stroke-gray-500 dark:stroke-slate-200'
-                              d='M4 17H8M12 17H20M4 12H20M4 7H12M16 7H20'
-                              stroke='#000000'
-                              strokeWidth='1.5'
-                              strokeLinecap='round'
-                              strokeLinejoin='round'
-                           />
-                        </g>
-                     </svg>
-                  </div>
                   <Link href={'/'}>
                      <span className='font-bold'>Next Quran</span>
                   </Link>
                </div>
 
-               <div className='ml-2 flex gap-x-2'>
+               <div className='flex gap-x-2'>
                   {Nav.map(to => (
                      <Link href={to.path}>
                         <div
                            className={`${
-                              router.pathname === to.path && 'bg-gray-100 dark:bg-gray-800'
-                           } flex cursor-pointer items-center gap-x-1 rounded-md  p-2 sm:py-2 sm:px-4 hover:bg-gray-200 hover:dark:bg-gray-700`}>
+                              router.pathname === to.path && 'bg-lightBg dark:bg-darkSecondary'
+                           } flex cursor-pointer items-center gap-x-1 rounded-md  p-2 sm:py-2 sm:px-4 hover:bg-lightBg hover:dark:bg-darkSecondary`}>
                            {to.icon}
                            <span className='hidden sm:block text-sm font-medium'>{to.title}</span>
                         </div>
@@ -141,7 +122,7 @@ export default function Header() {
                   ))}
                   <div
                      onClick={theme === 'dark' ? () => setTheme('light') : () => setTheme('dark')}
-                     className='flex cursor-pointer select-none items-center rounded-md p-2 hover:bg-gray-100 hover:dark:bg-gray-700'>
+                     className='flex cursor-pointer select-none items-center rounded-md p-2 hover:bg-lightBg hover:dark:bg-darkSecondary'>
                      <svg
                         className='h-5 w-5 fill-none'
                         viewBox='0 0 24 24'>

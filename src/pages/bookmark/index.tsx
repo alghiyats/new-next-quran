@@ -36,37 +36,68 @@ export default function Bookmark({ dataSurah }) {
          nama_latin: surah.nama_latin,
          nomor: nomorAyah,
          nomorSurah: nomorSurah,
-         jumlah_ayat: surah.jumlah_ayat,
-         tempat_turun: surah.tempat_turun,
       };
    });
 
    const handleRemoveBookmark = (id: number) => {
-      const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
-      const newBookmarks = bookmarks.filter((bookmark: any) => bookmark.id !== id);
+      const newBookmarks = data.filter((bookmark: any) => bookmark.id !== id);
       localStorage.setItem('bookmarks', JSON.stringify(newBookmarks));
       setData(newBookmarks);
       window.dispatchEvent(new Event('bookmarks'));
    };
 
-   if (loading) {
-      return <h1>Loading...</h1>;
-   }
+   const [search, setSearch] = useState('');
 
-   const NotFound = data < 1 && (
-      <h1 className='pl-4 p-6 flex bg-[#fffdfc] dark:bg-[#2d2d30] shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl justify-between items-center'>
-         Tidak ada bookmark.
+   const filteredItems = surahInfo?.filter(
+      item =>
+         item.nama_latin.toLowerCase().includes(search.toLowerCase()) ||
+         item.nomor.toString().includes(search.toLowerCase())
+   );
+
+   const bookmarkTitle = (
+      <h1 className='font-bold text-2xl mb-6 text-center p-6 bg-[#fffdfc] dark:bg-[#2d2d30] shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl'>
+         Bookamarks
       </h1>
    );
 
+   if (loading) {
+      return (
+         <>
+            {bookmarkTitle}
+            <h1 className='pl-4 p-6 flex bg-[#fffdfc] dark:bg-[#2d2d30] shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl justify-between items-center'>
+               Loading....
+            </h1>
+         </>
+      );
+   }
+
+   if (!data || data < 1) {
+      return (
+         <>
+            {bookmarkTitle}
+            <h1 className='pl-4 p-6 flex bg-[#fffdfc] dark:bg-[#2d2d30] shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl justify-between items-center'>
+               Tidak ada bookmark.
+            </h1>
+         </>
+      );
+   }
+
    return (
       <>
-         <h1 className='font-bold text-2xl mb-6 text-center p-6 bg-[#fffdfc] dark:bg-[#2d2d30] shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl'>
-            Bookamarks
-         </h1>
-         {NotFound}
+         {bookmarkTitle}
+         <div className='my-6 p-1'>
+            <form>
+               <input
+                  type='search'
+                  className='dark:bg-darkSecondary shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl bg-secondary w-full py-4 px-6 font-semibold'
+                  value={search}
+                  onChange={e => setSearch(e.target.value)}
+                  placeholder='🔍 Cari Surat ...'
+               />
+            </form>
+         </div>
          <div className='grid grid-cols-1 gap-8 md:grid-cols-3 sm:grid-cols-2'>
-            {surahInfo.map(surah => (
+            {filteredItems.map(surah => (
                <div className='pl-4 p-6 flex bg-[#fffdfc] dark:bg-[#2d2d30] shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl justify-between items-center'>
                   <div className='flex items-center'>
                      <div className='flex justify-center items-center w-8 h-8 dark:bg-gray-700 bg-gray-100 mr-4 rounded-md text-xs'>

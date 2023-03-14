@@ -31,16 +31,28 @@ const IndexPage = () => {
       }
       return result;
    };
+
+   const lastReadTitle = (
+      <h1 className='font-bold text-2xl mb-6 text-center p-6 bg-[#fffdfc] dark:bg-[#2d2d30] shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl'>
+         Terakhir dibaca
+      </h1>
+   );
+
    if (loading) {
-      return <h1>Loading...</h1>;
+      return (
+         <>
+            {lastReadTitle}
+            <h1 className='pl-4 p-6 flex bg-[#fffdfc] dark:bg-[#2d2d30] shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl justify-between items-center'>
+               Loading....
+            </h1>
+         </>
+      );
    }
 
    if (!data)
       return (
          <>
-            <h1 className='font-bold text-2xl mb-6 text-center p-6 bg-[#fffdfc] dark:bg-[#2d2d30] shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl'>
-               Terakhir dibaca
-            </h1>
+            {lastReadTitle}
             <h1 className='pl-4 p-6 flex bg-[#fffdfc] dark:bg-[#2d2d30] shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl justify-between items-center'>
                Tidak ada terakhir dibaca.
             </h1>
@@ -49,9 +61,11 @@ const IndexPage = () => {
 
    return (
       <>
+         {lastReadTitle}
+
          <div className='shadow-md bg-secondary dark:bg-darkSecondary rounded-lg p-6'>
-            <h1 className='hover:underline font-bold w-max'>
-               {data.nama_latin} / {data.nomor} : {data.ayat.map(m => m.nomor)}
+            <h1 className='text-xl font-bold'>
+               {data.nama_latin} Ayat {data.ayat.map(m => m.nomor)}
             </h1>
             <p
                className='text-3xl font-arabic my-6 leading-[60px]'
