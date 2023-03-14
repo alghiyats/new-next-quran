@@ -35,26 +35,30 @@ export default function Bookmark({ dataSurah }) {
 
    const surahInfo = data.map(item => {
       const nomorSurah = item.surah;
+      const nomorAyah = item.nomor;
       const surah = dataSurah.find(surah => surah.nomor === nomorSurah);
       return {
          nama: surah.nama,
          nama_latin: surah.nama_latin,
-         nomor: surah.nomor,
+         nomor: nomorAyah,
       };
    });
 
    return (
-      <div>
-         <div>
+      <>
+         <h1 className='font-bold text-xl mb-4'>Terakhir dibaca</h1>
+         <div className='shadow-md bg-secondary dark:bg-darkSecondary rounded-lg p-6'>
             {surahInfo.map(surah => (
                <div key={surah.nomor}>
                   <Link href={`/surah/${surah.nama_latin.toLowerCase()}#${surah.nomor}`}>
-                     <h1>{surah.nama_latin}</h1>
+                     <h1 className='hover:text-link dark:hover:text-darkLink font-semibold mt-4'>
+                        {surah.nama_latin} ayat {surah.nomor}
+                     </h1>
                   </Link>
                </div>
             ))}
          </div>
-      </div>
+      </>
    );
 }
 export const getStaticProps: GetStaticProps = async () => {
