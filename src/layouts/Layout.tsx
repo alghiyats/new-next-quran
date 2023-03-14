@@ -8,16 +8,10 @@ type Props = {
 };
 
 const Layout = ({ children }: Props) => {
-   const [headerLoaded, setHeaderLoaded] = useState(false);
-
-   const handleHeaderLoad = () => {
-      setHeaderLoaded(true);
-   };
-
    return (
       <>
-         <Header onLoad={handleHeaderLoad} />
-         {headerLoaded && <div className='max-w-screen-xl mx-auto px-5 my-6'>{children}</div>}
+         <Header />
+         <div className='max-w-screen-xl mx-auto px-6 my-6 pt-20'>{children}</div>
          <Footer />
       </>
    );

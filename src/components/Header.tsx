@@ -3,12 +3,7 @@ import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 
-type Props = {
-   onLoad: () => void;
-};
-
-export default function Header({ onLoad }: Props) {
-   onLoad();
+export default function Header() {
    const router = useRouter();
    const [mounted, setMounted] = useState(false);
    const { theme, setTheme } = useTheme();
@@ -104,7 +99,7 @@ export default function Header({ onLoad }: Props) {
             isTop
                ? ''
                : 'dark:border-b dark:border-[rgba(255,255,255,.15)] dark:border-solid shadow-md dark:shadow-none '
-         }bg-[#fffdfc] sticky top-0 dark:bg-darkPrimary`}>
+         }bg-[#fffdfc] fixed top-0 dark:bg-darkPrimary w-full`}>
          <div className={`duration-300 py-4`}>
             <div className='flex justify-between max-w-screen-xl mx-auto px-3'>
                <div className='flex items-center'>

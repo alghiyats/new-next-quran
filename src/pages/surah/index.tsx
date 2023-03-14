@@ -14,7 +14,9 @@ export default function SurahList({ listSurah }: Props) {
 
    return (
       <>
-         <h1 className='text-center text-2xl font-bold mb-6'>Daftar Surah</h1>
+         <h1 className='font-bold text-2xl mb-6 text-center p-6 bg-[#fffdfc] dark:bg-[#2d2d30] shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl'>
+            Daftar Surah
+         </h1>
          <List items={listSurah} />
       </>
    );
