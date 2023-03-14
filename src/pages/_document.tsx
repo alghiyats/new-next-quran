@@ -6,7 +6,6 @@ class SpecialDocument extends Document {
       return (
          <Html>
             <Head>
-               <title>Next Quran</title>
                <meta charSet='utf-8' />
                <meta
                   name='viewport'

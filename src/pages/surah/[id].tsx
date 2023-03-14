@@ -68,6 +68,24 @@ const StaticPropsDetail = ({ detail, errors }: Props) => {
       };
    }, []);
 
+   const handleAddBookmark = (data: any, number: number) => {
+      const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
+      const newBookmark = data?.ayat?.find(verse => verse.nomor === number);
+
+      if (newBookmark) {
+         bookmarks.push(newBookmark);
+         localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+         window.dispatchEvent(new Event('bookmarks'));
+      }
+   };
+
+   const handleRemoveBookmark = (number: number) => {
+      const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
+      const newBookmarks = bookmarks.filter((bookmark: any) => bookmark.nomor !== number);
+      localStorage.setItem('bookmarks', JSON.stringify(newBookmarks));
+      window.dispatchEvent(new Event('bookmarks'));
+   };
+
    if (errors) {
       return (
          <>
@@ -121,6 +139,8 @@ const StaticPropsDetail = ({ detail, errors }: Props) => {
                      latin={x.tr}
                      check={check}
                      id={x.id}
+                     handleAddBookmark={handleAddBookmark}
+                     handleRemoveBookmark={handleRemoveBookmark}
                   />
                ))}
             </div>
