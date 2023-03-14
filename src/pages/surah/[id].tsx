@@ -70,7 +70,7 @@ const StaticPropsDetail = ({ detail, errors }: Props) => {
 
    const handleAddBookmark = (data: any, number: number) => {
       const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
-      const newBookmark = data?.ayat?.find(verse => verse.nomor === number);
+      const newBookmark = data?.ayat?.find(verse => verse.id === number);
 
       if (newBookmark) {
          bookmarks.push(newBookmark);
@@ -81,7 +81,7 @@ const StaticPropsDetail = ({ detail, errors }: Props) => {
 
    const handleRemoveBookmark = (number: number) => {
       const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
-      const newBookmarks = bookmarks.filter((bookmark: any) => bookmark.nomor !== number);
+      const newBookmarks = bookmarks.filter((bookmark: any) => bookmark.id !== number);
       localStorage.setItem('bookmarks', JSON.stringify(newBookmarks));
       window.dispatchEvent(new Event('bookmarks'));
    };

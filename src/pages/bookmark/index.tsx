@@ -35,10 +35,8 @@ export default function Bookmark({ dataSurah }) {
 
    const surahInfo = data.map(item => {
       const nomorSurah = item.surah;
-      const idayat = item.id;
       const surah = dataSurah.find(surah => surah.nomor === nomorSurah);
       return {
-         id: idayat,
          nama: surah.nama,
          nama_latin: surah.nama_latin,
          nomor: surah.nomor,
@@ -50,7 +48,7 @@ export default function Bookmark({ dataSurah }) {
          <div>
             {surahInfo.map(surah => (
                <div key={surah.nomor}>
-                  <Link href={`/surah/${surah.nama_latin.toLowerCase()}#${surah.id}`}>
+                  <Link href={`/surah/${surah.nama_latin.toLowerCase()}#${surah.nomor}`}>
                      <h1>{surah.nama_latin}</h1>
                   </Link>
                </div>

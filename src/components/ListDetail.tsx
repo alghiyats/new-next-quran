@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 
 import { listSurah } from '../interfaces';
-import BookmarkIcon from './BookmarkIcon';
 
 type ListDetailProps = {
    item: listSurah;
@@ -41,7 +40,7 @@ const ListDetail = ({
 
    const handleBookmarkClick = (item: any, number: number) => {
       const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
-      const isSaved = bookmarks.some((bookmark: any) => bookmark.nomor === number);
+      const isSaved = bookmarks.some((bookmark: any) => bookmark.id === number);
       if (isSaved) {
          handleRemoveBookmark(number);
       } else {
@@ -145,7 +144,7 @@ const ListDetail = ({
                   </svg>
                </span>
                <span
-                  onClick={() => handleBookmarkClick(item, ayat)}
+                  onClick={() => handleBookmarkClick(item, id)}
                   className='w-6 h-6 flex items-center justify-center cursor-pointer'>
                   <svg
                      className={`stroke-gray-500 w-5 h-5 fill-none `}
