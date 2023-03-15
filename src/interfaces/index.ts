@@ -15,4 +15,9 @@ export interface listSurah {
       tr: string;
       idn: string;
    }[];
+
+   tafsir: {
+      ayat: number;
+      teks: string;
+   }[];
 }

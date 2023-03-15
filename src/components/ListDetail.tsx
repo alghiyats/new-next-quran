@@ -13,6 +13,7 @@ type ListDetailProps = {
    id: number;
    handleAddBookmark: any;
    handleRemoveBookmark: any;
+   Tafsir: any;
 };
 
 const ListDetail = ({
@@ -26,6 +27,7 @@ const ListDetail = ({
    id,
    handleAddBookmark,
    handleRemoveBookmark,
+   Tafsir,
 }: ListDetailProps) => {
    const gh = w => {
       let ar = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
@@ -82,7 +84,9 @@ const ListDetail = ({
                <span className='text-sm'>{ayat}</span>
             </div>
             <div className='flex items-center flex-row-reverse gap-2'>
-               <span className='w-6 h-6 flex items-center justify-center cursor-pointer'>
+               <span
+                  onClick={() => Tafsir(ayat)}
+                  className='w-6 h-6 flex items-center justify-center cursor-pointer'>
                   <svg
                      className='w-5 h-5'
                      viewBox='0 0 24 24'
@@ -130,8 +134,10 @@ const ListDetail = ({
                      xmlns='http://www.w3.org/2000/svg'>
                      <g>
                         <path
-                           className={`${check?.ayat?.map(
-                              m => m.id === id ? 'stroke-link dark:stroke-darkLink' : 'stroke-gray-500 dark:stroke-slate-200'
+                           className={`${check?.ayat?.map(m =>
+                              m.id === id
+                                 ? 'stroke-link dark:stroke-darkLink'
+                                 : 'stroke-gray-500 dark:stroke-slate-200'
                            )}`}
                            d='M19 9.80001L20 8.00002L16 4.00002L7 9.00002L15 17L17 13.4M11 13L4 20'
                            stroke='#000000'

@@ -5,17 +5,27 @@ import Head from 'next/head';
 import { getSurah } from '../../lib/getSurah';
 import { getSurahDetail } from '../../lib/getSurahDetail';
 import { useEffect, useState } from 'react';
-import ModalLastRead from '../../components/ModalLastRead';
+import Modal from '../../components/Modal';
+import { getTafsir } from '../../lib/getTafsir';
 
 type Props = {
    detail?: listSurah;
+   tafsir?: listSurah;
    errors?: string;
 };
 
-const StaticPropsDetail = ({ detail, errors }: Props) => {
+const StaticPropsDetail = ({ detail, tafsir, errors }: Props) => {
    const [isModalOpen, setIsModalOpen] = useState(false);
    const [newData, setNewData] = useState<any>(null);
    const [check, setCheck] = useState<any>();
+   const [numberTafsir, setNumberTafsir] = useState<number>();
+   const [tafsirOpen, setTafsirOpen] = useState(false);
+   console.log(tafsir);
+
+   const Tafsir = (id: number) => {
+      setNumberTafsir(id);
+      setTafsirOpen(true);
+   };
 
    const handleLastRead = (data: any, number: number) => {
       const ayat = data?.ayat?.filter(verse => verse.nomor === number);
@@ -108,12 +118,29 @@ const StaticPropsDetail = ({ detail, errors }: Props) => {
          <Head>
             <title>Surah {detail ? detail.nama_latin : ''} - Next Quran</title>
          </Head>
+         {tafsirOpen && (
+            <Modal
+               modalTitle={'Tafsir'}
+               titleConfirm={'Close'}
+               actionConfirm={() => setTafsirOpen(false)}
+               actionCancel={() => setTafsirOpen(false)}>
+               <div className='relative overflow-y-auto p-4'>
+                  <p>{tafsir?.tafsir?.filter(x => x.ayat === numberTafsir).map(x => x.teks)}</p>
+               </div>
+            </Modal>
+         )}
          {isModalOpen && (
-            <ModalLastRead
-               data={check}
-               handleConfirm={handleConfirm}
-               handleCancel={handleCancel}
-            />
+            <Modal
+               titleConfirm={'Simpan'}
+               modalTitle={'Terakhir dibaca'}
+               actionConfirm={() => handleConfirm()}
+               actionCancel={() => handleCancel()}>
+               <div className='relative p-4'>
+                  <p>
+                     Ingin mengganti {check?.nama_latin} ayat {check?.ayat.map(x => x.nomor)}
+                  </p>
+               </div>
+            </Modal>
          )}
          <div>
             <div className='py-6 flex flex-col gap-4 shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl bg-secondary dark:bg-darkSecondary mb-12'>
@@ -146,6 +173,7 @@ const StaticPropsDetail = ({ detail, errors }: Props) => {
                      id={x.id}
                      handleAddBookmark={handleAddBookmark}
                      handleRemoveBookmark={handleRemoveBookmark}
+                     Tafsir={Tafsir}
                   />
                ))}
             </div>
@@ -179,8 +207,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
          return { notFound: true };
       }
       const detail = await getSurahDetail(id);
+      const tafsir = await getTafsir(id);
 
-      return { props: { detail } };
+      return { props: { detail, tafsir } };
    } catch (err: any) {
       return { props: { errors: err.message } };
    }
