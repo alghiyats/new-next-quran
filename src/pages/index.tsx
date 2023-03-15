@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Head from 'next/head';
 
 const IndexPage = () => {
    const [data, setData] = useState<any>();
@@ -61,6 +62,9 @@ const IndexPage = () => {
 
    return (
       <>
+         <Head>
+            <title>Next Quran</title>
+         </Head>
          {lastReadTitle}
 
          <div className='shadow-md bg-secondary dark:bg-darkSecondary rounded-lg p-6'>
@@ -80,7 +84,7 @@ const IndexPage = () => {
                dangerouslySetInnerHTML={{ __html: data.ayat.map(tr => tr.tr) }}></p>
             <p className='text-sm'>{data.ayat.map(idn => idn.idn)}</p>
             <Link href={`/surah/${data.nama_latin.toLowerCase()}#${data.ayat.map(m => m.nomor)}`}>
-               <h1 className='hover:text-link dark:hover:text-darkLink font-semibold mt-4'>
+               <h1 className='hover:text-link dark:hover:text-darkLink font-semibold mt-4 w-max'>
                   Lanjut membaca
                </h1>
             </Link>

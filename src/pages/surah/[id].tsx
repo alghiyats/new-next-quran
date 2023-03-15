@@ -105,17 +105,22 @@ const StaticPropsDetail = ({ detail, errors }: Props) => {
 
    return (
       <>
+         <Head>
+            <title>Surah {detail ? detail.nama_latin : ''} - Next Quran</title>
+         </Head>
          {isModalOpen && (
             <ModalLastRead
-               isModalOpen={isModalOpen}
+               data={check}
                handleConfirm={handleConfirm}
                handleCancel={handleCancel}
             />
          )}
          <div>
-            <div className='py-6 flex flex-col gap-4 shadow-md  border dark:border-gray-500 duration-300 rounded-md dark:shadow-gray-500 dark:bg-slate-900 mb-12'>
-               <p className='text-xl font-bold text-center'>{detail.nama_latin}</p>
-               <p className='text-center text-base'>
+            <div className='py-6 flex flex-col gap-4 shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl bg-secondary dark:bg-darkSecondary mb-12'>
+               <p className='text-xl font-bold text-center'>
+                  {detail.nama_latin} <span className='text-xl font-arabic'>( {detail.nama} )</span>
+               </p>
+               <p className='text-center text-base capitalize'>
                   {detail.jumlah_ayat} Ayat - {detail.tempat_turun}
                </p>
                {detail.nomor > 1 && (

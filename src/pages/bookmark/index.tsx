@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { getSurah } from '../../lib/getSurah';
 import { listSurah } from '../../interfaces';
 import Link from 'next/link';
+import Head from 'next/head';
 
 export default function Bookmark({ dataSurah }) {
    const [data, setData] = useState<any>();
@@ -84,6 +85,9 @@ export default function Bookmark({ dataSurah }) {
 
    return (
       <>
+         <Head>
+            <title>Bookmark - Next Quran</title>
+         </Head>
          {bookmarkTitle}
          <div className='my-6 p-1'>
             <form>
@@ -92,7 +96,7 @@ export default function Bookmark({ dataSurah }) {
                   className='dark:bg-darkSecondary shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl bg-secondary w-full py-4 px-6 font-semibold'
                   value={search}
                   onChange={e => setSearch(e.target.value)}
-                  placeholder='🔍 Cari Surat ...'
+                  placeholder='🔍 Cari Bookmark ...'
                />
             </form>
          </div>

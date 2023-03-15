@@ -23,7 +23,7 @@ const List = ({ items }: Props) => {
                   className='dark:bg-darkSecondary shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl bg-secondary w-full py-4 px-6 font-semibold'
                   value={search}
                   onChange={e => setSearch(e.target.value)}
-                  placeholder='🔍 Cari Surat ...'
+                  placeholder='🔍 Cari Surah ...'
                />
             </form>
          </div>

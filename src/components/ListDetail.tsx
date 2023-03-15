@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-
 import { listSurah } from '../interfaces';
 
 type ListDetailProps = {
@@ -77,8 +76,8 @@ const ListDetail = ({
    return (
       <div
          id={`${ayat}`}
-         className='group bg-[#fffdfc] scroll-mt-20 flex shadow-[0_5px_35px_rgba(0,0,0,.07)] hover:shadow-lg border dark:border-gray-500 duration-300 rounded-md dark:shadow-gray-500 justify-between dark:bg-slate-900 flex-col gap-y-2'>
-         <div className='px-4 py-2 gap-3 dark:bg-gray-700 bg-slate-200 flex items-center w-full justify-between'>
+         className='bg-secondary dark:bg-darkSecondary scroll-mt-20 flex shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl justify-between flex-col gap-y-2'>
+         <div className='px-4 py-2 gap-3 dark:bg-darkBg bg-lightBg flex items-center w-full justify-between'>
             <div>
                <span className='text-sm'>{ayat}</span>
             </div>
@@ -132,8 +131,8 @@ const ListDetail = ({
                      <g>
                         <path
                            className={`${check?.ayat?.map(
-                              m => m.id === id && 'stroke-sky-500 '
-                           )}stroke-gray-500 dark:stroke-slate-200`}
+                              m => m.id === id ? 'stroke-link dark:stroke-darkLink' : 'stroke-gray-500 dark:stroke-slate-200'
+                           )}`}
                            d='M19 9.80001L20 8.00002L16 4.00002L7 9.00002L15 17L17 13.4M11 13L4 20'
                            stroke='#000000'
                            strokeWidth='1.5'
@@ -147,16 +146,13 @@ const ListDetail = ({
                   onClick={() => handleBookmarkClick(item, id)}
                   className='w-6 h-6 flex items-center justify-center cursor-pointer'>
                   <svg
-                     className={`stroke-gray-500 w-5 h-5 fill-none `}
-                     width={20}
-                     height={20}
+                     className={`stroke-gray-500 dark:stroke-slate-200 w-5 h-5 fill-none`}
                      stroke='currentColor'
-                     strokeWidth={2}
+                     strokeWidth={1}
                      fill='none'
                      viewBox='0 0 24 24'>
                      <g transform='translate(4.500000, 2.500000)'>
                         <path d='M7.47024319,0 C1.08324319,0 0.00424318741,0.932 0.00424318741,8.429 C0.00424318741,16.822 -0.152756813,19 1.44324319,19 C3.03824319,19 5.64324319,15.316 7.47024319,15.316 C9.29724319,15.316 11.9022432,19 13.4972432,19 C15.0932432,19 14.9362432,16.822 14.9362432,8.429 C14.9362432,0.932 13.8572432,0 7.47024319,0 Z' />
-
                         {bookmarkSaved?.some(e => e.id === id) ? (
                            <line
                               className='svgC h'
@@ -189,7 +185,6 @@ const ListDetail = ({
                      </g>
                   </svg>
                </span>
-               {/* <BookmarkIcon favId={id} /> */}
             </div>
          </div>
          <div className='m-6'>
