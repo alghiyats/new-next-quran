@@ -28,12 +28,16 @@ const List = ({ items }: Props) => {
             </form>
          </div>
          <div className='grid grid-cols-1 gap-8 md:grid-cols-3 sm:grid-cols-2'>
-            {filteredItems.map(item => (
-               <ListItem
-                  key={item.nomor}
-                  data={item}
-               />
-            ))}
+            {filteredItems.length > 0 ? (
+               filteredItems.map(item => (
+                  <ListItem
+                     key={item.nomor}
+                     data={item}
+                  />
+               ))
+            ) : (
+               <p className='ml-2'>Surah tidak ditemukan ...</p>
+            )}
          </div>
       </div>
    );

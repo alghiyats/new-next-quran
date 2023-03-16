@@ -15,7 +15,7 @@ export default function ModalLastRead({
                className='undefined transition-all duration-300 ease-in-out fixed top-0 left-0 z-[29] bg-black w-screen h-screen opacity-50'
                data-te-backdrop-show
             />
-            <div className='z-30 pointer-events-none relative h-[75%] w-[75%] sm:w-[60%] md:w-[55%] lg:w-[50%] translate-y-[-50px]  transition-all duration-300 ease-in-out'>
+            <div className='z-30 pointer-events-none relative h-[80%] w-[85%] sm:w-[60%] md:w-[55%] lg:w-[50%] translate-y-[-50px]  transition-all duration-300 ease-in-out'>
                <div className='pointer-events-auto relative flex max-h-[100%] w-full flex-col overflow-hidden rounded-md border-none bg-secondary bg-clip-padding text-current shadow-lg outline-none dark:bg-darkSecondary'>
                   <div className='flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50'>
                      <h5 className='text-xl font-medium leading-normal'>{modalTitle}</h5>

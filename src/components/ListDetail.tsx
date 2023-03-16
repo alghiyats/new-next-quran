@@ -30,12 +30,15 @@ const ListDetail = ({
    Tafsir,
 }: ListDetailProps) => {
    const gh = w => {
-      let ar = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
-      let nm = `${w}`;
+      const arabicNumbers = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+      const numberString = String(w);
       let result = '';
-      for (let c of nm) {
-         result += ar[parseInt(c)];
+
+      for (let i = 0; i < numberString.length; i++) {
+         const digit = parseInt(numberString[i]);
+         result += arabicNumbers[digit];
       }
+
       return result;
    };
 

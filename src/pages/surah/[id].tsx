@@ -20,7 +20,7 @@ const StaticPropsDetail = ({ detail, tafsir, errors }: Props) => {
    const [check, setCheck] = useState<any>();
    const [numberTafsir, setNumberTafsir] = useState<number>();
    const [tafsirOpen, setTafsirOpen] = useState(false);
-   console.log(tafsir);
+   const [prevPin, setPrevPin] = useState<number>();
 
    const Tafsir = (id: number) => {
       setNumberTafsir(id);
@@ -30,6 +30,7 @@ const StaticPropsDetail = ({ detail, tafsir, errors }: Props) => {
    const handleLastRead = (data: any, number: number) => {
       const ayat = data?.ayat?.filter(verse => verse.nomor === number);
       const { nomor, nama, arti, nama_latin, deskripsi, jumlah_ayat, audio } = data;
+      setPrevPin(number);
       const newData = { nomor, nama, arti, nama_latin, deskripsi, jumlah_ayat, audio, ayat };
 
       const lastReadData = JSON.parse(localStorage.getItem('lastRead'));
@@ -38,7 +39,6 @@ const StaticPropsDetail = ({ detail, tafsir, errors }: Props) => {
          setNewData(newData);
          setIsModalOpen(true);
       } else {
-         // simpan objek baru ke local storage
          localStorage.setItem('lastRead', JSON.stringify(newData));
          window.dispatchEvent(new Event('lastRead'));
       }
@@ -83,7 +83,8 @@ const StaticPropsDetail = ({ detail, tafsir, errors }: Props) => {
       const newBookmark = data?.ayat?.find(verse => verse.id === number);
 
       if (newBookmark) {
-         bookmarks.push(newBookmark);
+         const { id, surah, nomor } = newBookmark; // hanya mengambil atribut surah dan nomor
+         bookmarks.push({ nama: data.nama, nama_latin: data.nama_latin, id, surah, nomor });
          localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
          window.dispatchEvent(new Event('bookmarks'));
       }
@@ -91,7 +92,9 @@ const StaticPropsDetail = ({ detail, tafsir, errors }: Props) => {
 
    const handleRemoveBookmark = (number: number) => {
       const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
-      const newBookmarks = bookmarks.filter((bookmark: any) => bookmark.id !== number);
+      const newBookmarks = bookmarks
+         .filter((bookmark: any) => bookmark.id !== number)
+         .map((bookmark: any) => ({ ...bookmark }));
       localStorage.setItem('bookmarks', JSON.stringify(newBookmarks));
       window.dispatchEvent(new Event('bookmarks'));
    };
@@ -131,13 +134,18 @@ const StaticPropsDetail = ({ detail, tafsir, errors }: Props) => {
          )}
          {isModalOpen && (
             <Modal
-               titleConfirm={'Simpan'}
+               titleConfirm={'Ganti'}
                modalTitle={'Terakhir dibaca'}
                actionConfirm={() => handleConfirm()}
                actionCancel={() => handleCancel()}>
-               <div className='relative p-4'>
+               <div className='relative p-4 py-8'>
                   <p>
-                     Ingin mengganti {check?.nama_latin} ayat {check?.ayat.map(x => x.nomor)}
+                     QS. {check?.nama_latin} Ayat {check?.ayat.map(x => x.nomor)}. Akan di ganti
+                     dengan
+                     <p>
+                        QS. {detail.nama_latin} Ayat {newData.ayat.map(x => x.nomor)}. Apakah Anda
+                        yakin?
+                     </p>
                   </p>
                </div>
             </Modal>
