@@ -160,7 +160,7 @@ const StaticPropsDetail = ({ detail, tafsir, errors }: Props) => {
                </p>
                {detail.nomor > 1 && (
                   <p
-                     className='text-3xl text-center font-["Scheherazade_New"] mb-4'
+                     className='text-3xl text-center font-arabic mb-4'
                      dir='rtl'>
                      بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ
                   </p>

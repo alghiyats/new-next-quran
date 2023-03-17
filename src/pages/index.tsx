@@ -77,10 +77,7 @@ const IndexPage = () => {
             <p
                className='text-3xl font-arabic my-6 leading-[60px]'
                dir='rtl'>
-               {data.ayat.map(ar => ar.ar)}
-               <span className='font-ayatArabic text-3xl md:text-4xl'>
-                  &nbsp;{gh(data.ayat.map(m => m.nomor))}
-               </span>
+               {data.ayat.map(ar => ar.ar)}&nbsp;{gh(data.ayat.map(m => m.nomor))}
             </p>
             <p
                className='text-sm font-semibold mb-2'
