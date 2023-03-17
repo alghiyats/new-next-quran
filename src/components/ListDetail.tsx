@@ -137,11 +137,15 @@ const ListDetail = ({
                      xmlns='http://www.w3.org/2000/svg'>
                      <g>
                         <path
-                           className={`${check?.ayat?.map(m =>
-                              m.id === id
-                                 ? 'stroke-link dark:stroke-darkLink'
+                           className={`${
+                              check
+                                 ? check?.ayat?.map(m =>
+                                      m.id === id
+                                         ? 'stroke-link dark:stroke-darkLink'
+                                         : 'stroke-gray-500 dark:stroke-slate-200'
+                                   )
                                  : 'stroke-gray-500 dark:stroke-slate-200'
-                           )}`}
+                           }`}
                            d='M19 9.80001L20 8.00002L16 4.00002L7 9.00002L15 17L17 13.4M11 13L4 20'
                            stroke='#000000'
                            strokeWidth='1.5'
@@ -200,7 +204,8 @@ const ListDetail = ({
             <p
                className='my-4 font-arabic md:text-3xl text-2xl leading-[3.5rem_!important]'
                dir='rtl'>
-               {arab}&nbsp;{gh(ayat)}
+               {arab}
+               <span className='text-3xl md:text-4xl font-arabicNumber'>&nbsp;{gh(ayat)}</span>
             </p>
             <p
                className='text-sm font-semibold mb-2'

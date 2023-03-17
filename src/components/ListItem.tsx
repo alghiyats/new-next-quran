@@ -18,7 +18,7 @@ const ListItem = ({ data }: Props) => {
                   <p className='font-semibold group-hover:text-blue-500 dark:group-hover:text-emerald-500'>
                      {data.nama_latin}
                   </p>
-                  <p className='text-xs'>
+                  <p className='text-xs capitalize'>
                      {data.jumlah_ayat} ayat - {data.tempat_turun}
                   </p>
                </div>
