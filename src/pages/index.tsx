@@ -38,7 +38,7 @@ const IndexPage = () => {
 
    const lastReadTitle = (
       <h1 className='font-bold text-2xl mb-6 text-center p-6 bg-[#fffdfc] dark:bg-[#2d2d30] shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl'>
-         Terakhir dibaca
+         Terakhir dibaca <span className='font-arabicNumber'></span>
       </h1>
    );
 
