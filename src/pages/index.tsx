@@ -38,7 +38,7 @@ const IndexPage = () => {
 
    const lastReadTitle = (
       <h1 className='font-bold text-2xl mb-6 text-center p-6 bg-[#fffdfc] dark:bg-[#2d2d30] shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl'>
-         Terakhir dibaca <span className='font-arabicNumber'></span>
+         Terakhir dibaca
       </h1>
    );
 
@@ -75,12 +75,10 @@ const IndexPage = () => {
                {data.nama_latin} Ayat {data.ayat.map(m => m.nomor)}
             </h1>
             <p
-               className='text-3xl font-arabicNumber my-6 leading-[50px]'
+               className='text-3xl font-arabic my-6 leading-[50px]'
                dir='rtl'>
                {data.ayat.map(ar => ar.ar)}
-               <span className='text-3xl md:text-4xl font-arabicNumber'>
-                  &nbsp;{gh(data.ayat.map(m => m.nomor))}
-               </span>
+               &nbsp;{gh(data.ayat.map(m => m.nomor))}
             </p>
             <p
                className='text-sm font-semibold mb-2'

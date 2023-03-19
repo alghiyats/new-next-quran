@@ -20,7 +20,13 @@ const StaticPropsDetail = ({ detail, tafsir, errors }: Props) => {
    const [check, setCheck] = useState<any>();
    const [numberTafsir, setNumberTafsir] = useState<number>();
    const [tafsirOpen, setTafsirOpen] = useState(false);
-   const [prevPin, setPrevPin] = useState<number>();
+   const [title, setTitle] = useState('');
+
+   useEffect(() => {
+      if (detail) {
+         setTitle(`Surah ${detail.nama_latin} - Next Quran`);
+      }
+   }, [detail]);
 
    const Tafsir = (id: number) => {
       setNumberTafsir(id);
@@ -30,7 +36,6 @@ const StaticPropsDetail = ({ detail, tafsir, errors }: Props) => {
    const handleLastRead = (data: any, number: number) => {
       const ayat = data?.ayat?.filter(verse => verse.nomor === number);
       const { nomor, nama, arti, nama_latin, deskripsi, jumlah_ayat, audio } = data;
-      setPrevPin(number);
       const newData = { nomor, nama, arti, nama_latin, deskripsi, jumlah_ayat, audio, ayat };
 
       const lastReadData = JSON.parse(localStorage.getItem('lastRead'));
@@ -119,7 +124,7 @@ const StaticPropsDetail = ({ detail, tafsir, errors }: Props) => {
    return (
       <>
          <Head>
-            <title>Surah {detail ? detail.nama_latin : ''} - Next Quran</title>
+            <title>{title}</title>
          </Head>
          {tafsirOpen && (
             <Modal

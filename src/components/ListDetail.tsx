@@ -204,8 +204,7 @@ const ListDetail = ({
             <p
                className='my-4 font-arabic md:text-3xl text-2xl leading-[3.5rem_!important]'
                dir='rtl'>
-               {arab}
-               <span className='text-3xl md:text-4xl font-arabicNumber'>&nbsp;{gh(ayat)}</span>
+               {arab}&nbsp;{gh(ayat)}
             </p>
             <p
                className='text-sm font-semibold mb-2'

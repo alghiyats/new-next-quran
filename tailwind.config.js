@@ -19,8 +19,7 @@ module.exports = {
             darkLink: '#41B375',
          },
          fontFamily: {
-            arabic: '"Scheherazade New"',
-            arabicNumber: '"Uthmani"',
+            arabic: '"Uthmani"',
          },
       },
    },
