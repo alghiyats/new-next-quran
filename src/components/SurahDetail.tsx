@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { listSurah } from '../interfaces';
 
-type ListDetailProps = {
+type SurahDetailProps = {
    item: listSurah;
    arab: string;
    translation: string;
@@ -16,7 +16,7 @@ type ListDetailProps = {
    Tafsir: any;
 };
 
-const ListDetail = ({
+const SurahDetail = ({
    item,
    arab,
    translation,
@@ -28,7 +28,7 @@ const ListDetail = ({
    handleAddBookmark,
    handleRemoveBookmark,
    Tafsir,
-}: ListDetailProps) => {
+}: SurahDetailProps) => {
    const gh = w => {
       const arabicNumbers = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
       const numberString = String(w);
@@ -215,4 +215,4 @@ const ListDetail = ({
    );
 };
 
-export default ListDetail;
+export default SurahDetail;

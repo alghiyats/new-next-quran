@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
+import Search from '../../components/Search';
 
 export default function Bookmark() {
    const [data, setData] = useState<any>();
@@ -31,7 +32,7 @@ export default function Bookmark() {
       window.dispatchEvent(new Event('bookmarks'));
    };
 
-   const filteredItems = data?.filter(
+   const filtered = data?.filter(
       item =>
          item.nama_latin.toLowerCase().includes(search.toLowerCase()) ||
          item.nomor.toString().includes(search.toLowerCase())
@@ -71,31 +72,26 @@ export default function Bookmark() {
             <title>Bookmark - Next Quran</title>
          </Head>
          {bookmarkTitle}
-         <div className='my-6 p-1'>
-            <form>
-               <input
-                  type='search'
-                  className='dark:bg-darkSecondary shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl bg-secondary w-full py-4 px-6 font-semibold'
-                  value={search}
-                  onChange={e => setSearch(e.target.value)}
-                  placeholder='🔍 Cari Bookmark ...'
-               />
-            </form>
-         </div>
+         <Search
+            search={search}
+            setSearch={setSearch}
+            placeholder={'Cari Bookmark...'}
+         />
          <div className='grid grid-cols-1 gap-8 md:grid-cols-3 sm:grid-cols-2'>
-            {filteredItems.length > 0 ? (
-               filteredItems.map(surah => (
-                  <div className='pl-4 p-6 flex bg-[#fffdfc] dark:bg-[#2d2d30] shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl justify-between items-center'>
+            {filtered.length > 0 ? (
+               filtered.map(surah => (
+                  <div className='pl-4 p-6 flex bg-[#fffdfc] dark:bg-[#2d2d30] shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl justify-between items-center relative'>
+                     <Link
+                        href={`/surah/${surah.nama_latin.toLowerCase()}#${surah.nomor}`}
+                        className='inset-0 absolute'></Link>
                      <div className='flex items-center'>
-                        <div className='flex justify-center items-center w-8 h-8 dark:bg-gray-700 bg-gray-100 mr-4 rounded-md text-xs'>
+                        <div className='flex justify-center items-center w-8 h-8 dark:bg-darkBg bg-lightBg mr-4 rounded-md text-xs'>
                            {surah.surah}
                         </div>
                         <div className='flex flex-col'>
-                           <Link href={`/surah/${surah.nama_latin.toLowerCase()}#${surah.nomor}`}>
-                              <p className='font-semibold hover:text-blue-500 dark:group-hover:text-emerald-500'>
-                                 {surah.nama_latin}
-                              </p>
-                           </Link>
+                           <p className='font-semibold group-hover:text-blue-500 dark:group-hover:text-emerald-500'>
+                              {surah.nama_latin}
+                           </p>
                            <p className='text-xs'>Ayat {surah.nomor}</p>
                         </div>
                      </div>
@@ -107,7 +103,7 @@ export default function Bookmark() {
                         </span>
                         <span
                            onClick={() => handleRemoveBookmark(surah.id)}
-                           className='flex cursor-pointer items-center rounded-full p-2 hover:bg-gray-200 hover:dark:bg-gray-700'>
+                           className='flex cursor-pointer items-center rounded-full p-2 hover:bg-lightBg hover:dark:bg-darkBg z-10'>
                            <svg
                               className='w-5 h-5'
                               viewBox='0 0 24 24'

@@ -1,12 +1,12 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
-import { listSurah } from '../../interfaces';
-import ListDetail from '../../components/ListDetail';
+import { listSurah } from '../../../interfaces';
+import SurahDetail from '../../../components/SurahDetail';
 import Head from 'next/head';
-import { getSurah } from '../../lib/getSurah';
-import { getSurahDetail } from '../../lib/getSurahDetail';
+import { getSurah } from '../../../lib/getSurah';
+import { getSurahDetail } from '../../../lib/getSurahDetail';
 import { useEffect, useState } from 'react';
-import Modal from '../../components/Modal';
-import { getTafsir } from '../../lib/getTafsir';
+import Modal from '../../../components/Modal';
+import { getTafsir } from '../../../lib/getTafsir';
 
 type Props = {
    detail?: listSurah;
@@ -173,7 +173,7 @@ const StaticPropsDetail = ({ detail, tafsir, errors }: Props) => {
             </div>
             <div className='flex gap-y-6 flex-col'>
                {detail.ayat.map(x => (
-                  <ListDetail
+                  <SurahDetail
                      key={x.nomor}
                      item={detail}
                      arab={x.ar}

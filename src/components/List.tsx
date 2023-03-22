@@ -1,36 +1,18 @@
 import * as React from 'react';
-import ListItem from './ListItem';
+import SurahItem from './SurahItem';
 import { listSurah } from '../interfaces';
-import { useState } from 'react';
 
 type Props = {
-   items: listSurah[];
+   filtered: listSurah[];
 };
 
-const List = ({ items }: Props) => {
-   const [search, setSearch] = useState('');
-
-   const filteredItems = items.filter(item =>
-      item.nama_latin.toLowerCase().includes(search.toLowerCase())
-   );
-
+const List = ({ filtered }: Props) => {
    return (
       <div>
-         <div className='my-6 p-1'>
-            <form>
-               <input
-                  type='search'
-                  className='dark:bg-darkSecondary shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl bg-secondary w-full py-4 px-6 font-semibold'
-                  value={search}
-                  onChange={e => setSearch(e.target.value)}
-                  placeholder='🔍 Cari Surah ...'
-               />
-            </form>
-         </div>
          <div className='grid grid-cols-1 gap-8 md:grid-cols-3 sm:grid-cols-2'>
-            {filteredItems.length > 0 ? (
-               filteredItems.map(item => (
-                  <ListItem
+            {filtered.length > 0 ? (
+               filtered.map(item => (
+                  <SurahItem
                      key={item.nomor}
                      data={item}
                   />

@@ -3,18 +3,18 @@ import React from 'react';
 
 export default function Footer() {
    return (
-      <footer className='pb-5 pt-10 text-[97%] mx-6'>
+      <footer className='pb-5 pt-10 text-[97%] px-6 max-w-screen-xl mx-auto'>
          <div className='p-5 bg-secondary dark:bg-darkSecondary rounded-xl shadow-[0_5px_35px_rgba(0,0,0,.1)] relative overflow-hidden'>
             <div className='flex flex-wrap relative -left-[15px] -right-[15px]'>
                <div className='mx-[15px]'>
-                  <div className='pb-[30px]'>
+                  <div className='pb-4'>
                      <div
                         className='before:content-[attr(data-text)] before:text-[13px] before:block before:mb-1'
                         data-text='Made with ️❤️ by Next Quran'>
                         <div>
                            <div className='flex-[0_0_calc(100%_-_82px)]'>
                               <h2 className='text-inherit text-xl font-bold'>Next Quran</h2>
-                              <p className='mt-1 overflow-hidden'>Web membaca Al-Quran Online.</p>
+                              <p className='mt-1 overflow-hidden'>Baca Al-Quran Online.</p>
                            </div>
                         </div>
                      </div>

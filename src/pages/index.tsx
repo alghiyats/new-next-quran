@@ -70,8 +70,8 @@ const IndexPage = () => {
          </Head>
          {lastReadTitle}
 
-         <div className='shadow-md bg-secondary dark:bg-darkSecondary rounded-lg p-6'>
-            <h1 className='text-xl font-bold'>
+         <div className='shadow-[0_5px_35px_rgba(0,0,0,.07)] bg-secondary dark:bg-darkSecondary rounded-lg p-6'>
+            <h1 className='text-xl font-bold hover:underline'>
                {data.nama_latin} Ayat {data.ayat.map(m => m.nomor)}
             </h1>
             <p
