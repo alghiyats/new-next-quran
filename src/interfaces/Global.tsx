@@ -1,4 +1,4 @@
-export interface listSurah {
+export interface Global {
    nomor: number;
    nama: string;
    nama_latin: string;

@@ -26,7 +26,7 @@ export default function Bookmark() {
    }, []);
 
    const handleRemoveBookmark = (id: number) => {
-      const newBookmarks = data.filter((bookmark: any) => bookmark.id !== id);
+      const newBookmarks = data.filter((bookmark: any) => bookmark.number_id !== id);
       localStorage.setItem('bookmarks', JSON.stringify(newBookmarks));
       setData(newBookmarks);
       window.dispatchEvent(new Event('bookmarks'));
@@ -34,8 +34,8 @@ export default function Bookmark() {
 
    const filtered = data?.filter(
       item =>
-         item.nama_latin.toLowerCase().includes(search.toLowerCase()) ||
-         item.nomor.toString().includes(search.toLowerCase())
+         item.name_transliteration.toLowerCase().includes(search.toLowerCase()) ||
+         item.number_ayat.toString().includes(search.toLowerCase())
    );
 
    const bookmarkTitle = (
@@ -82,27 +82,29 @@ export default function Bookmark() {
                filtered.map(surah => (
                   <div className='pl-4 p-6 flex bg-[#fffdfc] dark:bg-[#2d2d30] shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl justify-between items-center relative'>
                      <Link
-                        href={`/surah/${surah.nama_latin.toLowerCase()}#${surah.nomor}`}
+                        href={`/surah/${surah.name_transliteration.toLowerCase()}#${
+                           surah.number_ayat
+                        }`}
                         className='inset-0 absolute'></Link>
                      <div className='flex items-center'>
                         <div className='flex justify-center items-center w-8 h-8 dark:bg-darkBg bg-lightBg mr-4 rounded-md text-xs'>
-                           {surah.surah}
+                           {surah.number_surah}
                         </div>
                         <div className='flex flex-col'>
                            <p className='font-semibold group-hover:text-blue-500 dark:group-hover:text-emerald-500'>
-                              {surah.nama_latin}
+                              {surah.name_transliteration}
                            </p>
-                           <p className='text-xs'>Ayat {surah.nomor}</p>
+                           <p className='text-xs'>Ayat {surah.number_ayat}</p>
                         </div>
                      </div>
                      <div className='flex items-center gap-2'>
                         <span
                            className='font-arabic text-xl font-bold'
                            dir='rtl'>
-                           {surah.nama}
+                           {surah.name_arab}
                         </span>
                         <span
-                           onClick={() => handleRemoveBookmark(surah.id)}
+                           onClick={() => handleRemoveBookmark(surah.number_id)}
                            className='flex cursor-pointer items-center rounded-full p-2 hover:bg-lightBg hover:dark:bg-darkBg z-10'>
                            <svg
                               className='w-5 h-5'

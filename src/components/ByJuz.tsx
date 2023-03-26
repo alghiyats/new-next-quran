@@ -9,15 +9,16 @@ export default function ByJuz({ surahList }) {
    const startIndex = Data.map(v => v.start.index);
    const endIndex = Data.map(v => v.end.index);
    const filtered = surahList.filter(
-      v => v.nomor >= startIndex[0] && v.nomor <= endIndex[Data.length - 1]
+      v => v.number >= startIndex[0] && v.number <= endIndex[Data.length - 1]
    );
    const newData = Data.map((item, index) => ({
       index: item.index,
       filtered: filtered.filter(
-         surah => surah.nomor >= startIndex[index] && surah.nomor <= endIndex[index]
+         surah => surah.number >= startIndex[index] && surah.number <= endIndex[index]
       ),
    }));
    const filteredJuz = newData.filter(item => item.index.toString().includes(search));
+   console.log(filteredJuz);
 
    return (
       <>
@@ -34,7 +35,10 @@ export default function ByJuz({ surahList }) {
                   <h3 className='mb-4 font-bold'>Juz {juz.index}</h3>
                   <ul className='flex flex-col gap-4'>
                      {juz.filtered.map(surah => (
-                        <SurahItem data={surah} />
+                        <SurahItem
+                           data={surah}
+                           key={surah.number}
+                        />
                      ))}
                   </ul>
                </li>

@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-import { listSurah } from '../interfaces';
-
+import { Chapter } from '../interfaces/Chapter';
 type SurahDetailProps = {
-   item: listSurah;
+   item: Chapter;
    arab: string;
    translation: string;
    ayat: number;
@@ -44,7 +43,7 @@ const SurahDetail = ({
 
    const handleBookmarkClick = (item: any, number: number) => {
       const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
-      const isSaved = bookmarks.some((bookmark: any) => bookmark.id === number);
+      const isSaved = bookmarks.some((bookmark: any) => bookmark.number_id === number);
       if (isSaved) {
          handleRemoveBookmark(number);
       } else {
@@ -126,7 +125,9 @@ const SurahDetail = ({
                <span
                   onClick={() =>
                      check
-                        ? check.ayat.map(m => m.id !== id && handleLastRead(item, ayat))
+                        ? check?.ayat?.map(
+                             m => m.number.inQuran !== id && handleLastRead(item, ayat)
+                          )
                         : handleLastRead(item, ayat)
                   }
                   className='w-6 h-6 flex items-center justify-center cursor-pointer'>
@@ -140,7 +141,7 @@ const SurahDetail = ({
                            className={`${
                               check
                                  ? check?.ayat?.map(m =>
-                                      m.id === id
+                                      m.number.inQuran === id
                                          ? 'stroke-link dark:stroke-darkLink'
                                          : 'stroke-gray-500 dark:stroke-slate-200'
                                    )
@@ -166,7 +167,7 @@ const SurahDetail = ({
                      viewBox='0 0 24 24'>
                      <g transform='translate(4.500000, 2.500000)'>
                         <path d='M7.47024319,0 C1.08324319,0 0.00424318741,0.932 0.00424318741,8.429 C0.00424318741,16.822 -0.152756813,19 1.44324319,19 C3.03824319,19 5.64324319,15.316 7.47024319,15.316 C9.29724319,15.316 11.9022432,19 13.4972432,19 C15.0932432,19 14.9362432,16.822 14.9362432,8.429 C14.9362432,0.932 13.8572432,0 7.47024319,0 Z' />
-                        {bookmarkSaved?.some(e => e.id === id) ? (
+                        {bookmarkSaved?.some(e => e.number_id === id) ? (
                            <line
                               className='svgC h'
                               transform='translate(-4.500000, -2.500000)'

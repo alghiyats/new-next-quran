@@ -1,5 +1,4 @@
 import { GetStaticProps } from 'next';
-import { listSurah } from '../../interfaces';
 import List from '../../components/List';
 import { getSurah } from '../../lib/getSurah';
 import Head from 'next/head';
@@ -7,9 +6,10 @@ import Search from '../../components/Search';
 import { useState } from 'react';
 import ByJuz from '../../components/ByJuz';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { Chapter } from '../../interfaces/Chapter';
 
 type Props = {
-   listSurah: any;
+   listSurah: Chapter[];
 };
 
 export default function SurahList({ listSurah }: Props) {
@@ -21,7 +21,7 @@ export default function SurahList({ listSurah }: Props) {
    };
 
    const filtered = listSurah.filter(item =>
-      item.nama_latin.toLowerCase().includes(search.toLowerCase())
+      item.name.transliteration.id.toLowerCase().includes(search.toLowerCase())
    );
 
    if (!listSurah) {
@@ -60,6 +60,6 @@ export default function SurahList({ listSurah }: Props) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-   const listSurah: listSurah[] = await getSurah();
+   const listSurah: Chapter[] = await getSurah();
    return { props: { listSurah } };
 };

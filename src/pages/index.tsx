@@ -72,19 +72,20 @@ const IndexPage = () => {
 
          <div className='shadow-[0_5px_35px_rgba(0,0,0,.07)] bg-secondary dark:bg-darkSecondary rounded-lg p-6'>
             <h1 className='text-xl font-bold hover:underline'>
-               {data.nama_latin} Ayat {data.ayat.map(m => m.nomor)}
+               {data.name} Ayat {data.ayat.map(m => m.number.inSurah)}
             </h1>
             <p
                className='text-3xl font-arabic my-6 leading-[50px]'
                dir='rtl'>
-               {data.ayat.map(ar => ar.ar)}
-               &nbsp;{gh(data.ayat.map(m => m.nomor))}
+               {data.ayat.map(ar => ar.text)}
+               &nbsp;{gh(data.ayat.map(m => m.number.inSurah))}
             </p>
             <p
                className='text-sm font-semibold mb-2'
-               dangerouslySetInnerHTML={{ __html: data.ayat.map(tr => tr.tr) }}></p>
-            <p className='text-sm'>{data.ayat.map(idn => idn.idn)}</p>
-            <Link href={`/surah/${data.nama_latin.toLowerCase()}#${data.ayat.map(m => m.nomor)}`}>
+               dangerouslySetInnerHTML={{ __html: data.ayat.map(tr => tr.transliteration) }}></p>
+            <p className='text-sm'>{data.ayat.map(idn => idn.translation)}</p>
+            <Link
+               href={`/surah/${data.name.toLowerCase()}#${data.ayat.map(m => m.number.inSurah)}`}>
                <h1 className='hover:text-link dark:hover:text-darkLink font-semibold mt-4 w-max'>
                   Lanjut membaca
                </h1>

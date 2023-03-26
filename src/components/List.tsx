@@ -1,9 +1,9 @@
 import * as React from 'react';
+import { Chapter } from '../interfaces/Chapter';
 import SurahItem from './SurahItem';
-import { listSurah } from '../interfaces';
 
 type Props = {
-   filtered: listSurah[];
+   filtered: Chapter[];
 };
 
 const List = ({ filtered }: Props) => {
@@ -13,7 +13,7 @@ const List = ({ filtered }: Props) => {
             {filtered.length > 0 ? (
                filtered.map(item => (
                   <SurahItem
-                     key={item.nomor}
+                     key={item.number}
                      data={item}
                   />
                ))
