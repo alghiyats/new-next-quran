@@ -109,8 +109,10 @@ export default function Header() {
                </div>
 
                <div className='flex gap-x-2'>
-                  {Nav.map(to => (
-                     <Link href={to.path}>
+                  {Nav.map((to, i) => (
+                     <Link
+                        href={to.path}
+                        key={i}>
                         <div
                            className={`${
                               router.pathname === to.path && 'bg-lightBg dark:bg-darkSecondary'

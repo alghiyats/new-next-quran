@@ -13,40 +13,18 @@ type Props = {
 };
 
 const StaticPropsDetail = ({ detail, errors }: Props) => {
-   const [isModalOpen, setIsModalOpen] = useState(false);
-   const [newData, setNewData] = useState<any>(null);
    const [check, setCheck] = useState<any>();
    const [tafsirOpen, setTafsirOpen] = useState(false);
    const [title, setTitle] = useState('');
    const [numberTafsir, setNumberTafsir] = useState<number>();
+   const [isModalOpen, setIsModalOpen] = useState(false);
+   const [newData, setNewData] = useState<any>(null);
 
    useEffect(() => {
       if (detail) {
          setTitle(`Surah ${detail.name.transliteration.id} - Next Quran`);
       }
    }, [detail]);
-
-   const handleLastRead = (data: any, number_inSurah: number) => {
-      const ayat = data?.verses?.filter(verse => verse.number.inSurah === number_inSurah);
-      const { name, numberOfVerses, number } = data;
-      const newData = {
-         number_inSurah,
-         number,
-         name: name.transliteration.id,
-         numberOfVerses,
-         ayat,
-      };
-
-      const lastReadData = JSON.parse(localStorage.getItem('lastRead'));
-
-      if (lastReadData) {
-         setNewData(newData);
-         setIsModalOpen(true);
-      } else {
-         localStorage.setItem('lastRead', JSON.stringify(newData));
-         window.dispatchEvent(new Event('lastRead'));
-      }
-   };
 
    const handleConfirm = () => {
       localStorage.setItem('lastRead', JSON.stringify(newData));
@@ -56,63 +34,6 @@ const StaticPropsDetail = ({ detail, errors }: Props) => {
 
    const handleCancel = () => {
       setIsModalOpen(false);
-   };
-
-   useEffect(() => {
-      const datas = JSON.parse(localStorage.getItem('lastRead'));
-      setCheck(datas);
-
-      const handleStorageChange = () => {
-         const newData = JSON.parse(localStorage.getItem('lastRead'));
-         setCheck(newData);
-      };
-
-      window.addEventListener('storage', handleStorageChange);
-
-      const handleLastReadChange = () => {
-         const newData = JSON.parse(localStorage.getItem('lastRead'));
-         setCheck(newData);
-      };
-
-      window.addEventListener('lastRead', handleLastReadChange);
-
-      return () => {
-         window.removeEventListener('storage', handleStorageChange);
-         window.removeEventListener('lastRead', handleLastReadChange);
-      };
-   }, []);
-
-   const handleAddBookmark = (data: any, id: number) => {
-      const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
-      const newBookmark = data?.verses?.find((verse: any) => verse.number.inQuran === id);
-
-      if (newBookmark) {
-         const {
-            number: { inSurah, inQuran },
-         } = newBookmark;
-         const isDuplicate = bookmarks.some((bookmark: any) => bookmark.number_id === inQuran);
-         if (!isDuplicate) {
-            bookmarks.push({
-               number_id: inQuran,
-               number_surah: data.number,
-               name_arab: data.name.short,
-               name_translation: data.name.translation.id,
-               name_transliteration: data.name.transliteration.id,
-               number_ayat: inSurah,
-            });
-            localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
-            window.dispatchEvent(new Event('bookmarks'));
-         }
-      }
-   };
-
-   const handleRemoveBookmark = (number: number) => {
-      const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
-      const newBookmarks = bookmarks
-         .filter((bookmark: any) => bookmark.number_id !== number)
-         .map((bookmark: any) => ({ ...bookmark }));
-      localStorage.setItem('bookmarks', JSON.stringify(newBookmarks));
-      window.dispatchEvent(new Event('bookmarks'));
    };
 
    const Tafsir = number_ayat => {
@@ -136,6 +57,7 @@ const StaticPropsDetail = ({ detail, errors }: Props) => {
    if (!detail) {
       return <div>Loading...</div>;
    }
+
    return (
       <>
          <Head>
@@ -150,7 +72,7 @@ const StaticPropsDetail = ({ detail, errors }: Props) => {
                <div className='relative overflow-y-auto p-4'>
                   <p>
                      {detail?.verses
-                        ?.filter(x => x.number.inSurah === numberTafsir)
+                        ?.filter(x => x.number.inQuran === numberTafsir)
                         .map(x => x.tafsir.id.long)}
                   </p>
                </div>
@@ -199,14 +121,14 @@ const StaticPropsDetail = ({ detail, errors }: Props) => {
                      arab={x.text}
                      translation={x.translation}
                      ayat={x.number.inSurah}
-                     handleLastRead={handleLastRead}
                      data={x}
                      latin={x.transliteration}
                      check={check}
+                     setCheck={setCheck}
                      id={x.number.inQuran}
-                     handleAddBookmark={handleAddBookmark}
-                     handleRemoveBookmark={handleRemoveBookmark}
                      Tafsir={Tafsir}
+                     setNewData={setNewData}
+                     setIsModalOpen={setIsModalOpen}
                   />
                ))}
             </div>

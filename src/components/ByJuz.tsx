@@ -19,7 +19,6 @@ export default function ByJuz({ surahList }) {
       ),
    }));
    const filteredJuz = newData.filter(item => item.index.toString().includes(search));
-   console.log(filteredJuz);
 
    return (
       <>
@@ -40,10 +39,14 @@ export default function ByJuz({ surahList }) {
                   </Link>
                   <ul className='flex flex-col gap-4'>
                      {juz.filtered.map(surah => (
-                        <SurahItem
-                           data={surah}
-                           key={surah.number}
-                        />
+                        <Link
+                           href={`/surah/${surah.name.transliteration.id.toLowerCase()}`}
+                           key={surah.number}>
+                           <SurahItem
+                              data={surah}
+                              key={surah.number}
+                           />
+                        </Link>
                      ))}
                   </ul>
                </li>
