@@ -39,8 +39,8 @@ export default function SurahList({ listSurah }: Props) {
 
          <Tabs onSelect={handleSelect}>
             <TabList className='my-6 flex gap-2 bg-secondary dark:bg-darkSecondary p-3 rounded-xl shadow-[0_5px_35px_rgba(0,0,0,.07)]'>
-               <Tab className='p-2 rounded-md font-semibold'>Surah</Tab>
-               <Tab className='p-2 rounded-md font-semibold'>Juz</Tab>
+               <Tab className='p-2 rounded-md font-semibold cursor-pointer'>Surah</Tab>
+               <Tab className='p-2 rounded-md font-semibold cursor-pointer'>Juz</Tab>
             </TabList>
 
             <TabPanel>

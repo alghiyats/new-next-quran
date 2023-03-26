@@ -34,3 +34,13 @@ export interface Chapter {
    tafsir: { id: string };
    verses: Verse[];
 }
+export interface Juz {
+   name: any;
+   juz: number;
+   juzStartSurahNumber: number;
+   juzEndSurahNumber: number;
+   juzStartInfo: string;
+   juzEndInfo: string;
+   totalVerses: number;
+   verses: Verse[];
+}

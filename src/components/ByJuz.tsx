@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { useState } from 'react';
 import { Data } from '../lib/juz';
 import Search from './Search';
@@ -32,7 +33,11 @@ export default function ByJuz({ surahList }) {
                <li
                   key={juz.index}
                   className='dark:bg-darkBg bg-lightBg p-4 rounded-lg inline-block w-full mb-4'>
-                  <h3 className='mb-4 font-bold'>Juz {juz.index}</h3>
+                  <Link href={`/juz/${juz.index}`}>
+                     <h3 className='mb-4 font-bold hover:text-link dark:hover:text-darkLink'>
+                        Juz {juz.index}
+                     </h3>
+                  </Link>
                   <ul className='flex flex-col gap-4'>
                      {juz.filtered.map(surah => (
                         <SurahItem
