@@ -42,5 +42,14 @@ export interface Juz {
    juzStartInfo: string;
    juzEndInfo: string;
    totalVerses: number;
-   verses: Verse[];
+   data: {
+      number: number;
+      name: {
+         short: string;
+         long: string;
+         transliteration: { id: string };
+         translation: { id: string };
+      };
+      verses: Verse[];
+   }[];
 }

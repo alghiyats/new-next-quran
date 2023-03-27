@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 
 export default function LastRead({ ayat, id, item, check, setCheck, setNewData, setIsModalOpen }) {
-   const handleLastRead = (data: any, number_inSurah: number) => {
-      const ayat = data?.verses?.filter(verse => verse.number.inSurah === number_inSurah);
+   const handleLastRead = (data: any, number_inQuran: number) => {
+      const ayat = data?.verses?.filter(verse => verse.number.inQuran === number_inQuran);
       const { name, numberOfVerses, number } = data;
       const newData = {
-         number_inSurah,
+         number_inQuran,
          number,
          name: name.transliteration.id,
          numberOfVerses,
@@ -51,8 +51,8 @@ export default function LastRead({ ayat, id, item, check, setCheck, setNewData, 
          <span
             onClick={() =>
                check
-                  ? check?.ayat?.map(m => m.number.inQuran !== id && handleLastRead(item, ayat))
-                  : handleLastRead(item, ayat)
+                  ? check?.ayat?.map(m => m.number.inQuran !== id && handleLastRead(item, id))
+                  : handleLastRead(item, id)
             }
             className='w-6 h-6 flex items-center justify-center cursor-pointer'>
             <svg
