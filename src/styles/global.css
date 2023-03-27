@@ -9,3 +9,6 @@
 .react-tabs__tab--selected {
    @apply bg-lightBg dark:bg-darkBg;
 }
+#nprogress .bar {
+   @apply bg-link dark:bg-darkLink;
+}
