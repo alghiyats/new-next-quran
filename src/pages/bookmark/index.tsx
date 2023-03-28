@@ -3,7 +3,20 @@ import Link from 'next/link';
 import Head from 'next/head';
 import Search from '../../components/Search';
 
-export default function Bookmark() {
+export default function Bookmark({ errors }) {
+   if (errors) {
+      return (
+         <>
+            <Head>
+               <title>Error - Next Quran</title>
+            </Head>
+            <p>
+               <span style={{ color: 'red' }}>Error:</span> {errors}
+            </p>
+         </>
+      );
+   }
+
    const [data, setData] = useState<any>();
    const [loading, setLoading] = useState(true);
    const [search, setSearch] = useState('');

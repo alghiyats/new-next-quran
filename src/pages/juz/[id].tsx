@@ -11,7 +11,7 @@ type Props = {
    errors?: string;
 };
 
-export default function index({ juzDetail, errors }: Props) {
+export default function JuzDetail({ juzDetail, errors }: Props) {
    const [check, setCheck] = useState<any>();
    const [tafsirOpen, setTafsirOpen] = useState(false);
    const [title, setTitle] = useState('');

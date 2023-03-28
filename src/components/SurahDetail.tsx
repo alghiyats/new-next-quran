@@ -46,7 +46,7 @@ const SurahDetail = ({
       <div
          id={`${ayat}`}
          className='bg-secondary dark:bg-darkSecondary scroll-mt-20 flex shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl justify-between flex-col gap-y-2'>
-         <div className='px-4 py-2 gap-3 dark:bg-darkBg bg-lightBg flex items-center w-full justify-between'>
+         <div className='px-4 py-2 gap-3 dark:bg-darkBg bg-lightBg flex items-center w-full justify-between rounded-t-xl'>
             <div>
                <span className='text-sm'>{ayat}</span>
             </div>
