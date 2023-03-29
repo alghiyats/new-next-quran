@@ -65,7 +65,7 @@ const Home: React.FC<{ errors?: string }> = ({ errors }) => {
    };
 
    const lastReadTitle = (
-      <h1 className='font-bold text-2xl mb-6 text-center p-6 bg-[#fffdfc] dark:bg-[#2d2d30] shadow-[0 5px 35px rgba(0,0,0,.07)] rounded-xl'>
+      <h1 className='font-bold text-2xl mb-6 text-center p-6 bg-[#fffdfc] dark:bg-[#2d2d30] shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl'>
          Terakhir dibaca
       </h1>
    );
@@ -74,7 +74,7 @@ const Home: React.FC<{ errors?: string }> = ({ errors }) => {
       return (
          <>
             {lastReadTitle}
-            <h1 className='pl-4 p-6 flex bg-[#fffdfc] dark:bg-[#2d2d30] shadow-[0 5px 35px rgba(0,0,0,.07)] rounded-xl justify-between items-center'>
+            <h1 className='pl-4 p-6 flex bg-[#fffdfc] dark:bg-[#2d2d30] rounded-xl justify-between items-center'>
                Loading....
             </h1>
          </>
@@ -85,7 +85,7 @@ const Home: React.FC<{ errors?: string }> = ({ errors }) => {
       return (
          <>
             {lastReadTitle}
-            <h1 className='pl-4 p-6 flex bg-[#fffdfc] dark:bg-[#2d2d30] shadow-[0 5px 35px rgba(0,0,0,.07)] rounded-xl justify-between items-center'>
+            <h1 className='shadow-[0_5px_35px_rgba(0,0,0,.07)] pl-4 p-6 flex bg-[#fffdfc] dark:bg-[#2d2d30] rounded-xl justify-between items-center'>
                Tidak ada terakhir dibaca.
             </h1>
          </>

@@ -46,11 +46,10 @@ export default function ByJuz({ surahList, sortOrder }) {
                      </Link>
                      <ul className='flex flex-col gap-4'>
                         {juz.filtered.map(surah => (
-                           <Link href={`/surah/${surah.name.transliteration.id.toLowerCase()}`}>
-                              <SurahItem
-                                 data={surah}
-                                 key={surah.number}
-                              />
+                           <Link
+                              href={`/surah/${surah.name.transliteration.id.toLowerCase()}`}
+                              key={surah.number}>
+                              <SurahItem data={surah} />
                            </Link>
                         ))}
                      </ul>

@@ -6,6 +6,7 @@ import { getSurahDetail } from '../../../lib/getSurahDetail';
 import { useEffect, useState } from 'react';
 import Modal from '../../../components/Modal';
 import { Chapter } from '../../../interfaces/Chapter';
+import Search from '../../../components/Search';
 
 type Props = {
    detail?: Chapter;
@@ -19,6 +20,9 @@ const StaticPropsDetail = ({ detail, errors }: Props) => {
    const [numberTafsir, setNumberTafsir] = useState<number>();
    const [isModalOpen, setIsModalOpen] = useState(false);
    const [newData, setNewData] = useState<any>(null);
+   const [search, setSearch] = useState('');
+
+   const filtered = detail.verses.filter(s => s.number.inSurah.toString().includes(search));
 
    useEffect(() => {
       if (detail) {
@@ -113,24 +117,34 @@ const StaticPropsDetail = ({ detail, errors }: Props) => {
                   </p>
                )}
             </div>
+            <Search
+               type={'number'}
+               search={search}
+               setSearch={setSearch}
+               placeholder={'Cari ayat...'}
+            />
             <div className='flex gap-y-6 flex-col'>
-               {detail.verses.map(x => (
-                  <SurahDetail
-                     key={x.number.inSurah}
-                     item={detail}
-                     arab={x.text}
-                     translation={x.translation}
-                     ayat={x.number.inSurah}
-                     data={x}
-                     latin={x.transliteration}
-                     check={check}
-                     setCheck={setCheck}
-                     id={x.number.inQuran}
-                     Tafsir={Tafsir}
-                     setNewData={setNewData}
-                     setIsModalOpen={setIsModalOpen}
-                  />
-               ))}
+               {filtered.length > 0 ? (
+                  filtered.map(x => (
+                     <SurahDetail
+                        key={x.number.inSurah}
+                        item={detail}
+                        arab={x.text}
+                        translation={x.translation}
+                        ayat={x.number.inSurah}
+                        data={x}
+                        latin={x.transliteration}
+                        check={check}
+                        setCheck={setCheck}
+                        id={x.number.inQuran}
+                        Tafsir={Tafsir}
+                        setNewData={setNewData}
+                        setIsModalOpen={setIsModalOpen}
+                     />
+                  ))
+               ) : (
+                  <p className='ml-2'>Ayat tidak dutemukan...</p>
+               )}
             </div>
          </div>
       </>
