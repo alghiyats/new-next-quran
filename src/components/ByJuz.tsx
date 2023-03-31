@@ -1,31 +1,28 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { Data } from '../lib/juz';
+import { juzData } from '../lib/juz';
 import Search from './Search';
 import SurahItem from './SurahItem';
 
 export default function ByJuz({ surahList, sortOrder }) {
    const [search, setSearch] = useState('');
 
-   const startIndex = Data.map(v => v.start.index);
-   const endIndex = Data.map(v => v.end.index);
-   const filtered = surahList.filter(
-      v => v.number >= startIndex[0] && v.number <= endIndex[Data.length - 1]
-   );
-   const newData = Data.map((item, index) => ({
-      index: item.index,
-      filtered: filtered.filter(
-         surah => surah.number >= startIndex[index] && surah.number <= endIndex[index]
-      ),
+   const numberSurah = juzData.flatMap(v => v.surah.map(x => x.number));
+   const filtered = surahList.filter(v => numberSurah.includes(v.number));
+   const newData = juzData.map(juz => ({
+      juzNumber: juz.juz_number,
+      verseRange: juz.surah,
+      filtered: filtered.filter(surah => juz.surah.some(s => s.number === surah.number)),
    }));
-   const filteredJuz = newData.filter(item => item.index.toString().includes(search));
+   const filteredJuz = newData.filter(item => item.juzNumber.toString().includes(search));
    const sortedSurahs = filteredJuz?.sort((a, b) => {
       if (sortOrder === 'asc') {
-         return a.index - b.index;
+         return a.juzNumber - b.juzNumber;
       } else {
-         return b.index - a.index;
+         return b.juzNumber - a.juzNumber;
       }
    });
+
    return (
       <>
          <Search
@@ -37,19 +34,21 @@ export default function ByJuz({ surahList, sortOrder }) {
             {sortedSurahs.length > 0 ? (
                sortedSurahs.map(juz => (
                   <li
-                     key={juz.index}
+                     key={juz.juzNumber}
                      className='dark:bg-darkBg bg-lightBg p-4 rounded-lg inline-block w-full mb-4'>
-                     <Link href={`/juz/${juz.index}`}>
+                     <Link href={`/juz/${juz.juzNumber}`}>
                         <h3 className='mb-4 font-bold hover:text-link dark:hover:text-darkLink'>
-                           Juz {juz.index}
+                           Juz {juz.juzNumber}
                         </h3>
                      </Link>
                      <ul className='flex flex-col gap-4'>
-                        {juz.filtered.map(surah => (
+                        {juz.filtered.map(item => (
                            <Link
-                              href={`/surah/${surah.name.transliteration.id.toLowerCase()}`}
-                              key={surah.number}>
-                              <SurahItem data={surah} />
+                              href={`/surah/${item?.name?.transliteration?.id.toLowerCase()}/${juz.verseRange.find(s => s.number === item.number).verses.start
+                                 }-${juz.verseRange.find(s => s.number === item.number).verses.end
+                                 }`}
+                              key={item.number}>
+                              <SurahItem data={item} />
                            </Link>
                         ))}
                      </ul>

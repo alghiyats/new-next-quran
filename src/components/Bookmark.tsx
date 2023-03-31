@@ -13,10 +13,10 @@ export default function Bookmark({ item, id }) {
          if (!isDuplicate) {
             bookmarks.push({
                number_id: inQuran,
-               number_surah: data.number,
-               name_arab: data.name.short,
-               name_translation: data.name.translation.id,
-               name_transliteration: data.name.transliteration.id,
+               number_surah: data?.number || data?.surah.number,
+               name_arab: data?.name?.short || data?.surah.name.short,
+               name_translation: data?.name?.translation.id || data?.surah.name.translation.id,
+               name_transliteration: data?.name?.transliteration.id || data?.surah.name.transliteration.id,
                number_ayat: inSurah,
             });
             localStorage.setItem('bookmarks', JSON.stringify(bookmarks));

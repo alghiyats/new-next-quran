@@ -1,19 +1,13 @@
-import { GetStaticProps, GetStaticPaths } from 'next';
-import SurahDetail from '../../../components/SurahDetail';
-import Head from 'next/head';
-import { getSurah } from '../../../lib/getSurah';
-import { getSurahDetail } from '../../../lib/getSurahDetail';
-import { useEffect, useState } from 'react';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import React, { useState } from 'react'
 import Modal from '../../../components/Modal';
-import { Chapter } from '../../../interfaces/Chapter';
 import Search from '../../../components/Search';
+import SurahDetail from '../../../components/SurahDetail';
+import { getSurah } from '../../../lib/getSurah';
+import { getVersesRange } from '../../../lib/getVersesRange';
+import { juzData } from '../../../lib/juz';
 
-type Props = {
-   detail?: Chapter;
-   errors?: string;
-};
-
-const StaticPropsDetail = ({ detail, errors }: Props) => {
+export default function Verse({ detail }) {
    const [check, setCheck] = useState<any>();
    const [tafsirOpen, setTafsirOpen] = useState(false);
    const [title, setTitle] = useState('');
@@ -24,11 +18,6 @@ const StaticPropsDetail = ({ detail, errors }: Props) => {
 
    const filtered = detail.verses.filter(s => s.number.inSurah.toString().includes(search));
 
-   useEffect(() => {
-      if (detail) {
-         setTitle(`Surah ${detail.name.transliteration.id} - Next Quran`);
-      }
-   }, [detail]);
 
    const handleConfirm = () => {
       localStorage.setItem('lastRead', JSON.stringify(newData));
@@ -44,29 +33,9 @@ const StaticPropsDetail = ({ detail, errors }: Props) => {
       setNumberTafsir(number_ayat);
       setTafsirOpen(!tafsirOpen);
    };
-
-   if (errors) {
-      return (
-         <>
-            <Head>
-               <title>Error - Next Quran</title>
-            </Head>
-            <p>
-               <span style={{ color: 'red' }}>Error:</span> {errors}
-            </p>
-         </>
-      );
-   }
-
-   if (!detail) {
-      return <div>Loading...</div>;
-   }
-
    return (
+
       <>
-         <Head>
-            <title>{title}</title>
-         </Head>
          {tafsirOpen && (
             <Modal
                modalTitle={'Tafsir'}
@@ -93,8 +62,8 @@ const StaticPropsDetail = ({ detail, errors }: Props) => {
                      QS. {check?.name} Ayat {check?.ayat.map(x => x.number.inSurah)}. Akan di ganti
                      dengan
                      <p>
-                        QS. {detail?.name.transliteration.id} Ayat{' '}
-                        {newData.ayat.map(x => x.number.inSurah)}. Apakah Anda yakin?
+                        QS. {detail?.surah.name.transliteration.id} Ayat{' '}
+                        {newData?.ayat?.map(x => x.number.inSurah)}. Apakah Anda yakin?
                      </p>
                   </p>
                </div>
@@ -103,13 +72,13 @@ const StaticPropsDetail = ({ detail, errors }: Props) => {
          <div>
             <div className='py-6 flex flex-col gap-4 shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl bg-secondary dark:bg-darkSecondary mb-12'>
                <p className='text-xl font-bold text-center'>
-                  {detail.name.transliteration.id}{' '}
-                  <span className='text-xl font-arabic'>( {detail.name.short} )</span>
+                  {detail?.surah.name.transliteration.id}{' '}
+                  <span className='text-xl font-arabic'>( {detail?.surah.name.short} )</span>
                </p>
                <p className='text-center text-base capitalize'>
-                  {detail.numberOfVerses} Ayat - {detail.revelation.id}
+                  {detail?.surah.numberOfVerses} Ayat - {detail?.surah.revelation.id}
                </p>
-               {detail.number > 1 && (
+               {detail?.surah.number > 1 && (
                   <p
                      className='text-3xl text-center font-arabic mb-4'
                      dir='rtl'>
@@ -133,49 +102,50 @@ const StaticPropsDetail = ({ detail, errors }: Props) => {
                         ayat={x.number.inSurah}
                         data={x}
                         latin={x.transliteration}
-                        check={check}
                         setCheck={setCheck}
                         id={x.number.inQuran}
                         Tafsir={Tafsir}
                         setNewData={setNewData}
-                        setIsModalOpen={setIsModalOpen}
-                     />
+                        setIsModalOpen={setIsModalOpen} check={check} />
                   ))
                ) : (
                   <p className='ml-2'>Ayat tidak dutemukan...</p>
                )}
             </div>
-         </div>
-      </>
-   );
-};
-
-export default StaticPropsDetail;
+         </div></>
+   )
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
-   const data = await getSurah();
-   const paths = data?.map(item => ({
-      params: { id: item.name.transliteration.id.toLowerCase() },
-   }));
+   const paths = juzData.flatMap(({ surah }) =>
+      surah.map((s) => ({
+         params: {
+            id: s.name.toLowerCase().toString(),
+            verses: `${s.verses.start}-${s.verses.end}`,
+         },
+      }))
+   );
 
    return { paths, fallback: false };
 };
+
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
    try {
       const data = await getSurah();
       const matchingData = data.find(
-         item => item.name.transliteration.id.toLowerCase() === params?.id
+         (item) => item.name.transliteration.id.toLowerCase() === params?.id
       );
       const id = matchingData ? matchingData.number : null;
 
       if (!id) {
          return { notFound: true };
       }
-      const detail = await getSurahDetail(id);
+      const detail = await getVersesRange(id, params.verses.toString());
 
       return { props: { detail } };
    } catch (err: any) {
       return { props: { errors: err.message } };
    }
 };
+

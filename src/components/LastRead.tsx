@@ -3,13 +3,13 @@ import React, { useEffect } from 'react';
 export default function LastRead({ ayat, id, item, check, setCheck, setNewData, setIsModalOpen }) {
    const handleLastRead = (data: any, number_inQuran: number) => {
       const ayat = data?.verses?.filter(verse => verse.number.inQuran === number_inQuran);
-      const { name, numberOfVerses, number } = data;
+      const { name, numberOfVerses, number, surah } = data;
       const newData = {
+         ayat,
          number_inQuran,
          number,
-         name: name.transliteration.id,
+         name: name ? name.transliteration.id : null || surah.name.transliteration.id,
          numberOfVerses,
-         ayat,
       };
 
       const lastReadData = JSON.parse(localStorage.getItem('lastRead'));
@@ -56,15 +56,14 @@ export default function LastRead({ ayat, id, item, check, setCheck, setNewData, 
             }
             className='w-6 h-6 flex items-center justify-center cursor-pointer'>
             <svg
-               className={`${
-                  check
-                     ? check?.ayat?.map(m =>
-                          m.number.inQuran === id
-                             ? 'fill-link dark:fill-darkLink'
-                             : 'fill-gray-500 dark:fill-slate-200'
-                       )
-                     : 'fill-gray-500 dark:fill-slate-200'
-               } h-5 w-5`}
+               className={`${check
+                  ? check?.ayat?.map(m =>
+                     m.number.inQuran === id
+                        ? 'fill-link dark:fill-darkLink'
+                        : 'fill-gray-500 dark:fill-slate-200'
+                  )
+                  : 'fill-gray-500 dark:fill-slate-200'
+                  } h-5 w-5`}
                viewBox='0 0 24 24'
                fill='none'
                xmlns='http://www.w3.org/2000/svg'>
