@@ -139,7 +139,6 @@ const StaticPropsDetail = ({ detail, errors }: Props) => {
                         Tafsir={Tafsir}
                         setNewData={setNewData}
                         setIsModalOpen={setIsModalOpen}
-                        audio={x.audio.primary}
                      />
                   ))
                ) : (
