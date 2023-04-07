@@ -1,4 +1,5 @@
 import { Chapter } from '../interfaces/Chapter';
+import AudioPlayer from './AudioPlayer';
 import Bookmark from './Bookmark';
 import LastRead from './LastRead';
 type SurahDetailProps = {
@@ -14,6 +15,7 @@ type SurahDetailProps = {
    setCheck: any;
    setNewData: any;
    setIsModalOpen: any;
+   audio: string
 };
 
 const SurahDetail = ({
@@ -28,19 +30,8 @@ const SurahDetail = ({
    setCheck,
    setIsModalOpen,
    setNewData,
+   audio
 }: SurahDetailProps) => {
-   const gh = w => {
-      const arabicNumbers = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
-      const numberString = String(w);
-      let result = '';
-
-      for (let i = 0; i < numberString.length; i++) {
-         const digit = parseInt(numberString[i]);
-         result += arabicNumbers[digit];
-      }
-
-      return result;
-   };
 
    return (
       <div
@@ -78,18 +69,19 @@ const SurahDetail = ({
                   item={item}
                   id={id}
                />
+               {/* <AudioPlayer value={audio} /> */}
             </div>
          </div>
          <div className='m-6'>
             <p
-               className='my-4 font-arabic md:text-3xl text-2xl leading-[3.5rem_!important]'
+               className='my-4 font-arabic md:text-3xl text-2xl leading-[4.5rem_!important]'
                dir='rtl'>
-               {arab}&nbsp;{gh(ayat)}
+               {arab}&nbsp;{ayat.toLocaleString('ar-EG')}
             </p>
             <p
-               className='text-sm font-semibold mb-2'
+               className='text-sm mb-3 font-latin'
                dangerouslySetInnerHTML={{ __html: latin }}></p>
-            <p className='text-sm'>{translation}</p>
+            <p className='text-sm font-arti font-extralight'>{translation}</p>
          </div>
       </div>
    );

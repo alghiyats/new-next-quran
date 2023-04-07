@@ -18,6 +18,7 @@ interface Verse {
    translation: string;
    transliteration: string;
    tafsir: { id: { short: string; long: string } };
+   audio: { primary: string }
 }
 
 export interface Chapter {

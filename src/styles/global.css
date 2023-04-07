@@ -3,8 +3,26 @@
 @tailwind utilities;
 
 @font-face {
+   font-family: 'montserrat';
+   src: url(../fonts/montserrat_regular.ttf);
+   font-weight: normal;
+}
+@font-face {
+   font-family: 'montserrat';
+   src: url(../fonts/montserrat_bold.ttf);
+   font-weight: bold;
+}
+@font-face {
    font-family: 'Uthmani';
-   src: url(/UthmanicHafs1Ver18.woff2);
+   src: url(../fonts/lpmq_isep_misbah.ttf);
+}
+@font-face {
+   font-family: 'latin';
+   src: url(../fonts/latin.ttf);
+}
+@font-face {
+   font-family: 'arti';
+   src: url(../fonts/arti.ttf);
 }
 #nprogress .bar {
    @apply bg-link dark:bg-darkLink;

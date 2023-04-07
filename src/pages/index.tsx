@@ -51,19 +51,6 @@ const Home: React.FC<{ errors?: string }> = ({ errors }) => {
       };
    }, []);
 
-   const toArabicNumbers = (num: number): string => {
-      const arabicNumbers = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
-      const numberString = String(num);
-      let result = '';
-
-      for (let i = 0; i < numberString.length; i++) {
-         const digit = parseInt(numberString[i]);
-         result += arabicNumbers[digit];
-      }
-
-      return result;
-   };
-
    const lastReadTitle = (
       <h1 className='font-bold text-2xl mb-6 text-center p-6 bg-[#fffdfc] dark:bg-[#2d2d30] shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl'>
          Terakhir dibaca
@@ -110,7 +97,7 @@ const Home: React.FC<{ errors?: string }> = ({ errors }) => {
                className='text-3xl font-arabic my-6 leading-[50px]'
                dir='rtl'>
                {data.ayat.map(ar => ar.text)}
-               &nbsp;{toArabicNumbers(ayahNumber)}
+               &nbsp;{ayahNumber.toLocaleString('ar-EG')}
             </p>
             <p
                className='text-sm font-semibold mb-2'

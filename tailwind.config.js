@@ -20,6 +20,9 @@ module.exports = {
          },
          fontFamily: {
             arabic: '"Uthmani"',
+            arti: '"arti"',
+            latin: '"latin"',
+            montserrat: '"montserrat"',
          },
       },
    },

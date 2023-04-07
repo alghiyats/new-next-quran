@@ -131,8 +131,7 @@ export default function JuzDetail({ juzDetail, errors }: Props) {
                               id={x.number.inQuran}
                               Tafsir={Tafsir}
                               setNewData={setNewData}
-                              setIsModalOpen={setIsModalOpen}
-                           />
+                              setIsModalOpen={setIsModalOpen} audio={''} />
                         ))}
                      </div>
                   </div>

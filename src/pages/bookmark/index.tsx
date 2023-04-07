@@ -95,11 +95,10 @@ export default function Bookmark({ errors }) {
          <div className='grid grid-cols-1 gap-8 md:grid-cols-3 sm:grid-cols-2'>
             {filtered.length > 0 ? (
                filtered.map(surah => (
-                  <div className='pl-4 p-6 flex bg-[#fffdfc] dark:bg-[#2d2d30] shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl justify-between items-center relative'>
+                  <div className='group pl-4 p-6 flex bg-[#fffdfc] dark:bg-[#2d2d30] shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl justify-between items-center relative'>
                      <Link
-                        href={`/surah/${surah.name_transliteration.toLowerCase()}#${
-                           surah.number_ayat
-                        }`}
+                        href={`/surah/${surah.name_transliteration.toLowerCase()}#${surah.number_ayat
+                           }`}
                         className='inset-0 absolute'></Link>
                      <div className='flex items-center'>
                         <div className='flex justify-center items-center w-8 h-8 dark:bg-darkBg bg-lightBg mr-4 rounded-md text-xs'>
