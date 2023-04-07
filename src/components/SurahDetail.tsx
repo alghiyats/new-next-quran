@@ -1,5 +1,4 @@
 import { Chapter } from '../interfaces/Chapter';
-import AudioPlayer from './AudioPlayer';
 import Bookmark from './Bookmark';
 import LastRead from './LastRead';
 type SurahDetailProps = {
@@ -15,7 +14,6 @@ type SurahDetailProps = {
    setCheck: any;
    setNewData: any;
    setIsModalOpen: any;
-   audio: string
 };
 
 const SurahDetail = ({
@@ -30,7 +28,6 @@ const SurahDetail = ({
    setCheck,
    setIsModalOpen,
    setNewData,
-   audio
 }: SurahDetailProps) => {
 
    return (
@@ -69,7 +66,6 @@ const SurahDetail = ({
                   item={item}
                   id={id}
                />
-               {/* <AudioPlayer value={audio} /> */}
             </div>
          </div>
          <div className='m-6'>
