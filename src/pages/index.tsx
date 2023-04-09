@@ -7,9 +7,8 @@ type Ayah = {
       inQuran: number;
       inSurah: number;
    };
-   text: string;
-   transliteration: string;
-   translation: string;
+   text: { arab: string; transliteration: { en: string; id: string }; };
+   translation: { en: string; id: string };
 };
 
 type Surah = {
@@ -94,18 +93,18 @@ const Home: React.FC<{ errors?: string }> = ({ errors }) => {
                {data.name} Ayat {ayahNumber}
             </h1>
             <p
-               className='text-3xl font-arabic my-6 leading-[50px]'
+               className='text-3xl font-arabic my-6 leading-loose'
                dir='rtl'>
-               {data.ayat.map(ar => ar.text)}
+               {data.ayat.map(ar => ar.text.arab)}
                &nbsp;{ayahNumber.toLocaleString('ar-EG')}
             </p>
             <p
-               className='text-sm font-semibold mb-2'
+               className='text-sm mb-3 font-latin'
                dangerouslySetInnerHTML={{
-                  __html: data.ayat.map(tr => tr.transliteration).join(''),
+                  __html: data.ayat.map(tr => tr.text.transliteration.id).join(''),
                }}></p>
 
-            <p className='text-sm'>{data.ayat.map(idn => idn.translation)}</p>
+            <p className='text-sm font-arti font-extralight'>{data.ayat.map(idn => idn.translation.id)}</p>
             <Link href={`/surah/${surahName}#${data.ayat.map(m => m.number.inSurah)}`}>
                <h1 className='hover:text-link dark:hover:text-darkLink font-semibold mt-4 w-max'>
                   Lanjut membaca

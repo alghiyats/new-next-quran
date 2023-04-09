@@ -107,15 +107,12 @@ const StaticPropsDetail = ({ detail, errors }: Props) => {
                   <span className='text-xl font-arabic'>( {detail.name.short} )</span>
                </p>
                <p className='text-center text-base capitalize'>
-                  {detail.numberOfVerses} Ayat - {detail.revelation.id}
+                  {detail?.numberOfVerses} Ayat - {detail?.revelation.id}
                </p>
-               {detail.number > 1 && (
-                  <p
-                     className='text-3xl text-center font-arabic mb-4'
-                     dir='rtl'>
-                     بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ
-                  </p>
-               )}
+               <p
+                  className='text-3xl text-center font-arabic mb-4'
+                  dir='rtl'>{detail.preBismillah.text.arab}
+               </p>
             </div>
             <Search
                search={search}
@@ -128,11 +125,10 @@ const StaticPropsDetail = ({ detail, errors }: Props) => {
                      <SurahDetail
                         key={x.number.inSurah}
                         item={detail}
-                        arab={x.text}
+                        text={x.text}
                         translation={x.translation}
                         ayat={x.number.inSurah}
                         data={x}
-                        latin={x.transliteration}
                         check={check}
                         setCheck={setCheck}
                         id={x.number.inQuran}

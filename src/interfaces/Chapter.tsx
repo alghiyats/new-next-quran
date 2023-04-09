@@ -14,9 +14,10 @@ interface Verse {
       recommended: boolean;
       obligatory: boolean;
    };
-   text: string;
-   translation: string;
-   transliteration: string;
+   text: {
+      arab: string;
+      transliteration: { en: string; id: string };
+   }; translation: { en: string; id: string };
    tafsir: { id: { short: string; long: string } };
    audio: { primary: string }
 }
@@ -32,7 +33,7 @@ export interface Chapter {
       translation: { id: string };
    };
    revelation: { arab: string; id: string };
-   tafsir: { id: string };
+   preBismillah: PreBismillah;
    verses: Verse[];
 }
 export interface Juz {
@@ -53,4 +54,20 @@ export interface Juz {
       };
       verses: Verse[];
    }[];
+}
+interface PreBismillah {
+   text?: {
+      arab: string;
+      transliteration: {
+         en: string;
+         id: string
+      };
+   };
+   translation?: {
+      en: string;
+      id: string;
+   };
+   audio?: {
+      primary: string;
+   };
 }

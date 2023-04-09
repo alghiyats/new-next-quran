@@ -62,7 +62,7 @@ export default function Verse({ detail }) {
                      QS. {check?.name} Ayat {check?.ayat.map(x => x.number.inSurah)}. Akan di ganti
                      dengan
                      <p>
-                        QS. {detail?.surah.name.transliteration.id} Ayat{' '}
+                        QS. {detail?.name.transliteration.id} Ayat{' '}
                         {newData?.ayat?.map(x => x.number.inSurah)}. Apakah Anda yakin?
                      </p>
                   </p>
@@ -72,19 +72,16 @@ export default function Verse({ detail }) {
          <div>
             <div className='py-6 flex flex-col gap-4 shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl bg-secondary dark:bg-darkSecondary mb-12'>
                <p className='text-xl font-bold text-center'>
-                  {detail?.surah.name.transliteration.id}{' '}
-                  <span className='text-xl font-arabic'>( {detail?.surah.name.short} )</span>
+                  {detail?.name.transliteration.id}
+                  <span className='text-xl font-arabic'>( {detail?.name.short} )</span>
                </p>
                <p className='text-center text-base capitalize'>
-                  {detail?.surah.numberOfVerses} Ayat - {detail?.surah.revelation.id}
+                  {detail?.numberOfVerses} Ayat - {detail?.revelation.id}
                </p>
-               {detail?.surah.number > 1 && (
-                  <p
-                     className='text-3xl text-center font-arabic mb-4'
-                     dir='rtl'>
-                     بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ
-                  </p>
-               )}
+               <p
+                  className='text-3xl text-center font-arabic mb-4'
+                  dir='rtl'>{detail.preBismillah.text.arab}
+               </p>
             </div>
             <Search
                search={search}
@@ -97,11 +94,10 @@ export default function Verse({ detail }) {
                      <SurahDetail
                         key={x.number.inSurah}
                         item={detail}
-                        arab={x.text}
+                        text={x.text}
                         translation={x.translation}
                         ayat={x.number.inSurah}
                         data={x}
-                        latin={x.transliteration}
                         setCheck={setCheck}
                         id={x.number.inQuran}
                         Tafsir={Tafsir}

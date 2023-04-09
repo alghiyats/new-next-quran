@@ -22,7 +22,7 @@ module.exports = {
             arabic: '"Uthmani"',
             arti: '"arti"',
             latin: '"latin"',
-            montserrat: '"montserrat"',
+            quicksand: '"Quicksand", sans-serif',
          },
       },
    },

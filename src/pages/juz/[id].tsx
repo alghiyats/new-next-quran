@@ -98,34 +98,30 @@ export default function JuzDetail({ juzDetail, errors }: Props) {
 
          <div>
             <div className='flex flex-col gap-16'>
-               {juzDetail?.data.map(v => (
+               {juzDetail?.dataJuz.map(v => (
                   <div key={v.number}>
                      <div className='py-6 flex flex-col gap-4 shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl bg-secondary dark:bg-darkSecondary mb-16'>
                         <p className='text-xl font-bold text-center'>
                            {v.name.transliteration.id}{' '}
                            <span className='text-xl font-arabic'>( {v.name.short} )</span>
                         </p>
-                        {/* <p className='text-center text-base capitalize'>
+                        <p className='text-center text-base capitalize'>
                   {v.numberOfVerses} Ayat - {v.revelation.id}
-               </p> */}
-                        {v.number > 1 && (
+               </p>
                            <p
                               className='text-3xl text-center font-arabic mb-4'
-                              dir='rtl'>
-                              بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ
+                              dir='rtl'>{v.preBismillah.text.arab}
                            </p>
-                        )}
                      </div>
                      <div className='flex gap-y-6 flex-col'>
                         {v.verses.map(x => (
                            <SurahDetail
                               key={x.number.inSurah}
                               item={v}
-                              arab={x.text}
+                              text={x.text}
                               translation={x.translation}
                               ayat={x.number.inSurah}
                               data={x}
-                              latin={x.transliteration}
                               check={check}
                               setCheck={setCheck}
                               id={x.number.inQuran}

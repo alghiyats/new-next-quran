@@ -3,11 +3,10 @@ import Bookmark from './Bookmark';
 import LastRead from './LastRead';
 type SurahDetailProps = {
    item: Chapter;
-   arab: string;
-   translation: string;
+   translation: { en: string; id: string };
    ayat: number;
    data: any;
-   latin: string;
+   text: { arab: string; transliteration: { en: string; id: string } };
    check: any;
    id: number;
    Tafsir: any;
@@ -18,10 +17,9 @@ type SurahDetailProps = {
 
 const SurahDetail = ({
    item,
-   arab,
+   text,
    translation,
    ayat,
-   latin,
    check,
    id,
    Tafsir,
@@ -70,14 +68,14 @@ const SurahDetail = ({
          </div>
          <div className='m-6'>
             <p
-               className='my-4 font-arabic md:text-3xl text-2xl leading-[4.5rem_!important]'
+               className='my-4 font-arabic text-3xl leading-loose'
                dir='rtl'>
-               {arab}&nbsp;{ayat.toLocaleString('ar-EG')}
+               {text.arab}&nbsp;{ayat.toLocaleString('ar-EG')}
             </p>
             <p
                className='text-sm mb-3 font-latin'
-               dangerouslySetInnerHTML={{ __html: latin }}></p>
-            <p className='text-sm font-arti font-extralight'>{translation}</p>
+               dangerouslySetInnerHTML={{ __html: text.transliteration.id }}></p>
+            <p className='text-sm font-arti font-extralight'>{translation.id}</p>
          </div>
       </div>
    );

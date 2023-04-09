@@ -16,10 +16,13 @@ class SpecialDocument extends Document {
                   href='favicon.ico'
                   type='image/x-icon'
                />
+               <link rel="preconnect" href="https://fonts.googleapis.com" />
+               <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+               <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
             </Head>
             <body
                id='body'
-               className="bg-primary text-black dark:bg-darkPrimary dark:text-white font-montserrat">
+               className="bg-primary text-black dark:bg-darkPrimary dark:text-white font-quicksand">
                <Main />
                <NextScript />
             </body>
