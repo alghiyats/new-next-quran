@@ -1,5 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import React, { useState } from 'react'
+import { Head } from 'next/document';
+import React, { useEffect, useState } from 'react'
 import Modal from '../../../components/Modal';
 import Search from '../../../components/Search';
 import SurahDetail from '../../../components/SurahDetail';
@@ -18,6 +19,11 @@ export default function Verse({ detail }) {
 
    const filtered = detail.verses.filter(s => s.number.inSurah.toString().includes(search));
 
+   useEffect(() => {
+      if (detail) {
+         setTitle(`Surah ${detail.name.transliteration.id} - Next Quran`);
+      }
+   }, [detail]);
 
    const handleConfirm = () => {
       localStorage.setItem('lastRead', JSON.stringify(newData));
@@ -35,7 +41,9 @@ export default function Verse({ detail }) {
    };
    return (
 
-      <>
+      <>      <Head>
+         <title>Next Quran</title>
+      </Head>
          {tafsirOpen && (
             <Modal
                modalTitle={'Tafsir'}
