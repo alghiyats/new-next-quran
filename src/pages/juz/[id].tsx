@@ -69,7 +69,7 @@ export default function JuzDetail({ juzDetail, errors }: Props) {
                actionCancel={() => setTafsirOpen(false)}>
                <div className='relative overflow-y-auto p-4'>
                   <p>
-                     {juzDetail.data
+                     {juzDetail.dataJuz
                         .flatMap(item => item.verses)
                         .filter(verse => verse.number.inQuran === numberTafsir)
                         .map(verse => verse.tafsir.id.long)}
