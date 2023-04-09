@@ -106,12 +106,14 @@ export default function JuzDetail({ juzDetail, errors }: Props) {
                            <span className='text-xl font-arabic'>( {v.name.short} )</span>
                         </p>
                         <p className='text-center text-base capitalize'>
-                  {v.numberOfVerses} Ayat - {v.revelation.id}
-               </p>
+                           {v.numberOfVerses} Ayat - {v.revelation.id}
+                        </p>
+                        {v.preBismillah !== null && (
                            <p
                               className='text-3xl text-center font-arabic mb-4'
                               dir='rtl'>{v.preBismillah.text.arab}
                            </p>
+                        )}
                      </div>
                      <div className='flex gap-y-6 flex-col'>
                         {v.verses.map(x => (

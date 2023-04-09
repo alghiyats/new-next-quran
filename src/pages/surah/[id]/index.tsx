@@ -109,10 +109,12 @@ const StaticPropsDetail = ({ detail, errors }: Props) => {
                <p className='text-center text-base capitalize'>
                   {detail?.numberOfVerses} Ayat - {detail?.revelation.id}
                </p>
-               <p
-                  className='text-3xl text-center font-arabic mb-4'
-                  dir='rtl'>{detail.preBismillah.text.arab}
-               </p>
+               {detail?.preBismillah !== null && (
+                  <p
+                     className='text-3xl text-center font-arabic mb-4'
+                     dir='rtl'>{detail.preBismillah.text.arab}
+                  </p>
+               )}
             </div>
             <Search
                search={search}

@@ -1,5 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { Head } from 'next/document';
+import Head from "next/head";
 import React, { useEffect, useState } from 'react'
 import Modal from '../../../components/Modal';
 import Search from '../../../components/Search';
@@ -21,7 +21,7 @@ export default function Verse({ detail }) {
 
    useEffect(() => {
       if (detail) {
-         setTitle(`Surah ${detail.name.transliteration.id} - Next Quran`);
+         setTitle(`Surah ${detail?.name.transliteration.id} - Next Quran`);
       }
    }, [detail]);
 
@@ -40,10 +40,10 @@ export default function Verse({ detail }) {
       setTafsirOpen(!tafsirOpen);
    };
    return (
-
-      <>      <Head>
-         <title>Next Quran</title>
-      </Head>
+      <>
+         <Head>
+            <title>{title}</title>
+         </Head>
          {tafsirOpen && (
             <Modal
                modalTitle={'Tafsir'}
@@ -86,10 +86,12 @@ export default function Verse({ detail }) {
                <p className='text-center text-base capitalize'>
                   {detail?.numberOfVerses} Ayat - {detail?.revelation.id}
                </p>
-               <p
-                  className='text-3xl text-center font-arabic mb-4'
-                  dir='rtl'>{detail.preBismillah.text.arab}
-               </p>
+               {detail?.preBismillah !== null && (
+                  <p
+                     className='text-3xl text-center font-arabic mb-4'
+                     dir='rtl'>{detail.preBismillah.text.arab}
+                  </p>
+               )}
             </div>
             <Search
                search={search}
