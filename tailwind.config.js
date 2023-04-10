@@ -24,6 +24,9 @@ module.exports = {
             latin: '"latin"',
             quicksand: '"Quicksand", sans-serif',
          },
+         borderRadius: {
+            cardRadius: '10px',
+         },
       },
    },
 

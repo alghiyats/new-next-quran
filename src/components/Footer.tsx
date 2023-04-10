@@ -3,8 +3,8 @@ import React from 'react';
 
 export default function Footer() {
    return (
-      <footer className='pb-5 pt-10 text-[97%] px-6 max-w-screen-xl mx-auto'>
-         <div className='p-5 bg-secondary dark:bg-darkSecondary rounded-xl shadow-[0_5px_35px_rgba(0,0,0,.1)] relative overflow-hidden'>
+      <footer className='pb-5 pt-6 mt-10 text-[97%] px-6 max-w-screen-xl mx-auto border-t-2'>
+         <div className='bg-secondary dark:bg-darkSecondary relative overflow-hidden'>
             <div className='flex flex-wrap relative -left-[15px] -right-[15px]'>
                <div className='mx-[15px]'>
                   <div className='pb-4'>

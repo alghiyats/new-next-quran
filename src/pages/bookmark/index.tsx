@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import Search from '../../components/Search';
+import CardTitle from '../../components/CardTitle';
 
 export default function Bookmark({ errors }) {
    if (errors) {
@@ -56,9 +57,7 @@ export default function Bookmark({ errors }) {
          <Head>
             <title>Bookmark - Next Quran</title>
          </Head>
-         <h1 className='font-bold text-2xl mb-6 text-center p-6 bg-[#fffdfc] dark:bg-[#2d2d30] shadow-[0_5px_35px_rgba(0,0,0,.07)] rounded-xl'>
-            Bookamarks
-         </h1>
+         <CardTitle title={'Bookmark Surah'} />
       </>
    );
 
