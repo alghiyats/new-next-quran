@@ -92,8 +92,8 @@ const Pinned: React.FC<{ errors?: string }> = ({ errors }) => {
                </div>
             </div>
          )}
-         {!data && <div className='py-6'>Ditandai Tidak ditemukan...</div>}
-         {data && (
+         {!loading && !data && <div className='py-6'>Ditandai Tidak ditemukan...</div>}
+         {!loading && data && (
             <>
                <div className='my-6'>
                   <div className='flex justify-between'>
