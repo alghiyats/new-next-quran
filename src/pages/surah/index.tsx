@@ -1,89 +1,46 @@
 import { GetStaticProps } from 'next';
-import List from '../../components/List';
-import { getSurah } from '../../lib/getSurah';
-import Head from 'next/head';
-import { useState } from 'react';
-import ByJuz from '../../components/ByJuz';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { Chapter } from '../../interfaces/Chapter';
-import AcDc from '../../components/AcDc';
-import CardTitle from '../../components/CardTitle';
+import { getSurahList } from '@/lib/getSurahList';
+import { Chapter } from '@/interfaces/Chapter';
+import CardSurah from '@/components/card-surah';
+import clsx from 'clsx';
+import { NextSeo } from 'next-seo';
 
 type Props = {
-   listSurah: Chapter[];
+   dataSurah: Chapter[];
    errors?: string;
    isLoading: boolean;
 };
 
-export default function SurahList({ listSurah, errors, isLoading }: Props) {
-   const [selectedTab, setSelectedTab] = useState(0);
-   const [sortOrder, setSortOrder] = useState('asc');
-
-   const handleSortOrderChange = () => {
-      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
-   };
-   const handleSelect = index => {
-      setSelectedTab(index);
-   };
+export default function SurahList({ dataSurah, errors, isLoading }: Props) {
    return (
       <>
-         <Head>
-            <title>Daftar Surah - Next Quran</title>
-         </Head>
-
-         <CardTitle title={'Daftar Surah'} />
+         <NextSeo title='Daftar Surah - Next Quran' />
 
          {errors && (
             <>
-               <Head>
-                  <title>Error - Next Quran</title>
-               </Head>
+               <NextSeo title='Error - Next Quran' />
                <p>
                   <span style={{ color: 'red' }}>Error:</span> {errors}
                </p>
             </>
          )}
 
-         {isLoading && <div>Loading...</div>}
+         {isLoading && <p>Loading...</p>}
 
-         {!isLoading && !listSurah && <div>No data available</div>}
-
-         {!isLoading && listSurah && (
-            <Tabs onSelect={handleSelect}>
-               <div className='flex justify-between gap-y-4 my-4'>
-                  <TabList className='flex gap-x-2 bg-secondary dark:bg-darkSecondary p-2 rounded-xl shadow-[0_5px_35px_rgba(0,0,0,.07)] text-center'>
-                     <Tab
-                        className={`${
-                           selectedTab === 0 ? 'bg-lightBg dark:bg-darkBg ' : ''
-                        }p-2 rounded-md font-semibold cursor-pointer w-16`}>
-                        Surah
-                     </Tab>
-                     <Tab
-                        className={`${
-                           selectedTab === 1 ? 'bg-lightBg dark:bg-darkBg ' : ''
-                        }p-2 rounded-md font-semibold cursor-pointer w-16`}>
-                        Juz
-                     </Tab>
-                  </TabList>
-                  <AcDc
-                     handleSortOrderChange={handleSortOrderChange}
-                     sortOrder={sortOrder}
-                  />
+         {!errors && !isLoading && dataSurah && (
+            <main className='lg:flex-[1_0_calc(100%_-_250px_-_25px)] lg:w-[calc(100%_-_250px_-_25px)]'>
+               <div className={clsx('grid sm:grid-cols-1 grid-cols-2 gap-6 w-full')}>
+                  {dataSurah?.map((c: Chapter) => (
+                     <CardSurah
+                        key={c.number}
+                        number={c.number}
+                        name={c.name}
+                        numberOfVerses={c.numberOfVerses}
+                        revelation={c.revelation}
+                     />
+                  ))}
                </div>
-
-               <TabPanel>
-                  <List
-                     surahList={listSurah}
-                     sortOrder={sortOrder}
-                  />
-               </TabPanel>
-               <TabPanel>
-                  <ByJuz
-                     surahList={listSurah}
-                     sortOrder={sortOrder}
-                  />
-               </TabPanel>
-            </Tabs>
+            </main>
          )}
       </>
    );
@@ -91,8 +48,8 @@ export default function SurahList({ listSurah, errors, isLoading }: Props) {
 
 export const getStaticProps: GetStaticProps = async () => {
    try {
-      const listSurah: Chapter[] = await getSurah();
-      return { props: { listSurah, isLoading: false } };
+      const dataSurah = await getSurahList();
+      return { props: { dataSurah, isLoading: false } };
    } catch (err: any) {
       return { props: { errors: err.message, isLoading: false } };
    }

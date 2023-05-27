@@ -1,10 +1,10 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import Head from "next/head";
-import React, { useEffect, useState } from 'react'
+import Head from 'next/head';
+import React, { useEffect, useState } from 'react';
 import Modal from '../../../components/Modal';
 import Search from '../../../components/Search';
 import SurahDetail from '../../../components/SurahDetail';
-import { getSurah } from '../../../lib/getSurah';
+import { getSurah } from '../../../lib/getSurahList';
 import { getVersesRange } from '../../../lib/getVersesRange';
 import { juzData } from '../../../lib/juz';
 
@@ -89,7 +89,8 @@ export default function Verse({ detail }) {
                {detail?.preBismillah !== null && (
                   <p
                      className='text-3xl text-center font-arabic mb-4'
-                     dir='rtl'>{detail.preBismillah.text.arab}
+                     dir='rtl'>
+                     {detail.preBismillah.text.arab}
                   </p>
                )}
             </div>
@@ -112,19 +113,22 @@ export default function Verse({ detail }) {
                         id={x.number.inQuran}
                         Tafsir={Tafsir}
                         setNewData={setNewData}
-                        setIsModalOpen={setIsModalOpen} check={check} />
+                        setIsModalOpen={setIsModalOpen}
+                        check={check}
+                     />
                   ))
                ) : (
                   <p className='ml-2'>Ayat tidak dutemukan...</p>
                )}
             </div>
-         </div></>
-   )
+         </div>
+      </>
+   );
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
    const paths = juzData.flatMap(({ surah }) =>
-      surah.map((s) => ({
+      surah.map(s => ({
          params: {
             id: s.name.toLowerCase().toString(),
             verses: `${s.verses.start}-${s.verses.end}`,
@@ -135,12 +139,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
    return { paths, fallback: false };
 };
 
-
 export const getStaticProps: GetStaticProps = async ({ params }) => {
    try {
       const data = await getSurah();
       const matchingData = data.find(
-         (item) => item.name.transliteration.id.toLowerCase() === params?.id
+         item => item.name.transliteration.id.toLowerCase() === params?.id
       );
       const id = matchingData ? matchingData.number : null;
 
@@ -154,4 +157,3 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       return { props: { errors: err.message } };
    }
 };
-
