@@ -16,7 +16,7 @@ export default function Bookmarks({ openBookmarks, setOpenBookmarks }: any) {
                'bg-darkBs',
                'xs:max-h-[calc(100%_-_60px)] xs:fixed xs:w-full xs:rounded-[12px_12px_0_0] xs:top-auto xs:-bottom-full xs:inset-x-0',
                openBookmarks
-                  ? 'opacity-100 visible xs:bottom-0 xs:top-auto'
+                  ? 'opacity-100 visible xs:bottom-12 xs:top-auto'
                   : 'opacity-0 top-0 invisible'
             )}>
             <div
