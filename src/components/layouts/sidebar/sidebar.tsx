@@ -66,7 +66,7 @@ export default function Sidebar() {
                                           {list.icon}
                                           <span
                                              className={clsx(
-                                                'block whitespace-nowrap overflow-hidden text-ellipsis flex-[1_0_calc(100%_-_64px)]',
+                                                'block font-medium whitespace-nowrap overflow-hidden text-ellipsis flex-[1_0_calc(100%_-_64px)]',
                                                 !isOpen &&
                                                    'lg:absolute lg:max-w-[160px] lg:bg-contentB lg:text-bodyC lg:opacity-0 lg:invisible lg:shadow-[0_5px_20px_0_rgba(0,0,0,0.1)] lg:z-[1] lg:mx-[5px] lg:my-0 lg:px-2.5 lg:py-2 lg:rounded-[5px_16px_16px_16px] lg:left-[35px] lg:top-[3px] lg:dark:bg-darkBa lg:dark:shadow-[0_10px_40px_rgba(0,0,0,0.2)] lg:dark:text-darkTa lg:group-hover:opacity-100 lg:group-hover:visible'
                                              )}>

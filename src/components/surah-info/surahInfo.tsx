@@ -9,8 +9,8 @@ export default function SurahInfo({ name, revelation, numberOfVerses, preBismill
             <p className='font-bold text-xl'>
                {name?.transliteration.id} ( {name?.translation.id} )
             </p>
-            <p>
-               {numberOfVerses} Ayah | {revelation?.id}
+            <p className='font-medium'>
+               {numberOfVerses} Ayah - {revelation?.id}
             </p>
             {preBismillah !== null && (
                <p

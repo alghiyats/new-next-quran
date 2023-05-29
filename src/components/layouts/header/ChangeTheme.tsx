@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Head from 'next/head';
 import clsx from 'clsx';
 import { useTheme } from 'next-themes';
 
@@ -24,21 +23,21 @@ export default function ChangeTheme({ openTheme }: any) {
          )}>
          <span
             className={clsx(
-               'block before:text-inherit cursor-pointer p-[8px_10px] m-[5px] rounded-lg hover:bg-[rgba(0,0,0,0.05)] before:content-[attr(aria-label)] before:opacity-90',
+               'block before:text-inherit cursor-pointer p-[8px_10px] m-[5px] rounded-lg hover:bg-[rgba(0,0,0,0.05)] before:content-[attr(aria-label)] before:opacity-90 before:font-medium',
                theme === 'light' && 'bg-[rgba(0,0,0,0.1)]'
             )}
             aria-label='Light'
             onClick={() => setTheme('light')}></span>
          <span
             className={clsx(
-               'block before:text-inherit cursor-pointer p-[8px_10px] m-[5px] rounded-lg hover:bg-[rgba(0,0,0,0.05)] before:content-[attr(aria-label)] before:opacity-90',
+               'block before:text-inherit cursor-pointer p-[8px_10px] m-[5px] rounded-lg hover:bg-[rgba(0,0,0,0.05)] before:content-[attr(aria-label)] before:opacity-90 before:font-medium',
                theme === 'dark' && 'bg-[rgba(0,0,0,0.1)]'
             )}
             aria-label='Dark'
             onClick={() => setTheme('dark')}></span>
          <span
             className={clsx(
-               'block before:text-inherit cursor-pointer p-[8px_10px] m-[5px] rounded-lg hover:bg-[rgba(0,0,0,0.05)] before:content-[attr(aria-label)] before:opacity-90',
+               'block before:text-inherit cursor-pointer p-[8px_10px] m-[5px] rounded-lg hover:bg-[rgba(0,0,0,0.05)] before:content-[attr(aria-label)] before:opacity-90 before:font-medium',
                theme === 'system' && 'bg-[rgba(0,0,0,0.1)]'
             )}
             aria-label='System'

@@ -21,7 +21,7 @@ export default function Bookmarks({ openBookmarks, setOpenBookmarks }: any) {
             )}>
             <div
                className={clsx(
-                  'overflow-y-scroll overflow-x-hidden w-full bg-contentB pt-[60px] pb-5 px-5',
+                  'overflow-y-scroll overflow-x-hidden w-full bg-contentB pt-[60px] pb-5 px-5 scrollbar-thumb-transB dark:scrollbar-thumb-darkBa scrollbar-thin scrollbar-thumb-rounded-xl scrollbar-track-transparent',
                   'dark:bg-darkBs'
                )}>
                <div
@@ -47,12 +47,14 @@ export default function Bookmarks({ openBookmarks, setOpenBookmarks }: any) {
                         <div
                            key={i}
                            className='flex items-center relative w-full'>
-                           <div className='basis-14 h-14 flex justify-center items-center rounded-lg relative overflow-hidden bg-transB text-xl '>
+                           <div className='w-10 h-10 flex justify-center items-center rounded-xl relative overflow-hidden bg-transB text-xl font-semibold'>
                               {bm?.numberSurah}
                            </div>
                            <div className='px-3 relative w-[calc(100%_-_56px)] flex flex-col'>
-                              <p className='font-bold text-lg'>{bm?.name?.transliteration.id}</p>
-                              <p>Ayah {bm?.numberInSurah}</p>
+                              <p className='font-semibold text-md'>
+                                 {bm?.name?.transliteration.id}
+                              </p>
+                              <p className='font-medium text-xs'>Ayah {bm?.numberInSurah}</p>
                            </div>
                            <IconSVG
                               onClick={() => handleRemoveBookmark(bm?.numberInQuran)}
