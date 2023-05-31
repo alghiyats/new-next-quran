@@ -18,3 +18,7 @@
 #nprogress .bar {
    @apply bg-linkC dark:bg-darkU;
 }
+
+.active {
+   @apply bg-transB dark:bg-darkB;
+}

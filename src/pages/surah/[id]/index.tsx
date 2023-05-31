@@ -13,10 +13,6 @@ type Props = {
 };
 
 const SurahDetail = ({ dataAyah, dataSurah }: Props) => {
-   const router = useRouter();
-   if (router.isFallback) {
-      return <div>Loading...</div>;
-   }
    return (
       <>
          <NextSeo

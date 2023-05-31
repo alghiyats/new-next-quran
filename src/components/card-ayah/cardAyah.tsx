@@ -11,7 +11,7 @@ export default function CardAyah({ data, number, text, translation }: any) {
             'dark:bg-darkBs'
          )}>
          <div className='flex flex-col'>
-            <div className='px-5 py-2 bg-[#f6f6f6] dark:bg-darkBa rounded-t-lg flex justify-between'>
+            <div className='px-5 py-2 border-b dark:lg:border-b-[rgba(255,255,255,0.15)] dark:lg:border-solid rounded-t-lg flex justify-between'>
                <span>
                   <svg
                      className='w-4 h-4 -rotate-90'

@@ -1,13 +1,77 @@
 import { useOpen } from '@/contexts/GlobalContext';
 import clsx from 'clsx';
 import Link from 'next/link';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Close from '../close';
 
 export default function Aside({ dataAyah, dataSurah }: any) {
    const { open, setOpen } = useOpen();
    const [filteredSurah, setFilteredSurah] = useState<any[]>([]);
    const [filteredVerses, setFilteredVerses] = useState<any[]>([]);
+   const ulRef = useRef<HTMLUListElement>(null);
+
+   useEffect(() => {
+      const surahList = document.getElementById('surahList');
+      const activeLi = surahList.querySelector('.active');
+
+      if (activeLi) {
+         const surahListRect = surahList.getBoundingClientRect();
+         const activeLiRect = activeLi.getBoundingClientRect();
+         const scrollY = activeLiRect.bottom - surahListRect.bottom;
+
+         surahList.scrollTo({ top: scrollY, behavior: 'smooth' });
+      }
+   }, []);
+
+   useEffect(() => {
+      const handleScroll = () => {
+         const divAyah = document.querySelectorAll('div[data-ayah]');
+
+         divAyah.forEach(div => {
+            const divRect = div.getBoundingClientRect();
+            const divNumber = div.getAttribute('data-ayah');
+            const listAyah = document.querySelector(`li[data-verse="${divNumber}"]`);
+
+            if (divRect.top <= 90 && divRect.bottom + 29 >= 90) {
+               if (listAyah) {
+                  listAyah.classList.add('active');
+               }
+            } else {
+               if (listAyah) {
+                  listAyah.classList.remove('active');
+               }
+            }
+         });
+
+         const ulElement = ulRef.current;
+         const activeItem = ulElement.querySelector('.active');
+
+         if (activeItem) {
+            const ulRect = ulElement.getBoundingClientRect();
+            const activeItemRect = activeItem.getBoundingClientRect();
+
+            if (activeItemRect.top < ulRect.top) {
+               ulElement.scrollTop += activeItemRect.top - ulRect.top;
+            }
+
+            if (activeItemRect.bottom > ulRect.bottom) {
+               ulElement.scrollTop += activeItemRect.bottom - ulRect.bottom;
+            }
+         }
+      };
+
+      window.addEventListener('scroll', handleScroll);
+      return () => {
+         window.removeEventListener('scroll', handleScroll);
+      };
+   }, []);
+
+   const handleClick = useCallback((verse: string) => {
+      const cardAyah = document.querySelector(`div[data-ayah="${verse}"]`);
+      if (cardAyah) {
+         cardAyah.scrollIntoView({ behavior: 'smooth' });
+      }
+   }, []);
 
    const handleSurahFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
       const value = event.target.value.toLowerCase();
@@ -25,50 +89,14 @@ export default function Aside({ dataAyah, dataSurah }: any) {
       setFilteredVerses(filteredVerses);
    };
 
-   const handleClick = useCallback((verse: string) => {
-      const cardAyah = document.querySelector(`div[data-ayah="${verse}"]`);
-      if (cardAyah) {
-         cardAyah.scrollIntoView({ behavior: 'smooth' });
-      }
-   }, []);
-
-   useEffect(() => {
-      const handleScroll = () => {
-         const divAyah = document.querySelectorAll('div[data-ayah]');
-
-         divAyah.forEach(div => {
-            const divRect = div.getBoundingClientRect();
-            const divNumber = div.getAttribute('data-ayah');
-            const listAyah = document.querySelector(`li[data-verse="${divNumber}"]`);
-
-            if (divRect.top <= 90 && divRect.bottom + 29 >= 90) {
-               if (listAyah) {
-                  listAyah.classList.add('bg-transB');
-                  listAyah.classList.add('dark:bg-darkB');
-               }
-            } else {
-               if (listAyah) {
-                  listAyah.classList.remove('bg-transB');
-                  listAyah.classList.remove('dark:bg-darkB');
-               }
-            }
-         });
-      };
-
-      window.addEventListener('scroll', handleScroll);
-      return () => {
-         window.removeEventListener('scroll', handleScroll);
-      };
-   }, []);
-
    return (
       <>
          <aside
             className={clsx(
                'lg:max-w-[500px] lg:mx-auto mt-[50px] mb-0 lg:flex lg:flex-[0_0_calc(230px_+_25px)] lg:w-[calc(230px + 25px)] lg:m-0 lg:before:basis-[25px] lg:h-[calc(100vh_-_131px)] lg:sticky lg:top-[90px] lg:dark:top-[91px] sm:fixed sm:inset-x-0 sm:transition-all sm:duration-200 sm:ease-ease z-[4] sm:z-[15]',
-               open ? 'sm:bottom-11' : 'sm:bottom-[-400px]'
+               open ? 'sm:bottom-12' : 'sm:bottom-[-400px]'
             )}>
-            <div className='px-4 pb-[40px] pt-4 bg-contentB shadow-[0_5px_35px_rgba(0,0,0,.1)] rounded-lg sm:rounded-b-none dark:bg-darkBs sm:h-[400px] flex flex-col items-center gap-5'>
+            <div className='lg:px-4 lg:pb-[40px] sm:p-6 lg:pt-6 bg-contentB shadow-[0_5px_35px_rgba(0,0,0,.1)] rounded-lg sm:rounded-b-none dark:bg-darkBs sm:h-[400px] flex flex-col items-center gap-5'>
                <div className='lg:hidden w-16 py-1 dark:bg-darkB rounded-xl bg-transB'></div>
                <div className='flex justify-between w-full h-full'>
                   <div className='w-[68%]'>
@@ -80,11 +108,13 @@ export default function Aside({ dataAyah, dataSurah }: any) {
                            onChange={handleSurahFilter}
                         />
                      </form>
-                     <ul className='flex flex-col overflow-y-scroll overflow-x-hidden h-[calc(100%_-_40px)] gap-1 pt-2 scrollbar-thumb-transB dark:scrollbar-thumb-darkBa scrollbar-thin scrollbar-thumb-rounded-xl scrollbar-track-transparent'>
+                     <ul
+                        id='surahList'
+                        className='flex flex-col overflow-y-scroll overflow-x-hidden  h-[calc(100%_-_40px)] sm:h-[calc(100%_-_60px)] gap-1 pt-2 scrollbar-thumb-transB dark:scrollbar-thumb-darkBa scrollbar-thin scrollbar-thumb-rounded-xl scrollbar-track-transparent'>
                         {(filteredSurah.length > 0 ? filteredSurah : dataSurah)?.map((v: any) => (
                            <React.Fragment key={v.number}>
                               {dataAyah?.name?.transliteration.id === v.name?.transliteration.id ? (
-                                 <li className='text-sm font-medium bg-transB dark:bg-darkB py-2 px-3 rounded-xl w-full'>
+                                 <li className='text-sm font-medium active py-2 px-3 rounded-xl w-full'>
                                     {v.name.transliteration.id}
                                  </li>
                               ) : (
@@ -107,7 +137,9 @@ export default function Aside({ dataAyah, dataSurah }: any) {
                            onChange={handleVerseFilter}
                         />
                      </form>
-                     <ul className='flex flex-col overflow-y-scroll overflow-x-hidden h-[calc(100%_-_40px)] gap-1 pt-2 scrollbar-thumb-transB dark:scrollbar-thumb-darkBa scrollbar-thin scrollbar-thumb-rounded-xl scrollbar-track-transparent'>
+                     <ul
+                        ref={ulRef}
+                        className='flex flex-col overflow-y-scroll overflow-x-hidden h-[calc(100%_-_40px)] sm:h-[calc(100%_-_60px)] gap-1 pt-2 scrollbar-thumb-transB dark:scrollbar-thumb-darkBa scrollbar-thin scrollbar-thumb-rounded-xl scrollbar-track-transparent'>
                         {(filteredVerses.length > 0 ? filteredVerses : dataAyah?.verses)?.map(
                            (v: any) => (
                               <li
