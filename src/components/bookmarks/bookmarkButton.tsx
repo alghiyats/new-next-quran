@@ -1,8 +1,7 @@
 import { useBookmarkContext } from '@/contexts/GlobalContext';
 
-export default function BookmarkButton({ item, id }: any) {
+export default function BookmarkButton({ item, id }) {
    const { handleBookmarkClick, bookmarkSaved } = useBookmarkContext();
-
    return (
       <span
          onClick={() => handleBookmarkClick(item, id)}

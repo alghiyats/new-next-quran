@@ -3,9 +3,6 @@ import React, { createContext, useCallback, useContext, useEffect, useState } fr
 const GlobalContext = createContext<any>({});
 
 export const GlobalContextProvider = ({ children }: { children: React.ReactNode }) => {
-   const [openNav, setOpenNav] = useState(true);
-   const [open, setOpen] = useState(false);
-
    const handleAddBookmark = useCallback((data: any, id: number) => {
       if (typeof window !== 'undefined') {
          const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
@@ -79,13 +76,9 @@ export const GlobalContextProvider = ({ children }: { children: React.ReactNode 
    return (
       <GlobalContext.Provider
          value={{
-            openNav,
-            setOpenNav,
             handleBookmarkClick,
             bookmarkSaved,
             handleRemoveBookmark,
-            open,
-            setOpen,
          }}>
          {children}
       </GlobalContext.Provider>
@@ -93,4 +86,3 @@ export const GlobalContextProvider = ({ children }: { children: React.ReactNode 
 };
 
 export const useBookmarkContext = () => useContext(GlobalContext);
-export const useOpen = () => useContext(GlobalContext);

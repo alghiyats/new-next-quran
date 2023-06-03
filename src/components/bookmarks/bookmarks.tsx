@@ -2,7 +2,8 @@ import clsx from 'clsx';
 import React from 'react';
 import { useBookmarkContext } from '@/contexts/GlobalContext';
 import ForClose from '../ForClose/ForClose';
-import DeleteIcon from './icons/DeleteIcon';
+import DeleteIcon from '@/icons/DeleteIcon';
+import Link from 'next/link';
 
 export default function Bookmarks({ openBookmarks, setOpenBookmarks }: any) {
    const { handleRemoveBookmark, bookmarkSaved } = useBookmarkContext();
@@ -19,13 +20,13 @@ export default function Bookmarks({ openBookmarks, setOpenBookmarks }: any) {
             )}>
             <div
                className={clsx(
-                  'overflow-y-scroll overflow-x-hidden w-full bg-contentB pt-[60px] pb-5 px-5 scrollbar-thumb-transB dark:scrollbar-thumb-darkBa scrollbar-thin scrollbar-thumb-rounded-xl scrollbar-track-transparent',
+                  'overflow-y-scroll overflow-x-hidden w-full bg-contentB pt-14 pb-5 pl-5 pr-3 scrollbar-thumb-transB dark:scrollbar-thumb-darkBa scrollbar-thin scrollbar-thumb-rounded-xl scrollbar-track-transparent',
                   'dark:bg-darkBs'
                )}>
                <div
                   className={clsx(
                      'flex bg-inherit absolute z-[2] px-2.5 py-0 top-0 inset-x-0',
-                     'before:content-[attr(data-text)] before:grow before:text-[90%] before:opacity-70 before:z-[2] before:px-2.5 before:py-4'
+                     'before:content-[attr(data-text)] before:text-sm before:grow before:text-[90%] before:opacity-70 before:z-[2] before:px-2.5 before:py-4'
                   )}
                   data-text='Bookmark Posts'>
                   <span
@@ -39,22 +40,25 @@ export default function Bookmarks({ openBookmarks, setOpenBookmarks }: any) {
                      )}
                   />
                </div>
-               <div className='flex flex-col gap-4'>
+               <div className='flex flex-col gap-2'>
                   {bookmarkSaved?.length > 0 ? (
                      bookmarkSaved?.map((bm: any, i: number) => (
-                        <div
-                           key={i}
-                           className='flex items-center relative w-full'>
-                           <div className='w-10 h-10 flex justify-center items-center rounded-xl relative overflow-hidden bg-transB text-xl font-semibold'>
-                              {bm?.numberSurah}
-                           </div>
-                           <div className='px-3 relative w-[calc(100%_-_56px)] flex flex-col'>
-                              <p className='font-semibold text-md'>
-                                 {bm?.name?.transliteration.id}
-                              </p>
-                              <p className='font-medium text-xs'>Ayah {bm?.numberInSurah}</p>
-                           </div>
-                           <span onClick={() => handleRemoveBookmark(bm?.numberInQuran)}>
+                        <div className='flex items-center justify-between relative w-full border dark:lg:border-[rgba(255,255,255,0.15)] dark:lg:border-solid p-2 rounded-md'>
+                           <Link
+                              key={i}
+                              href={`/surah/${bm?.name?.transliteration.id.toLowerCase()}?verse=${
+                                 bm?.numberInSurah
+                              }`}>
+                              <a className='relative flex flex-col w-[inherit]'>
+                                 <p className='font-semibold text-md'>
+                                    {bm?.name?.transliteration.id}
+                                 </p>
+                                 <p className='font-medium text-xs'>Ayah {bm?.numberInSurah}</p>
+                              </a>
+                           </Link>
+                           <span
+                              onClick={() => handleRemoveBookmark(bm?.numberInQuran)}
+                              className='hover:scale-125 ease-ease duration-100 transition-all w-8 h-8 flex justify-center items-center'>
                               <DeleteIcon />
                            </span>
                         </div>

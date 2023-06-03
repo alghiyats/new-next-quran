@@ -20,5 +20,8 @@
 }
 
 .active {
-   @apply bg-transB dark:bg-darkB;
+   @apply bg-transB dark:bg-darkBs;
+}
+.bhf {
+   scroll-behavior: auto;
 }

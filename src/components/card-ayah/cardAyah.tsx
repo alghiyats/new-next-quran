@@ -1,7 +1,21 @@
 import clsx from 'clsx';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import BookmarkButton from '../Bookmarks/BookmarkButton';
+import { useRouter } from 'next/router';
 
 export default function CardAyah({ data, number, text, translation }: any) {
+   const router = useRouter();
+
+   useEffect(() => {
+      const { verse } = router.query;
+      if (verse) {
+         const element = document.querySelector(`div[data-ayah="${verse}"]`);
+         if (element) {
+            element.scrollIntoView();
+         }
+      }
+   }, [router.query.verse]);
+
    return (
       <div
          data-ayah={number.inSurah}
@@ -25,10 +39,10 @@ export default function CardAyah({ data, number, text, translation }: any) {
                      <path d='M243.771,209.108c-17.804,0-32.294,14.483-32.294,32.294c0,17.804,14.49,32.293,32.294,32.293 c17.811,0,32.294-14.482,32.294-32.293S261.575,209.108,243.771,209.108z' />
                   </svg>
                </span>
-               {/* <BookmarkButton
+               <BookmarkButton
                   item={data}
                   id={number.inQuran}
-               /> */}
+               />
             </div>
             <div className='p-5 flex flex-col gap-2'>
                <p

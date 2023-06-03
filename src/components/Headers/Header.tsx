@@ -12,6 +12,7 @@ import ForClose from '../ForClose/ForClose';
 import SunIcon from '../../icons/SunIcon';
 import MoonIcon from '../../icons/MoonIcon';
 import ArrowLeft from '../../icons/ArrowLeft';
+import Bookmarks from '../Bookmarks/Bookmarks';
 
 export default function Header() {
    const { onToggle, isOpen } = useSidebar();
@@ -47,7 +48,7 @@ export default function Header() {
                )}>
                <div
                   className={
-                     'h-full flex items-center justify-between relative w-[calc(100%_+_15px)] left-[-7.5px] right-[-7.5px]'
+                     'h-full flex items-center justify-between sm:justify-end relative w-[calc(100%_+_15px)] left-[-7.5px] right-[-7.5px]'
                   }>
                   <HeaderSearch placeholder="Try 'Adventure'" />
                   <div className={'flex justify-end relative mx-[7.5px]'}>
@@ -78,10 +79,10 @@ export default function Header() {
                            </li>
                         </ul>
                      </div>
-                     {/* <Bookmarks
+                     <Bookmarks
                         openBookmarks={openBookmarks}
                         setOpenBookmarks={setOpenBookmarks}
-                     /> */}
+                     />
                   </div>
                </div>
             </div>
