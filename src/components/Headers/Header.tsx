@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import ChangeTheme from './ChangeTheme';
-import Bookmarks from '../Bookmarks/Bookmarks';
 import { useSidebar } from '@/contexts/SidebarContext';
 import { useTheme } from 'next-themes';
 import HeaderIcon from './HeaderIcon';
@@ -14,12 +13,12 @@ import ForClose from '../ForClose/ForClose';
 import SunIcon from '../../icons/SunIcon';
 import MoonIcon from '../../icons/MoonIcon';
 import ArrowLeft from '../../icons/ArrowLeft';
+import Bookmarks from '../Bookmarks/Bookmarks';
 
 export default function Header() {
    const { onToggle, isOpen } = useSidebar();
    const [openTheme, setOpenTheme] = useState(false);
    const [openBookmarks, setOpenBookmarks] = useState(false);
-   const { theme } = useTheme();
 
    return (
       <header
