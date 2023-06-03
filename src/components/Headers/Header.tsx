@@ -12,7 +12,6 @@ import ForClose from '../ForClose/ForClose';
 import SunIcon from '../../icons/SunIcon';
 import MoonIcon from '../../icons/MoonIcon';
 import ArrowLeft from '../../icons/ArrowLeft';
-import Bookmarks from '@/components/Bookmarks/Bookmarks';
 
 export default function Header() {
    const { onToggle, isOpen } = useSidebar();
@@ -79,10 +78,6 @@ export default function Header() {
                            </li>
                         </ul>
                      </div>
-                     <Bookmarks
-                        openBookmarks={openBookmarks}
-                        setOpenBookmarks={setOpenBookmarks}
-                     />
                   </div>
                </div>
             </div>
