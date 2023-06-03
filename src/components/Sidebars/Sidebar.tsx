@@ -1,12 +1,12 @@
 import clsx from 'clsx';
 import React from 'react';
-import Close from '@/components/close';
-import { ListMenu } from './listMenu';
 import { useSidebar } from '@/contexts/SidebarContext';
 import Link from 'next/link';
+import ForClose from '../ForClose/ForClose';
+import { MenuList } from './MenuList';
 
 export default function Sidebar() {
-   const { isOpen, toggleSidebar } = useSidebar();
+   const { isOpen, onToggle, onClose } = useSidebar();
    return (
       <>
          <div
@@ -32,7 +32,7 @@ export default function Sidebar() {
                         'lg:hidden'
                      )}>
                      <span
-                        onClick={toggleSidebar}
+                        onClick={onToggle}
                         aria-label='Close'
                         className={clsx(
                            'sm:py-[15px] sm:px-[10px]',
@@ -51,11 +51,12 @@ export default function Sidebar() {
                      )}>
                      <div>
                         <ul className='list-none m-0 p-0 [&>li]:relative'>
-                           {ListMenu?.map((list, i) => {
+                           {MenuList?.map((list, i) => {
                               return (
                                  <li key={i}>
                                     <Link href={list.path}>
                                        <a
+                                          onClick={onClose}
                                           className={clsx(
                                              'hover:opacity-90 hover:bg-transB hover:text-linkC flex items-center relative w-[calc(100%_+_10px)] left-[-5px] right-[-5px] transition-all duration-1 ease-ease px-[5px] py-2.5 rounded-lg',
                                              'dark:text-darkT dark:hover:bg-[rgba(0,0,0,.15)] dark:hover:text-darkU',
@@ -82,8 +83,8 @@ export default function Sidebar() {
                   </div>
                </div>
             </div>
-            <Close
-               onClick={toggleSidebar}
+            <ForClose
+               onClick={onClose}
                customStyles={clsx(
                   !isOpen ? 'sm:opacity-0 sm:invisible' : 'sm:opacity-100 sm:visible',
                   'lg:hidden sm:bg-[rgba(0,0,0,0.2)] sm:backdrop-saturate-[180%] sm:backdrop-blur-[10px]'

@@ -1,8 +1,8 @@
-import Footer from '@/components/layouts/footer';
-import Header from '@/components/layouts/header';
-import MobileMenu from '@/components/layouts/mobile-menu/MobileMenu';
-import Sidebar from '@/components/layouts/sidebar';
-import { SidebarProvider } from '@/contexts/SidebarContext';
+import Footer from '@/components/Footers/Footer';
+import Header from '@/components/Headers/Header';
+import MobileMenu from '@/components/MobileMenu/MobileMenu';
+import Sidebar from '@/components/Sidebars/Sidebar';
+import { SidebarContextProvider } from '@/contexts/SidebarContext';
 import clsx from 'clsx';
 import React, { ReactNode } from 'react';
 
@@ -10,10 +10,10 @@ type Props = {
    children: ReactNode;
 };
 
-const Layout: React.FC<Props> = ({ children }) => {
+const MainLayout: React.FC<Props> = ({ children }) => {
    return (
-      <div>
-         <SidebarProvider>
+      <>
+         <SidebarContextProvider>
             <Header />
             <div className='lg:flex'>
                <Sidebar />
@@ -30,9 +30,9 @@ const Layout: React.FC<Props> = ({ children }) => {
                   </div>
                </div>
             </div>
-         </SidebarProvider>
-      </div>
+         </SidebarContextProvider>
+      </>
    );
 };
 
-export default Layout;
+export default MainLayout;

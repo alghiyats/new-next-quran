@@ -23,7 +23,7 @@ class SpecialDocument extends Document {
                   href='https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap'
                   rel='stylesheet'></link>
             </Head>
-            <body className='antialiased relative bg-bodyB text-bodyC dark:bg-darkB dark:text-darkT scrollbar-thin scrollbar-thumb-transB dark:scrollbar-thumb-darkBa scrollbar-thumb-rounded-xl scrollbar-track-contentB dark:scrollbar-track-darkB font-fontB'>
+            <body className='antialiased relative bg-bodyB text-bodyC dark:bg-darkB dark:text-darkT scrollbar-thin scrollbar-thumb-transB dark:scrollbar-thumb-darkBa scrollbar-thumb-rounded-xl scrollbar-track-contentB dark:scrollbar-track-darkB font-fontB font-medium'>
                <Main />
                <NextScript />
             </body>

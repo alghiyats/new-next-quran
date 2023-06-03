@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import React from 'react';
-import BookmarkButton from '../bookmarks/bookmarkButton';
+import BookmarkButton from '../Bookmarks/bookmarkButton';
 
 export default function CardAyah({ data, number, text, translation }: any) {
    return (

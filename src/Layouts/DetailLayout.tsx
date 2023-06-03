@@ -1,8 +1,8 @@
-import Aside from '@/components/aside';
+import JumpSidebar from '@/components/JumpSidebar/JumpSidebar';
 import SurahInfo from '@/components/surah-info';
 import React from 'react';
 
-export default function Layout({
+export default function DetailLayout({
    children,
    dataAyah,
    dataSurah,
@@ -22,7 +22,7 @@ export default function Layout({
             />
             {children}
          </main>
-         <Aside
+         <JumpSidebar
             dataAyah={dataAyah}
             dataSurah={dataSurah}
          />

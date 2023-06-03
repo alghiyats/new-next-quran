@@ -1,24 +1,33 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useCallback } from 'react';
 
 type SidebarContextType = {
    isOpen: boolean;
-   toggleSidebar: () => void;
+   onOpen: () => void;
+   onClose: () => void;
+   onToggle: () => void;
 };
 
 const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
-type SidebarProviderProps = {
+type SidebarContextProviderProps = {
    children: React.ReactNode;
 };
 
-export const SidebarProvider: React.FC<SidebarProviderProps> = ({ children }) => {
+export const SidebarContextProvider: React.FC<SidebarContextProviderProps> = ({ children }) => {
    const [isOpen, setIsOpen] = useState(false);
 
-   const toggleSidebar = () => {
-      setIsOpen(!isOpen);
+   const onOpen = useCallback(() => {
+      setIsOpen(true);
+   }, []);
+   const onClose = useCallback(() => {
+      setIsOpen(false);
+   }, []);
+
+   const onToggle = () => {
+      setIsOpen(prev => !prev);
    };
 
    return (
-      <SidebarContext.Provider value={{ isOpen, toggleSidebar }}>
+      <SidebarContext.Provider value={{ isOpen, onOpen, onClose, onToggle }}>
          {children}
       </SidebarContext.Provider>
    );

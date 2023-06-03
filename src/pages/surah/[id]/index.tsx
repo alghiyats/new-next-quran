@@ -4,8 +4,7 @@ import { getSurahDetail } from '../../../lib/getSurahDetail';
 import { Chapter } from '../../../interfaces/Chapter';
 import CardAyah from '@/components/card-ayah';
 import { NextSeo } from 'next-seo';
-import Layout from '@/layout/surah-detail';
-import { useRouter } from 'next/router';
+import DetailLayout from '@/Layouts/DetailLayout';
 
 type Props = {
    dataAyah?: Chapter;
@@ -19,7 +18,7 @@ const SurahDetail = ({ dataAyah, dataSurah }: Props) => {
             title={`Surah ${dataAyah?.name.transliteration.id} - Next Quran`}
             description={dataAyah?.tafsir.id}
          />
-         <Layout
+         <DetailLayout
             dataAyah={dataAyah}
             dataSurah={dataSurah}>
             {dataAyah?.verses?.map((x: any) => (
@@ -31,7 +30,7 @@ const SurahDetail = ({ dataAyah, dataSurah }: Props) => {
                   translation={x.translation}
                />
             ))}
-         </Layout>
+         </DetailLayout>
       </>
    );
 };

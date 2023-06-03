@@ -1,10 +1,9 @@
-'use client';
-
 import clsx from 'clsx';
 import React from 'react';
-import Close from '../close';
 import IconSVG from '../layouts/header/iconSVG';
 import { useBookmarkContext } from '@/contexts/GlobalContext';
+import ForClose from '../ForClose/ForClose';
+import DeleteIcon from './icons/DeleteIcon';
 
 export default function Bookmarks({ openBookmarks, setOpenBookmarks }: any) {
    const { handleRemoveBookmark, bookmarkSaved } = useBookmarkContext();
@@ -56,19 +55,9 @@ export default function Bookmarks({ openBookmarks, setOpenBookmarks }: any) {
                               </p>
                               <p className='font-medium text-xs'>Ayah {bm?.numberInSurah}</p>
                            </div>
-                           <IconSVG
-                              onClick={() => handleRemoveBookmark(bm?.numberInQuran)}
-                              customStyle='w-5 h-5'>
-                              <g transform='translate(3.500000, 2.000000)'>
-                                 <path d='M15.3891429,7.55409524 C15.3891429,15.5731429 16.5434286,19.1979048 8.77961905,19.1979048 C1.01485714,19.1979048 2.19295238,15.5731429 2.19295238,7.55409524'></path>
-                                 <line
-                                    x1='16.8651429'
-                                    y1='4.47980952'
-                                    x2='0.714666667'
-                                    y2='4.47980952'></line>
-                                 <path d='M12.2148571,4.47980952 C12.2148571,4.47980952 12.7434286,0.714095238 8.78914286,0.714095238 C4.83580952,0.714095238 5.36438095,4.47980952 5.36438095,4.47980952'></path>
-                              </g>
-                           </IconSVG>
+                           <span onClick={() => handleRemoveBookmark(bm?.numberInQuran)}>
+                              <DeleteIcon />
+                           </span>
                         </div>
                      ))
                   ) : (
@@ -77,7 +66,7 @@ export default function Bookmarks({ openBookmarks, setOpenBookmarks }: any) {
                </div>
             </div>
          </div>
-         <Close
+         <ForClose
             onClick={() => setOpenBookmarks(false)}
             customStyles={clsx(
                openBookmarks ? 'opacity-100 visible z-[3]' : 'opacity-0 invisible',

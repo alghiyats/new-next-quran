@@ -1,7 +1,13 @@
 import clsx from 'clsx';
 import React from 'react';
 
-export default function Close({ onClick, customStyles }: { onClick?: any; customStyles?: string }) {
+export default function ForClose({
+   onClick,
+   customStyles,
+}: {
+   onClick?: any;
+   customStyles?: string;
+}) {
    return (
       <div
          onClick={onClick}

@@ -3,9 +3,9 @@ import '../styles/global.css';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
-import Layout from '@/layout';
 import { GlobalContextProvider } from '@/contexts/GlobalContext';
 import { ThemeProvider } from 'next-themes';
+import MainLayout from '@/Layouts/MainLayout';
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
@@ -20,9 +20,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
          defaultTheme='system'
          enableSystem={true}>
          <GlobalContextProvider>
-            <Layout>
+            <MainLayout>
                <Component {...pageProps} />
-            </Layout>
+            </MainLayout>
          </GlobalContextProvider>
       </ThemeProvider>
    );
