@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import clsx from 'clsx';
 import ChangeTheme from './ChangeTheme';
 import { useSidebar } from '@/contexts/SidebarContext';
-import { useTheme } from 'next-themes';
 import HeaderIcon from './HeaderIcon';
 import HamIcon from '../../icons/HamIcon';
 import HeaderTitle from './HeaderTitle';
