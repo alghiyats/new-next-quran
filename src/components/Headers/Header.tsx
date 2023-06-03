@@ -12,7 +12,7 @@ import ForClose from '../ForClose/ForClose';
 import SunIcon from '../../icons/SunIcon';
 import MoonIcon from '../../icons/MoonIcon';
 import ArrowLeft from '../../icons/ArrowLeft';
-import Bookmarks from '../Bookmarks/Bookmarks';
+import Bookmarks from '@/components/Bookmarks/Bookmarks';
 
 export default function Header() {
    const { onToggle, isOpen } = useSidebar();
