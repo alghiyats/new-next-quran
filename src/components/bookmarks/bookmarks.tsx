@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import React from 'react';
-import IconSVG from '../layouts/header/iconSVG';
 import { useBookmarkContext } from '@/contexts/GlobalContext';
 import ForClose from '../ForClose/ForClose';
 import DeleteIcon from './icons/DeleteIcon';
