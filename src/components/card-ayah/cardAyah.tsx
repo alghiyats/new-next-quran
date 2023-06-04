@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import React, { useEffect } from 'react';
-import BookmarkButton from '../Bookmarks/BookmarkButton';
+import BookmarkButton from '../Bookmark/BookmarkButton';
 import { useRouter } from 'next/router';
 
 export default function CardAyah({ data, number, text, translation }: any) {

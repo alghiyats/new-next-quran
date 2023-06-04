@@ -1,9 +1,9 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 
 const GlobalContext = createContext<any>({});
 
 export const GlobalContextProvider = ({ children }: { children: React.ReactNode }) => {
-   const handleAddBookmark = (data: any, id: number) => {
+   const handleAddBookmark = useCallback((data: any, id: number) => {
       if (typeof window !== 'undefined') {
          const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
          const newBookmark = data?.verses?.find((verse: any) => verse.number.inQuran === id);
@@ -27,9 +27,9 @@ export const GlobalContextProvider = ({ children }: { children: React.ReactNode 
             }
          }
       }
-   };
+   }, []);
 
-   const handleRemoveBookmark = (number: number) => {
+   const handleRemoveBookmark = useCallback((number: number) => {
       if (typeof window !== 'undefined') {
          const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
          const newBookmarks = bookmarks
@@ -41,9 +41,9 @@ export const GlobalContextProvider = ({ children }: { children: React.ReactNode 
             window.dispatchEvent(new Event('bookmarks'));
          }
       }
-   };
+   }, []);
 
-   const handleBookmarkClick = (item: any, number: number) => {
+   const handleBookmarkClick = useCallback((item: any, number: number) => {
       if (typeof window !== 'undefined') {
          const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
          const isSaved = bookmarks.some((bookmark: any) => bookmark.numberInQuran === number);
@@ -53,7 +53,7 @@ export const GlobalContextProvider = ({ children }: { children: React.ReactNode 
             handleAddBookmark(item, number);
          }
       }
-   };
+   }, []);
 
    const [bookmarkSaved, setBookmarkSaved] = useState<any>();
 
