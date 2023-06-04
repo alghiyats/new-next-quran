@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import BookmarkButton from '../Bookmarks/BookmarkButton';
 import { useRouter } from 'next/router';
 
