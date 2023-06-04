@@ -1,4 +1,3 @@
-import { useOpen } from '@/contexts/GlobalContext';
 import clsx from 'clsx';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
