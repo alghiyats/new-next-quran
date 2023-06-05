@@ -22,7 +22,7 @@ export default function Header() {
    return (
       <header
          className={clsx(
-            'w-full z-10 sticky shadow-[0_0_15px_rgba(0,0,0,0.07)] top-0',
+            'w-full z-[5] sticky shadow-[0_0_15px_rgba(0,0,0,0.07)] top-0',
             'sm:shadow-none sm:border-none',
             'dark:lg:border-b dark:lg:shadow-none dark:lg:border-b-[rgba(255,255,255,0.15)] dark:lg:border-solid'
          )}>

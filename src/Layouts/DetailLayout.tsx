@@ -14,18 +14,18 @@ export default function DetailLayout({
    return (
       <>
          <main className='scroll-pb-6 lg:flex-[1_0_calc(100%_-_250px_-_25px)] lg:w-[calc(100%_-_250px_-_25px)] flex flex-col gap-[30px] relative bhf'>
-            <SurahInfo
+            {/* <SurahInfo
                name={dataAyah?.name}
                revelation={dataAyah?.revelation}
                numberOfVerses={dataAyah?.numberOfVerses}
                preBismillah={dataAyah?.preBismillah}
-            />
+            /> */}
             {children}
          </main>
-         <JumpSidebar
+         {/* <JumpSidebar
             dataAyah={dataAyah}
             dataSurah={dataSurah}
-         />
+         /> */}
       </>
    );
 }
