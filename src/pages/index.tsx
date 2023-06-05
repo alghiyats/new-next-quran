@@ -20,7 +20,7 @@ export default function Home() {
       try {
          const today = new Date();
          const tahun = today.getFullYear();
-         const bulan = today.getMonth() + 1; // Ingat, indeks bulan dimulai dari 0
+         const bulan = today.getMonth() + 1;
          const hari = today.getDate();
 
          const data = await getJadwalShalat(id, tahun, bulan, hari);

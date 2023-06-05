@@ -22,6 +22,3 @@
 .active {
    @apply bg-transB dark:bg-darkBs;
 }
-.bhf {
-   scroll-behavior: auto;
-}

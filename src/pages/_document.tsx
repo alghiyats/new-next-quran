@@ -4,7 +4,7 @@ import Document, { Head, Html, Main, NextScript } from 'next/document';
 class SpecialDocument extends Document {
    render() {
       return (
-         <Html className='scroll-smooth overflow-x-hidden'>
+         <Html className='overflow-x-hidden'>
             <Head>
                <link
                   rel='shortcut icon'
