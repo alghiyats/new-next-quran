@@ -5,7 +5,7 @@ import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import { GlobalContextProvider } from '@/contexts/GlobalContext';
 import { ThemeProvider } from 'next-themes';
-import Layout from '@/layouts/Layout';
+import Layout from '../layouts/Layout';
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
