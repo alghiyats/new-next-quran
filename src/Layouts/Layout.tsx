@@ -10,7 +10,7 @@ type Props = {
    children: ReactNode;
 };
 
-const MainLayout: React.FC<Props> = ({ children }) => {
+const Layout: React.FC<Props> = ({ children }) => {
    return (
       <>
          <SidebarContextProvider>
@@ -35,4 +35,4 @@ const MainLayout: React.FC<Props> = ({ children }) => {
    );
 };
 
-export default MainLayout;
+export default Layout;

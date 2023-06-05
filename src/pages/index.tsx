@@ -1,56 +1,56 @@
-// import { getJadwalShalat } from '@/lib/getJadwalShalat';
-// import { getLocationBySearch } from '@/lib/getLocationBySearch';
-import React from 'react';
+import { getJadwalShalat } from '@/lib/getJadwalShalat';
+import { getLocationBySearch } from '@/lib/getLocationBySearch';
+import React, { useState } from 'react';
 
 export default function Home() {
-   // const [keyword, setKeyword] = useState('');
-   // const [results, setResults] = useState([]);
-   // const [jadwal, setJadwal] = useState<any>();
+   const [keyword, setKeyword] = useState('');
+   const [results, setResults] = useState([]);
+   const [jadwal, setJadwal] = useState<any>();
 
-   // const fetchSearchResults = async (keyword: string) => {
-   //    try {
-   //       const data = await getLocationBySearch(keyword);
-   //       setResults(data);
-   //    } catch (error) {
-   //       console.error('Error fetching search results:', error);
-   //    }
-   // };
+   const fetchSearchResults = async (keyword: string) => {
+      try {
+         const data = await getLocationBySearch(keyword);
+         setResults(data);
+      } catch (error) {
+         console.error('Error fetching search results:', error);
+      }
+   };
 
-   // const fetchJadwal = async (id: string) => {
-   //    try {
-   //       const today = new Date();
-   //       const tahun = today.getFullYear();
-   //       const bulan = today.getMonth() + 1;
-   //       const hari = today.getDate();
+   const fetchJadwal = async (id: string) => {
+      try {
+         const today = new Date();
+         const tahun = today.getFullYear();
+         const bulan = today.getMonth() + 1; // Ingat, indeks bulan dimulai dari 0
+         const hari = today.getDate();
 
-   //       const data = await getJadwalShalat(id, tahun, bulan, hari);
-   //       setJadwal(data);
-   //    } catch (error) {
-   //       console.error('Error fetching jadwal:', error);
-   //    }
-   // };
+         const data = await getJadwalShalat(id, tahun, bulan, hari);
+         setJadwal(data);
+      } catch (error) {
+         console.error('Error fetching jadwal:', error);
+      }
+   };
 
-   // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-   //    const newKeyword = e.target.value;
-   //    setKeyword(newKeyword);
+   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newKeyword = e.target.value;
+      setKeyword(newKeyword);
 
-   //    if (newKeyword.trim() !== '') {
-   //       fetchSearchResults(newKeyword);
-   //    } else {
-   //       setResults([]);
-   //    }
-   // };
+      if (newKeyword.trim() !== '') {
+         fetchSearchResults(newKeyword);
+      } else {
+         setResults([]);
+      }
+   };
 
-   // const handleResultClick = (result: string, id: string) => {
-   //    setKeyword(result);
-   //    setResults([]);
-   //    fetchJadwal(id);
-   //    console.log('Hasil yang dipilih:', id);
-   // };
+   const handleResultClick = (result: string, id: string) => {
+      setKeyword(result);
+      setResults([]);
+      fetchJadwal(id);
+      console.log('Hasil yang dipilih:', id);
+   };
 
    return (
       <>
-         {/* <div className='flex justify-center flex-col gap-6'>
+         <div className='flex justify-center flex-col gap-6'>
             <h1 className='font-bold text-2xl text-center'>Jadwal Sholat</h1>
             <div>
                <input
@@ -82,7 +82,7 @@ export default function Home() {
                   <p>Isya: {jadwal.jadwal.isya}</p>
                </div>
             )}
-         </div> */}
+         </div>
       </>
    );
 }

@@ -5,7 +5,7 @@ import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import { GlobalContextProvider } from '@/contexts/GlobalContext';
 import { ThemeProvider } from 'next-themes';
-import MainLayout from '@/layouts/MainLayout';
+import Layout from '@/layouts/Layout';
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
@@ -20,9 +20,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
          defaultTheme='system'
          enableSystem={true}>
          <GlobalContextProvider>
-            <MainLayout>
+            <Layout>
                <Component {...pageProps} />
-            </MainLayout>
+            </Layout>
          </GlobalContextProvider>
       </ThemeProvider>
    );
