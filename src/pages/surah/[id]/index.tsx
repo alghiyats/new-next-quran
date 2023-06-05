@@ -4,7 +4,7 @@ import { getSurahDetail } from '../../../lib/getSurahDetail';
 import { Chapter } from '../../../interfaces/Chapter';
 import CardAyah from '@/components/card-ayah';
 import { NextSeo } from 'next-seo';
-import DetailLayout from '@/layouts/DetailLayout';
+import DetailLayout from '@/Layouts/DetailLayout';
 
 type Props = {
    dataAyah?: Chapter;
