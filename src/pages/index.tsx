@@ -1,6 +1,6 @@
 import { getJadwalShalat } from '@/lib/getJadwalShalat';
 import { getLocationBySearch } from '@/lib/getLocationBySearch';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function Home() {
    const [keyword, setKeyword] = useState('');
@@ -15,12 +15,12 @@ export default function Home() {
          console.error('Error fetching search results:', error);
       }
    };
-
+   useEffect(() => {});
    const fetchJadwal = async (id: string) => {
       try {
          const today = new Date();
          const tahun = today.getFullYear();
-         const bulan = today.getMonth() + 1; // Ingat, indeks bulan dimulai dari 0
+         const bulan = today.getMonth() + 1;
          const hari = today.getDate();
 
          const data = await getJadwalShalat(id, tahun, bulan, hari);
@@ -70,7 +70,7 @@ export default function Home() {
             </div>
             {jadwal && (
                <div>
-                  <h2>Jadwal Shalat untuk {jadwal.lokasi}</h2>
+                  <h2>Jadwal Shalat untuk {jadwal.id}</h2>
                   <p>Tanggal: {jadwal.jadwal.tanggal}</p>
                   <p>Imsak: {jadwal.jadwal.imsak}</p>
                   <p>Subuh: {jadwal.jadwal.subuh}</p>

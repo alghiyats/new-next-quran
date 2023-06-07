@@ -1,6 +1,6 @@
 export async function getSurahList() {
-   const res = await fetch(process.env.API_ENDPOINT);
+   const res = await fetch('https://next-quran-api.vercel.app/surah');
    const data = await res.json();
 
-   return data.chapters;
+   return data.data;
 }
